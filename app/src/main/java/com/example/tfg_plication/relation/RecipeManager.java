@@ -1,0 +1,50 @@
+package com.example.tfg_plication.relation;
+
+import android.content.Context;
+
+import com.example.tfg_plication.db.ControllerDB;
+import com.example.tfg_plication.entity.Ingredient;
+import com.example.tfg_plication.entity.Recipe;
+import com.example.tfg_plication.entity.RecipeIngredient;
+import com.example.tfg_plication.entity.User;
+
+import java.util.List;
+
+
+public class RecipeManager {
+    private ControllerDB controllerDB;
+    public List<Ingredient> getingredients(Context context){
+        controllerDB = new ControllerDB( context);
+        return controllerDB.getAllIngredient();
+    }
+    public void addIngredient(String name,Context context){
+        Ingredient ingredient = new Ingredient();
+        ingredient.setName(name);
+        controllerDB = new ControllerDB( context);
+        controllerDB.addIngredient(ingredient);
+    }
+    public void addRecipe(String name, String recipeText, User idUser, List<RecipeIngredient> ingredients){
+        Recipe recipe = new Recipe();
+        recipe.setName(name);
+        recipe.setUser(idUser);
+        recipe.setRecipeText(recipeText);
+        recipe.addListIngredient(ingredients);
+    }
+    public List<RecipeIngredient> addToListRecipeIngredient(Recipe recipe,Ingredient  ingredient,int amount,List<RecipeIngredient> ingredients){
+        RecipeIngredient recipeIngredient = new RecipeIngredient(ingredient,recipe,amount);
+        ingredients.add(recipeIngredient);
+        return ingredients;
+    }
+    public void deleteRecipe(Recipe recipe,Context context){
+        controllerDB = new ControllerDB( context);
+        controllerDB.deleteRecipe(recipe);
+    }
+    public List<Recipe> allRecipeUser(User user,Context context){
+        controllerDB = new ControllerDB( context);
+        return controllerDB.getRecipes(user);
+    }
+    public Recipe getRecipe(Recipe recipe,Context context){
+        controllerDB = new ControllerDB( context);
+        return controllerDB.getRecipe(recipe);
+    }
+}

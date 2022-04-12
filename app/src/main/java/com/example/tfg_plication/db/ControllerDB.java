@@ -22,6 +22,10 @@ public class ControllerDB extends SQLiteOpenHelper{
         super(context, "com.damedix.Tfg_application",null,1);
 
     }
+
+
+
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE USERS (ID INTEGER PRIMARY KEY AUTOINCREMENT,USER TEXT NOT NULL,PASS TEXT NOT NULL);");
@@ -87,7 +91,7 @@ public class ControllerDB extends SQLiteOpenHelper{
         ingredient.setName(c2.getString(1));
         return ingredient;
     }
-    public  List<Ingredient> getAllIngredient(){
+    public List<Ingredient> getAllIngredient(){
         List<Ingredient> ingredients=new ArrayList<Ingredient>();
         SQLiteDatabase ref_db = this.getReadableDatabase();
         Cursor c2 = ref_db.rawQuery("SELECT * FROM INGREDIENTS",null);
@@ -115,7 +119,6 @@ public class ControllerDB extends SQLiteOpenHelper{
 
 
         ContentValues cv = new ContentValues();
-        cv.put("userID", String.valueOf(recipe.getId()));
         cv.put("NAME_RECIPE", String.valueOf(recipe.getName()));
         cv.put("RECIPE_TEXT", String.valueOf(recipe.getRecipeText()));
         cv.put("FATTEN", String.valueOf(recipe.getFatten()));

@@ -71,6 +71,9 @@ public class Recipe {
             }
         }
     }
+    public void addListIngredient(List<RecipeIngredient> recipeIngredients){
+        this.recipeIngredients = recipeIngredients;
+    }
     public User getUser() {
         return user;
     }
