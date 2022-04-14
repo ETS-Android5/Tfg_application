@@ -13,13 +13,17 @@ import java.util.List;
 
 public class RecipeManager {
     private ControllerDB controllerDB;
+
     public List<Ingredient> getingredients(Context context){
         controllerDB = new ControllerDB( context);
         return controllerDB.getAllIngredient();
     }
-    public void addIngredient(String name,Context context){
+    public void addIngredient(String name){
         Ingredient ingredient = new Ingredient();
         ingredient.setName(name);
+
+    }
+    public void addIngredientDB(Ingredient ingredient,Context context){
         controllerDB = new ControllerDB( context);
         controllerDB.addIngredient(ingredient);
     }
@@ -46,5 +50,9 @@ public class RecipeManager {
     public Recipe getRecipe(Recipe recipe,Context context){
         controllerDB = new ControllerDB( context);
         return controllerDB.getRecipe(recipe);
+    }
+    public void addRecipeToDB(Recipe recipe, Context context){
+        controllerDB = new ControllerDB( context);
+        controllerDB.addRecipe(recipe);
     }
 }
