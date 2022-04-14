@@ -47,12 +47,13 @@ public class RecipeManager {
         controllerDB = new ControllerDB( context);
         return controllerDB.getRecipes(user);
     }
-    public Recipe getRecipe(Recipe recipe,Context context){
+    public Recipe getRecipeIngredient(Recipe recipe,Context context){
         controllerDB = new ControllerDB( context);
-        return controllerDB.getRecipe(recipe);
+        return controllerDB.getRecipeIngredient(recipe);
     }
     public void addRecipeToDB(Recipe recipe, Context context){
         controllerDB = new ControllerDB( context);
         controllerDB.addRecipe(recipe);
     }
+    public void
 }

@@ -1,4 +1,6 @@
 package com.example.tfg_plication.entity;
+import android.graphics.Bitmap;
+
 import com.example.tfg_plication.entity.Ingredient;
 
 import java.util.List;
@@ -12,19 +14,24 @@ public class Recipe {
     private String name;
     private String recipeText;
     private String fatten;
+
+
+
+    private Bitmap img;
     private List <RecipeIngredient> recipeIngredients;
 
 
 
 
     public Recipe(){}
-    public Recipe(int id, String name, String recipeText, String fatten,List<RecipeIngredient> recipeIngredients,User user   ) {
+    public Recipe(int id, String name, String recipeText, String fatten,List<RecipeIngredient> recipeIngredients,User user, Bitmap img   ) {
         this.id = id;
         this.name = name;
         this.recipeText = recipeText;
         this.fatten = fatten;
         this.recipeIngredients = recipeIngredients;
         this.user=user;
+        this.img=img;
     }
     public int getId() {
         return id;
@@ -81,5 +88,11 @@ public class Recipe {
     public void setUser(User user) {
         this.user = user;
     }
+    public Bitmap getImg() {
+        return img;
+    }
 
+    public void setImg(Bitmap img) {
+        this.img = img;
+    }
 }
