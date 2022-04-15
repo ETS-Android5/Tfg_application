@@ -55,5 +55,5 @@ public class RecipeManager {
         controllerDB = new ControllerDB( context);
         controllerDB.addRecipe(recipe);
     }
-    public void
+
 }
