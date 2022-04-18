@@ -10,8 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Tfg_Plication">
         <activity
-            android:name=".splash"
+            android:name=".Splash"
             android:exported="false" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">

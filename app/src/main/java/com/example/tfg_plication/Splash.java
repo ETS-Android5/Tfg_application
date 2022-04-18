@@ -3,7 +3,7 @@ package com.example.tfg_plication;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class splash extends AppCompatActivity {
+public class Splash extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
