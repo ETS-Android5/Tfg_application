@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Tfg_Plication">
         <activity
-            android:name=".check_in"
+            android:name=".Check_in"
             android:exported="false" />
         <activity
             android:name=".Splash"

@@ -1,5 +1,8 @@
 package com.example.tfg_plication.entity;
 
+import android.widget.EditText;
+import android.widget.TextView;
+
 public class User {
     private int id;
     private String name;
@@ -11,6 +14,10 @@ public class User {
         this.name = name;
         this.pass = pass;
     }
+
+    public User(TextView boxUser, EditText pass) {
+    }
+
     public int getId() {
         return id;
     }
