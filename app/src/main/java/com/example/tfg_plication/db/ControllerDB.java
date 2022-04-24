@@ -127,17 +127,16 @@ public class ControllerDB extends SQLiteOpenHelper{
         cv.put("NAME_RECIPE", String.valueOf(recipe.getName()));
         cv.put("RECIPE_TEXT", String.valueOf(recipe.getRecipeText()));
         cv.put("FATTEN", String.valueOf(recipe.getFatten()));
+        cv.put("IMAGE",getBitmapAsByteArray(recipe.getImg())));
         ref_db.insert("RECIPES", null, cv);
         Cursor c2 = ref_db.rawQuery("SELECT ID FROM INGREDIENTS WHERE NAME_RECIPE=?", new String[]{recipe.getName()});
         c2.moveToFirst();
         int idRecipe = c2.getInt(0);
         for(int i=0;i<=recipe.getIngredients().size();i++){
-
             ContentValues cv2 = new ContentValues();
-            cv2.put("ID_USER", Integer.valueOf(recipe.getId()));
+            cv2.put("ID_RECIPE", Integer.valueOf(recipe.getId()));
             cv2.put("ID_INGREDIENT", Integer.valueOf(recipe.getIngredients().get(i).getIngredient().getId()));
             cv2.put("AMOUNT",Integer.valueOf(recipe.getIngredients().get(i).getAmount()));
-            cv2.put("IMAGE",getBitmapAsByteArray(recipe.getImg()));
             ref_db.insert("RECIPES_INGREDIENTS",null,cv2);
         }
         ref_db.close();
