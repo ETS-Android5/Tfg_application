@@ -14,7 +14,7 @@ import java.util.List;
 public class RecipeManager {
     private ControllerDB controllerDB;
 
-    public List<Ingredient> getingredients(Context context){
+    public List<Ingredient> getIngredients(Context context){
         controllerDB = new ControllerDB( context);
         return controllerDB.getAllIngredient();
     }
