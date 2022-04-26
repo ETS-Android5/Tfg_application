@@ -45,7 +45,7 @@ public class ControllerDB extends SQLiteOpenHelper{
         db.execSQL("CREATE TABLE RECIPES_INGREDIENTS (ID_RECIPE INTEGER NOT NULL," +
                 "ID_INGREDIENT INTEGER NOT NULL,"+
                 "AMOUNT INT NOT NULL," +
-                "FOREIGN KEY (ID_RECIPE) REFERENCES INGREDIENTS(ID)," +
+                "FOREIGN KEY (ID_RECIPE) REFERENCES RECIPES(ID)," +
                 "FOREIGN KEY (ID_INGREDIENT) REFERENCES INGREDIENTS(ID));");
     }
 
