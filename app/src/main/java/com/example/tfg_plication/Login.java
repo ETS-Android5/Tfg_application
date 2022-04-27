@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,14 +26,14 @@ public class Login extends AppCompatActivity {
     }
 
     private void changeFont() {
-        Typeface font  = Typeface.createFromAsset(getAssets(),FONT_STYLE_SPLASH);
-        TextView loading =(TextView) findViewById(R.id.tittle_log);
+        Typeface font = Typeface.createFromAsset(getAssets(), FONT_STYLE_SPLASH);
+        TextView loading = (TextView) findViewById(R.id.tittle_log);
         loading.setTypeface(font);
     }
 
     public void createAccount(View view) {
-        Intent intent = new Intent(this, SignUser.class);
-        startActivity(intent);
+        //Intent intent = new Intent(this, SignUp.class);
+        //startActivity(intent);
     }
 
     public void LogTheAccount(View view) {
@@ -61,7 +62,7 @@ public class Login extends AppCompatActivity {
     }
 
     public void moveToSignUp(View view) {
-        Intent intent = new Intent(this, SignUser.class);
-        startActivity(intent);
+        //Intent intent = new Intent(this, SignUser.class);
+        //startActivity(intent);
     }
 }
