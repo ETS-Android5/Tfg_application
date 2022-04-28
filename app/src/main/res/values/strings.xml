@@ -12,4 +12,6 @@
     <string name="check_in">Check_In</string>
     <string name="user">User</string>
     <string name="deliciosapp">DELICIOSAPP</string>
+    <string name="starters">Starters</string>
+    <string name="recipe_today">Recipe Today!</string>
 </resources>
