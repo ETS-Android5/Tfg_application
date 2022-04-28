@@ -14,4 +14,5 @@
     <string name="deliciosapp">DELICIOSAPP</string>
     <string name="starters">Starters</string>
     <string name="recipe_today">Recipe Today!</string>
+    <string name="all_recipes">All recipes</string>
 </resources>

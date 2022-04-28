@@ -8,11 +8,12 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="246dp"
+        android:layout_width="match_parent"
         android:layout_height="34dp"
         android:text="@string/recipe_today"
         android:textAlignment="center"
         android:visibility="visible"
+        android:background="@color/orange_soft"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -25,6 +26,7 @@
         android:layout_width="138dp"
         android:layout_height="33dp"
         android:text="@string/starters"
+        android:background="@color/teal_200"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,6 +42,7 @@
         android:layout_width="138dp"
         android:layout_height="33dp"
         android:text="  Mains Courses"
+        android:background="@color/teal_200"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -54,6 +57,7 @@
         android:id="@+id/textView3"
         android:layout_width="138dp"
         android:layout_height="33dp"
+        android:background="@color/teal_200"
         android:text="  Desserts"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -64,5 +68,43 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.654" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        tools:layout_editor_absoluteX="163dp"
+        tools:layout_editor_absoluteY="178dp" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        tools:layout_editor_absoluteX="161dp"
+        tools:layout_editor_absoluteY="315dp" />
+
+    <Button
+        android:id="@+id/dessertsRecipes"
+        android:layout_width="91dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="240dp"
+        android:text="show desserts"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView3" />
+
+    <Button
+        android:id="@+id/allRecipes"
+        android:layout_width="156dp"
+        android:layout_height="38dp"
+        android:layout_marginBottom="104dp"
+        android:background="@color/purple_200"
+        android:text="@string/all_recipes"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
