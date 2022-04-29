@@ -9,23 +9,13 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="729dp"
+        android:layout_height="150dp"
         android:scaleType="fitStart"
         android:src="@mipmap/healthy"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
-    <TextView
-        android:id="@+id/tittle_log"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-    android:textColor="@color/white"
-    android:textSize="40sp"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintVertical_bias="0.038" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.101"
+        tools:layout_editor_absoluteX="-1dp" />
 
     <LinearLayout
         android:id="@+id/box_check_in"
@@ -33,34 +23,31 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
+        android:layout_marginBottom="284dp"
         android:background="@color/purple_200"
         android:orientation="vertical"
         android:padding="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.428"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tittle_log"
-        app:layout_constraintVertical_bias="0.295"
-        >
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
 
 
         <TextView
             android:id="@+id/boxUser"
             android:layout_width="match_parent"
             android:layout_height="35dp"
-            android:text="TextView"
+            android:layout_marginBottom="10dp"
             android:hint="@string/user"
-            android:layout_marginBottom="10dp"/>
+            android:text="TextView" />
 
         <EditText
             android:id="@+id/boxPass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPassword"
             android:hint="Password"
-            />
+            android:inputType="textPassword" />
 
         <Button
             android:id="@+id/buttonCheck_in"
@@ -74,7 +61,6 @@
 
 
     </LinearLayout>
-
 
 
 </android.support.constraint.ConstraintLayout>
