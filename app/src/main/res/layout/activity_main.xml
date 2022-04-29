@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/welcomebar"
         android:layout_width="match_parent"
         android:layout_height="34dp"
         android:text="@string/recipe_today"
@@ -23,6 +23,7 @@
         app:layout_constraintVertical_bias="0.16" />
 
     <TextView
+        android:id="@+id/starters"
         android:layout_width="match_parent"
         android:layout_height="33dp"
         android:text="@string/starters"
@@ -39,8 +40,20 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.266" />
 
+    <Button
+        android:id="@+id/buttonStarters"
+        android:layout_width="48dp"
+        android:layout_height="54dp"
+        android:background="@mipmap/arrow_right"
+        app:layout_constraintBottom_toTopOf="@+id/mainCourses"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.955"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/starters"
+        tools:ignore="SpeakableTextPresentCheck" />
+
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/mainCourses"
         android:layout_width="match_parent"
         android:layout_height="33dp"
         android:text="  Mains Courses"
@@ -57,8 +70,21 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.451" />
 
+    <Button
+        android:id="@+id/buttonMainCourses"
+        android:layout_width="48dp"
+        android:layout_height="54dp"
+        android:background="@mipmap/arrow_right"
+        app:layout_constraintBottom_toTopOf="@+id/desserts"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.955"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainCourses"
+        app:layout_constraintVertical_bias="0.545"
+        tools:ignore="SpeakableTextPresentCheck" />
+
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/desserts"
         android:layout_width="match_parent"
         android:layout_height="33dp"
         android:background="@color/teal_200"
@@ -75,39 +101,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.654" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="48dp"
-        android:layout_height="54dp"
-        android:background="@mipmap/arrow_right"
-        tools:layout_editor_absoluteX="347dp"
-        tools:layout_editor_absoluteY="376dp" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="48dp"
-        android:layout_height="54dp"
-        android:background="@mipmap/arrow_right"
-        tools:layout_editor_absoluteX="347dp"
-        tools:layout_editor_absoluteY="515dp" />
-
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="48dp"
-        android:layout_height="54dp"
-        android:background="@mipmap/arrow_right"
-        tools:layout_editor_absoluteX="347dp"
-        tools:layout_editor_absoluteY="239dp" />
 
     <Button
         android:id="@+id/dessertsRecipes"
-        android:layout_width="91dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="156dp"
-        android:layout_marginBottom="184dp"
-        android:text="show desserts"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView3" />
+        android:layout_width="48dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:background="@mipmap/arrow_right"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/desserts"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <Button
         android:id="@+id/allRecipes"
@@ -119,6 +123,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.533"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="TouchTargetSizeCheck" />
 
 </android.support.constraint.ConstraintLayout>
