@@ -40,7 +40,6 @@ public class ControllerDB extends SQLiteOpenHelper{
                 "NAME_RECIPE TEXT NOT NULL," +
                 "RECIPE_TEXT TEXT NOT NULL ,"+
                 "FATTEN TEXT ,"+
-                "TYPEOFFOOD TEXT,"+
                 "IMAGE BLOB,"+
                 "FOREIGN KEY (userID) REFERENCES USERS(ID));");
         db.execSQL("CREATE TABLE RECIPES_INGREDIENTS (ID_RECIPE INTEGER NOT NULL," +
@@ -48,19 +47,6 @@ public class ControllerDB extends SQLiteOpenHelper{
                 "AMOUNT INT NOT NULL," +
                 "FOREIGN KEY (ID_RECIPE) REFERENCES RECIPES(ID)," +
                 "FOREIGN KEY (ID_INGREDIENT) REFERENCES INGREDIENTS(ID));");
-
-        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES (Tomate)");
-        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES (Pollo)");
-        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES (Harina)");
-        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES (Huevo)");
-        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES (Leche)");
-        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES (Queso_Untable)");
-        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES (Lechuga)");
-        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES (Zanahoria)");
-        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES (Limon)");
-        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES (levadura)");
-        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES (Sal)");
-        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES (Coliflor)");
     }
 
     @Override
@@ -141,7 +127,6 @@ public class ControllerDB extends SQLiteOpenHelper{
         cv.put("NAME_RECIPE", String.valueOf(recipe.getName()));
         cv.put("RECIPE_TEXT", String.valueOf(recipe.getRecipeText()));
         cv.put("FATTEN", String.valueOf(recipe.getFatten()));
-        cv.put("TYPEOFFOOD", String.valueOf(recipe.getFatten()));
         cv.put("IMAGE",getBitmapAsByteArray(recipe.getImg()));
         ref_db.insert("RECIPES", null, cv);
         Cursor c2 = ref_db.rawQuery("SELECT ID FROM INGREDIENTS WHERE NAME_RECIPE=?", new String[]{recipe.getName()});
