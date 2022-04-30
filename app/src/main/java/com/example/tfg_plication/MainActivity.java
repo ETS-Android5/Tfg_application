@@ -1,5 +1,6 @@
 package com.example.tfg_plication;
 
+
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -14,7 +15,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tfg_plication.db.ControllerDB;
 import com.example.tfg_plication.entity.User;
+
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 

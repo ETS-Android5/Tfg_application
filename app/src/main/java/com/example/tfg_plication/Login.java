@@ -27,10 +27,10 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         controllerDB = new ControllerDB(this);
         getSupportActionBar().hide();
-        changeFont();
+        //changeFont();
     }
 
-    private void changeFont() {
+    /*private void changeFont() {
         Typeface font = Typeface.createFromAsset(getAssets(), FONT_STYLE_SPLASH);
         TextView loading = (TextView) findViewById(R.id.tittle_log);
         loading.setTypeface(font);
@@ -72,5 +72,5 @@ public class Login extends AppCompatActivity {
     public void moveToSignUp(View view) {
         //Intent intent = new Intent(this, SignUser.class);
         //startActivity(intent);
-    }
+    }*/
 }

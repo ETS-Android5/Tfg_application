@@ -16,6 +16,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import pl.droidsonroids.gif.GifImageView;
 
 public class Splash extends AppCompatActivity implements Animation.AnimationListener {

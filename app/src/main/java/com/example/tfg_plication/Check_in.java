@@ -1,7 +1,9 @@
 package com.example.tfg_plication;
 
 import android.content.Intent;
+
 import android.graphics.Typeface;
+
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;

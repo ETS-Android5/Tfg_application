@@ -3,10 +3,14 @@ package com.example.tfg_plication;
 
 import android.os.Bundle;
 
+
 import androidx.appcompat.app.AppCompatActivity;
+
 
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
@@ -30,12 +34,17 @@ public class AddRecipe extends AppCompatActivity {
         }
     }
         Spinner spinner1 = findViewById(R.id.ingredient);
+
     /*
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.support.design.R.layout.support_simple_spinner_dropdown_item,ingredients);
+
+
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,ingredients);
+
         spinner1.setAdapter(arrayAdapter);
 
         Spinner spinner2 = findViewById(R.id.numIngredients);
-        ArrayAdapter arrayAdapter2 = new ArrayAdapter(this, android.support.design.R.layout.support_simple_spinner_dropdown_item,amount);
+        ArrayAdapter arrayAdapter2 = new ArrayAdapter(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,amount);
         spinner2.setAdapter(arrayAdapter2);
 
 
