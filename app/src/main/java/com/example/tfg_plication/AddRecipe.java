@@ -1,7 +1,10 @@
 package com.example.tfg_plication;
 
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
@@ -22,12 +25,12 @@ public class AddRecipe extends AppCompatActivity {
         ingredients.add("Cucumber");
 
         ArrayList<Integer> amount = new ArrayList<>();
-        for (int i=1;i < 10;i++){
+        for (int i = 1; i < 10; i++) {
             amount.add(i);
         }
-
+    }
         Spinner spinner1 = findViewById(R.id.ingredient);
-
+    /*
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.support.design.R.layout.support_simple_spinner_dropdown_item,ingredients);
         spinner1.setAdapter(arrayAdapter);
 
@@ -38,7 +41,7 @@ public class AddRecipe extends AppCompatActivity {
 
 
     }
-    /*
+
     public void saveInfo(View view){
 
         EditText txt_recipe = (EditText) findViewById(R.id.name_recipe);

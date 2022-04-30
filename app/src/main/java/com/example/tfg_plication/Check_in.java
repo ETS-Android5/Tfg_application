@@ -1,18 +1,19 @@
 package com.example.tfg_plication;
 
 import android.content.Intent;
-import android.support.design.widget.TextInputEditText;
-import android.support.v7.app.AppCompatActivity;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.tfg_plication.db.ControllerDB;
 import com.example.tfg_plication.entity.User;
-
 public class Check_in extends AppCompatActivity {
     ControllerDB controllerDB;
     private Button buttonCheck_in;
