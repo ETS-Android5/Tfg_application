@@ -8,14 +8,15 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_width="365dp"
+        android:layout_height="137dp"
         android:scaleType="fitStart"
         android:src="@mipmap/healthy"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.101"
-        tools:layout_editor_absoluteX="-1dp" />
+        app:layout_constraintVertical_bias="0.228"
+        tools:layout_editor_absoluteX="16dp"
+        tools:ignore="MissingConstraints" />
 
     <LinearLayout
         android:id="@+id/box_check_in"
