@@ -25,20 +25,14 @@ public class AddRecipe extends AppCompatActivity {
         for (int i=1;i < 10;i++){
             amount.add(i);
         }
-        ingredients.add("Tomato");
-        ingredients.add("Carrot");
-        ingredients.add("Lettuce");
-        ingredients.add("Escarole");
-        ingredients.add("Broccoli");
-        ingredients.add("Cucumber");
 
         Spinner spinner1 = findViewById(R.id.ingredient);
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,ingredients);
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.support.design.R.layout.support_simple_spinner_dropdown_item,ingredients);
         spinner1.setAdapter(arrayAdapter);
 
         Spinner spinner2 = findViewById(R.id.numIngredients);
-        ArrayAdapter arrayAdapter2 = new ArrayAdapter(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,amount);
+        ArrayAdapter arrayAdapter2 = new ArrayAdapter(this, android.support.design.R.layout.support_simple_spinner_dropdown_item,amount);
         spinner2.setAdapter(arrayAdapter2);
 
 
@@ -64,6 +58,4 @@ public class AddRecipe extends AppCompatActivity {
             imgBtn1.setImageURI(path);
         }
     }*/
-}
-    }
 }

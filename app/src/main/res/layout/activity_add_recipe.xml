@@ -42,24 +42,17 @@
             android:maxLines="3"
             android:scrollbars="vertical" />
     </LinearLayout>
-    <com.google.android.material.textfield.TextInputLayout
+
+
+    <EditText
+        android:id="@+id/info_about"
+        android:maxLines="50"
+        android:gravity="top"
+        android:hint="Don't Forget Add A description"
+        android:padding="10dp"
+        android:inputType="textMultiLine"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Description About Your Dish"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textMultiLine"
-            android:lines="6"
-            android:gravity="top"
-            android:overScrollMode="always"
-            android:scrollbars="vertical"
-            android:scrollbarStyle="insideInset"
-            android:scrollHorizontally="false"/>
-
-    </com.google.android.material.textfield.TextInputLayout>
+        android:layout_height="150dp"/>
 
     <TextView
         android:id="@+id/textView10"
@@ -91,10 +84,11 @@
         android:hint="Kcal "
         android:inputType="numberDecimal"/>
 
-    <Button
+    <android.support.design.button.MaterialButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Save"
-        android:textColorHint="@color/white"/>
+        />
+
 
 </LinearLayout>
