@@ -14,6 +14,7 @@ public class Recipe {
     private String name;
     private String recipeText;
     private String fatten;
+    private String typeofFood;
 
 
 
@@ -24,11 +25,12 @@ public class Recipe {
 
 
     public Recipe(){}
-    public Recipe(int id, String name, String recipeText, String fatten,List<RecipeIngredient> recipeIngredients,User user, Bitmap img   ) {
+    public Recipe(int id, String name, String recipeText, String fatten,List<RecipeIngredient> recipeIngredients,User user, Bitmap img,String typeofFood   ) {
         this.id = id;
         this.name = name;
         this.recipeText = recipeText;
         this.fatten = fatten;
+        this.typeofFood=typeofFood;
         this.recipeIngredients = recipeIngredients;
         this.user=user;
         this.img=img;
@@ -63,6 +65,13 @@ public class Recipe {
 
     public void setFatten(String fatten) {
         this.fatten = fatten;
+    }
+    public String getTypeofFood() {
+        return typeofFood;
+    }
+
+    public void setTypeofFood(String typeofFood) {
+        this.typeofFood = typeofFood;
     }
 
     public List<RecipeIngredient> getIngredients() {

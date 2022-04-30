@@ -1,20 +1,25 @@
 package com.example.tfg_plication;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.os.Parcelable;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.tfg_plication.db.ControllerDB;
+import com.example.tfg_plication.entity.User;
 
 public class Login extends AppCompatActivity {
     private ControllerDB controllerDB;
     private final String FONT_STYLE_SPLASH = "Little Comet Demo Version.otf";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +37,8 @@ public class Login extends AppCompatActivity {
     }
 
     public void createAccount(View view) {
-        //Intent intent = new Intent(this, SignUp.class);
-        //startActivity(intent);
+        Intent intent = new Intent(this, Login.class);
+        startActivity(intent);
     }
 
     public void LogTheAccount(View view) {
@@ -41,14 +46,17 @@ public class Login extends AppCompatActivity {
         String user_name = user.getText().toString();
         TextView pass = (TextView) findViewById(R.id.pass_til);
         String pass_user = pass.getText().toString();
-        if (user_name.isEmpty() || pass_user.isEmpty()) {
+        User user1 = new User();
+        user1.setName(user.getText().toString());
+        user1.setPass(pass.getText().toString());
+        if (user1.getName().isEmpty() || user1.getPass().isEmpty()) {
             Toast toast = Toast.makeText(this, "Please don't let boxes empty", Toast.LENGTH_SHORT);
             toast.show();
         } else {
-            if (controllerDB.checkIfUserExists(user_name) != 0) {
-                if (controllerDB.checkIfPassExists(user_name, pass_user) != 0) {
+            if (controllerDB.checkIfUserExists(user1) != 0) {
+                if (controllerDB.checkIfPassExists(user1) != 0) {
                     Intent intent = new Intent(this, MainActivity.class);
-                    intent.putExtra("USER_I_NEED", user_name);
+                    intent.putExtra("USER_I_NEED", (Parcelable) user1);
                     startActivity(intent);
                 } else {
                     Toast toast = Toast.makeText(this, "Invalid password", Toast.LENGTH_SHORT);

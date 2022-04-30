@@ -41,6 +41,8 @@
             android:lines="2"
             android:maxLines="3"
             android:scrollbars="vertical" />
+
+
     </LinearLayout>
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
