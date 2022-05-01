@@ -78,7 +78,19 @@ public class ControllerDB extends SQLiteOpenHelper {
         Cursor c1 = ref_db.rawQuery("SELECT ID FROM USERS WHERE USER=? AND PASS=?", new String[]{user.getName(), user.getPass()});
         return c1.getCount();
     }
+<<<<<<< Updated upstream
 
+=======
+    public User getUser(int id){
+        SQLiteDatabase ref_db = this.getReadableDatabase();
+        Cursor c1 = ref_db.rawQuery("SELECT ID FROM USERS WHERE USER=? ", new String[]{String.valueOf(id)});
+        User user = new User();
+        user.setId(id);
+        user.setName(c1.getString(1));
+        user.setPass(c1.getString(2));
+        return user;
+    }
+>>>>>>> Stashed changes
     public void insertNewUser(User user) {
         ContentValues cv = new ContentValues();
         cv.put("USER", user.getName());
@@ -216,24 +228,58 @@ public class ControllerDB extends SQLiteOpenHelper {
             return recipe;
         }
     }
+<<<<<<< Updated upstream
 
     public Bitmap blobToBitmap(byte[] img) {
 
 
         return BitmapFactory.decodeByteArray(img, 0, img.length);
     }
+=======
+    
+    public Bitmap blobToBitmap(byte[] img){
+        return BitmapFactory.decodeByteArray(img, 0, img.length);  }
+>>>>>>> Stashed changes
 
     public byte[] getBitmapAsByteArray(Bitmap bitmap) {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 0, stream);
         return stream.toByteArray();
     }
+    public List<Recipe> getAllRecipes(){
+        List<Recipe> recipes= new ArrayList<Recipe>();
+        SQLiteDatabase ref_db = this.getReadableDatabase();
+        Cursor c2 = ref_db.rawQuery("SELECT * FROM RECIPES", null);
+        int cant_reg = c2.getCount();
+        if (cant_reg == 0) {
+            ref_db.close();
+            return null;
+        } else {
+            c2.moveToFirst();
 
+<<<<<<< Updated upstream
     public int getIngredients() {
         SQLiteDatabase ref_db = this.getReadableDatabase();
         Cursor c2 = ref_db.rawQuery("SELECT * FROM INGREDIENTS", null);
         return c2.getCount();
 
+=======
+            String[] tasks = new String[cant_reg];
+            for (int i = 0; i < cant_reg; i++) {
+                Recipe recipe = new Recipe();
+                recipe.setId(c2.getInt(0));
+                recipe.setUser(getUser(c2.getInt(1) ));
+                recipe.setName(c2.getString(2));
+                recipe.setRecipeText(c2.getString(3));
+                recipe.setFatten(c2.getString(4));
+                recipe.setImg(blobToBitmap(c2.getBlob(5)));
+                recipes.add(recipe);
+
+            }
+            ref_db.close();
+            return recipes;
+        }
+>>>>>>> Stashed changes
     }
 
 }
