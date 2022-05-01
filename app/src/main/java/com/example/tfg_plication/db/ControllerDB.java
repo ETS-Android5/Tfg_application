@@ -23,7 +23,7 @@ import java.util.List;
 public class ControllerDB extends SQLiteOpenHelper{
 
     public ControllerDB(Context context){
-        super(context, "com.damedix.Tfg_application",null,1);
+        super(context, "com.damedix.Tfg_application",null,6);
 
     }
 
@@ -49,18 +49,18 @@ public class ControllerDB extends SQLiteOpenHelper{
                 "FOREIGN KEY (ID_RECIPE) REFERENCES RECIPES(ID)," +
                 "FOREIGN KEY (ID_INGREDIENT) REFERENCES INGREDIENTS(ID));");
 
-        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES (Tomate)");
-        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES (Pollo)");
-        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES (Harina)");
-        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES (Huevo)");
-        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES (Leche)");
-        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES (Queso_Untable)");
-        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES (Lechuga)");
-        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES (Zanahoria)");
-        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES (Limon)");
-        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES (levadura)");
-        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES (Sal)");
-        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES (Coliflor)");
+        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Tomate')");
+        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Pollo')");
+        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Harina')");
+        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Huevo')");
+        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Leche')");
+        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Queso Untable')");
+        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Lechuga')");
+        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Zanahoria')");
+        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Limon')");
+        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('levadura')");
+        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Sal')");
+        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Coliflor')");
     }
 
     @Override
@@ -120,14 +120,12 @@ public class ControllerDB extends SQLiteOpenHelper{
             return null;
         } else {
             c2.moveToFirst();
-
-            String[] tasks = new String[cant_reg];
             for (int i = 0; i < cant_reg; i++) {
                 Ingredient ingredient = new Ingredient();
                 ingredient.setId(c2.getInt(0));
                 ingredient.setName(c2.getString(1));
                 ingredients.add(ingredient);
-
+                c2.moveToNext();
             }
             ref_db.close();
             return ingredients;

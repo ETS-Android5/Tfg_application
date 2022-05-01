@@ -8,8 +8,6 @@ import java.util.List;
 public class Recipe {
     private int id;
 
-
-
     private User user;
     private String name;
     private String recipeText;

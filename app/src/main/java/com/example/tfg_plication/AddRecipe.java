@@ -9,8 +9,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.tfg_plication.db.ControllerDB;
 
 import java.util.ArrayList;
 
@@ -20,20 +23,10 @@ public class AddRecipe extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_recipe);
-        ArrayList<String> ingredients = new ArrayList<>();
-        ingredients.add("Tomato");
-        ingredients.add("Carrot");
-        ingredients.add("Lettuce");
-        ingredients.add("Escarole");
-        ingredients.add("Broccoli");
-        ingredients.add("Cucumber");
-
-        ArrayList<Integer> amount = new ArrayList<>();
-        for (int i = 1; i < 10; i++) {
-            amount.add(i);
-        }
+        ControllerDB controllerDB = new ControllerDB(this);
+        Toast.makeText(this,""+controllerDB.getAllIngredient(),Toast.LENGTH_SHORT).show();
     }
-        Spinner spinner1 = findViewById(R.id.ingredient);
+
 
     /*
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.support.design.R.layout.support_simple_spinner_dropdown_item,ingredients);
