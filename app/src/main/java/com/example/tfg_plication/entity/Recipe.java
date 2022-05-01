@@ -2,7 +2,7 @@ package com.example.tfg_plication.entity;
 import android.graphics.Bitmap;
 
 import com.example.tfg_plication.entity.Ingredient;
-
+import com.example.tfg_plication.entity.User;
 import java.util.List;
 
 public class Recipe {

@@ -1,5 +1,6 @@
 package com.example.tfg_plication.entity;
 
+import com.example.tfg_plication.entity.Ingredient;
 public class RecipeIngredient {
     private Ingredient ingredient;
     private Recipe recipe;

@@ -19,16 +19,14 @@ import com.example.tfg_plication.entity.User;
 public class Check_in extends AppCompatActivity {
     ControllerDB controllerDB;
     private Button buttonCheck_in;
-    TextView boxUser;
+    EditText boxUser;
     EditText pass;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_in);
 
-        boxUser = (TextView) findViewById(R.id.boxUser);
-        pass = (EditText) findViewById(R.id.boxPass);
-        User user = new User(boxUser,pass);
+
 
         buttonCheck_in = (Button) findViewById(R.id.buttonCheck_in);
         controllerDB = new ControllerDB(this);
@@ -36,6 +34,12 @@ public class Check_in extends AppCompatActivity {
         buttonCheck_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                boxUser = (EditText) findViewById(R.id.boxUser);
+
+                pass = (EditText) findViewById(R.id.boxPass);
+                User user = new User(boxUser,pass);
+                user.setName(boxUser.getText().toString());
+                user.setPass(pass.getText().toString());
                 if(user.getName().toString().length()!=0){
                     if(user.getPass().toString().length()!=0){
 
@@ -46,7 +50,7 @@ public class Check_in extends AppCompatActivity {
                             controllerDB.insertNewUser(user);
                             Toast userCreate = Toast.makeText(Check_in.this, "User Create", Toast.LENGTH_LONG);
                             userCreate.show();
-                            Intent intent = new Intent(Check_in.this,Login.class);
+                            Intent intent = new Intent(Check_in.this,MainActivity.class);
                             startActivity(intent);
                         }
                     }else{

@@ -25,8 +25,10 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         controllerDB = new ControllerDB(this);
         getSupportActionBar().hide();
+
         //changeFont();
     }
 
@@ -35,9 +37,9 @@ public class Login extends AppCompatActivity {
         TextView loading = (TextView) findViewById(R.id.tittle_log);
         loading.setTypeface(font);
     }
-
+*/
     public void createAccount(View view) {
-        Intent intent = new Intent(this, Login.class);
+        Intent intent = new Intent(this, Check_in.class);
         startActivity(intent);
     }
 
@@ -56,7 +58,7 @@ public class Login extends AppCompatActivity {
             if (controllerDB.checkIfUserExists(user1) != 0) {
                 if (controllerDB.checkIfPassExists(user1) != 0) {
                     Intent intent = new Intent(this, MainActivity.class);
-                    intent.putExtra("USER_I_NEED", (Parcelable) user1);
+                    //intent.putExtra("USER_I_NEED", (Parcelable) user1);
                     startActivity(intent);
                 } else {
                     Toast toast = Toast.makeText(this, "Invalid password", Toast.LENGTH_SHORT);
@@ -70,7 +72,7 @@ public class Login extends AppCompatActivity {
     }
 
     public void moveToSignUp(View view) {
-        //Intent intent = new Intent(this, SignUser.class);
-        //startActivity(intent);
-    }*/
+        Intent intent = new Intent(this, Check_in.class);
+        startActivity(intent);
+    }
 }
