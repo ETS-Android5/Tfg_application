@@ -78,9 +78,9 @@ public class ControllerDB extends SQLiteOpenHelper {
         Cursor c1 = ref_db.rawQuery("SELECT ID FROM USERS WHERE USER=? AND PASS=?", new String[]{user.getName(), user.getPass()});
         return c1.getCount();
     }
-<<<<<<< Updated upstream
 
-=======
+
+
     public User getUser(int id){
         SQLiteDatabase ref_db = this.getReadableDatabase();
         Cursor c1 = ref_db.rawQuery("SELECT ID FROM USERS WHERE USER=? ", new String[]{String.valueOf(id)});
@@ -90,7 +90,7 @@ public class ControllerDB extends SQLiteOpenHelper {
         user.setPass(c1.getString(2));
         return user;
     }
->>>>>>> Stashed changes
+
     public void insertNewUser(User user) {
         ContentValues cv = new ContentValues();
         cv.put("USER", user.getName());
@@ -228,18 +228,10 @@ public class ControllerDB extends SQLiteOpenHelper {
             return recipe;
         }
     }
-<<<<<<< Updated upstream
 
     public Bitmap blobToBitmap(byte[] img) {
-
-
         return BitmapFactory.decodeByteArray(img, 0, img.length);
     }
-=======
-    
-    public Bitmap blobToBitmap(byte[] img){
-        return BitmapFactory.decodeByteArray(img, 0, img.length);  }
->>>>>>> Stashed changes
 
     public byte[] getBitmapAsByteArray(Bitmap bitmap) {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -256,14 +248,6 @@ public class ControllerDB extends SQLiteOpenHelper {
             return null;
         } else {
             c2.moveToFirst();
-
-<<<<<<< Updated upstream
-    public int getIngredients() {
-        SQLiteDatabase ref_db = this.getReadableDatabase();
-        Cursor c2 = ref_db.rawQuery("SELECT * FROM INGREDIENTS", null);
-        return c2.getCount();
-
-=======
             String[] tasks = new String[cant_reg];
             for (int i = 0; i < cant_reg; i++) {
                 Recipe recipe = new Recipe();
@@ -279,7 +263,7 @@ public class ControllerDB extends SQLiteOpenHelper {
             ref_db.close();
             return recipes;
         }
->>>>>>> Stashed changes
+
     }
 
 }
