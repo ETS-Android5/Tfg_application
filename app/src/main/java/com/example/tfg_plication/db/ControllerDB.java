@@ -20,14 +20,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class ControllerDB extends SQLiteOpenHelper{
+public class ControllerDB extends SQLiteOpenHelper {
 
-    public ControllerDB(Context context){
-        super(context, "com.damedix.Tfg_application",null,6);
+    public ControllerDB(Context context) {
+        super(context, "com.damedix.Tfg_application", null, 11);
 
     }
-
-
 
 
     @Override
@@ -36,19 +34,24 @@ public class ControllerDB extends SQLiteOpenHelper{
         db.execSQL("CREATE TABLE INGREDIENTS (ID INTEGER PRIMARY KEY AUTOINCREMENT,INGREDIENT TEXT NOT NULL);");
         db.execSQL("CREATE TABLE RECIPES (" +
                 "ID INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "userId INT NOT NULL,"+
+                "userId INT NOT NULL," +
                 "NAME_RECIPE TEXT NOT NULL," +
-                "RECIPE_TEXT TEXT NOT NULL ,"+
-                "FATTEN TEXT ,"+
-                "TYPEOFFOOD TEXT,"+
-                "IMAGE BLOB,"+
+                "RECIPE_TEXT TEXT NOT NULL ," +
+                "FATTEN TEXT ," +
+                "TYPEOFFOOD TEXT," +
+                "IMAGE BLOB," +
                 "FOREIGN KEY (userID) REFERENCES USERS(ID));");
         db.execSQL("CREATE TABLE RECIPES_INGREDIENTS (ID_RECIPE INTEGER NOT NULL," +
-                "ID_INGREDIENT INTEGER NOT NULL,"+
+                "ID_INGREDIENT INTEGER NOT NULL," +
                 "AMOUNT INT NOT NULL," +
                 "FOREIGN KEY (ID_RECIPE) REFERENCES RECIPES(ID)," +
                 "FOREIGN KEY (ID_INGREDIENT) REFERENCES INGREDIENTS(ID));");
 
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int i, int i1) {
+        db.execSQL("CREATE TABLE INGREDIENTS (ID INTEGER PRIMARY KEY AUTOINCREMENT,INGREDIENT TEXT NOT NULL);");
         db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Tomate')");
         db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Pollo')");
         db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Harina')");
@@ -58,18 +61,10 @@ public class ControllerDB extends SQLiteOpenHelper{
         db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Lechuga')");
         db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Zanahoria')");
         db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Limon')");
-
         db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('levadura')");
-
         db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Levadura')");
-
         db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Sal')");
         db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Coliflor')");
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-
     }
 
     public int checkIfUserExists(User user) {
@@ -77,11 +72,13 @@ public class ControllerDB extends SQLiteOpenHelper{
         Cursor c1 = ref_db.query("USERS", new String[]{"ID"}, "USER=?", new String[]{user.getName()}, null, null, null);
         return c1.getCount();
     }
+
     public int checkIfPassExists(User user) {
         SQLiteDatabase ref_db = this.getReadableDatabase();
-        Cursor c1 = ref_db.rawQuery("SELECT ID FROM USERS WHERE USER=? AND PASS=?", new String[]{user.getName(),user.getPass()});
+        Cursor c1 = ref_db.rawQuery("SELECT ID FROM USERS WHERE USER=? AND PASS=?", new String[]{user.getName(), user.getPass()});
         return c1.getCount();
     }
+
     public void insertNewUser(User user) {
         ContentValues cv = new ContentValues();
         cv.put("USER", user.getName());
@@ -90,6 +87,7 @@ public class ControllerDB extends SQLiteOpenHelper{
         ref_db.insert("USERS", null, cv);
         ref_db.close();
     }
+
     /*public int getCantRegisters(User user) {
         SQLiteDatabase ref_db = this.getReadableDatabase();
         Cursor c1 = ref_db.rawQuery("SELECT ID FROM USERS WHERE USER=?", new String[]{user.getName()});
@@ -106,7 +104,8 @@ public class ControllerDB extends SQLiteOpenHelper{
 
         ref_db.close();
     }
-    public Ingredient getIngredient(int id){
+
+    public Ingredient getIngredient(int id) {
         SQLiteDatabase ref_db = this.getReadableDatabase();
         Cursor c2 = ref_db.rawQuery("SELECT * FROM INGREDIENTS WHERE ID = ? ", new String[]{String.valueOf(id)});
         Ingredient ingredient = new Ingredient();
@@ -114,10 +113,11 @@ public class ControllerDB extends SQLiteOpenHelper{
         ingredient.setName(c2.getString(1));
         return ingredient;
     }
-    public List<Ingredient> getAllIngredient(){
-        List<Ingredient> ingredients=new ArrayList<Ingredient>();
+
+    public List<Ingredient> getAllIngredient() {
+        List<Ingredient> ingredients = new ArrayList<Ingredient>();
         SQLiteDatabase ref_db = this.getReadableDatabase();
-        Cursor c2 = ref_db.rawQuery("SELECT * FROM INGREDIENTS",null);
+        Cursor c2 = ref_db.rawQuery("SELECT * FROM INGREDIENTS", null);
         int cant_reg = c2.getCount();
         if (cant_reg == 0) {
             ref_db.close();
@@ -135,7 +135,8 @@ public class ControllerDB extends SQLiteOpenHelper{
             return ingredients;
         }
     }
-    public void addRecipe( Recipe recipe) {
+
+    public void addRecipe(Recipe recipe) {
         SQLiteDatabase ref_db = this.getWritableDatabase();
 
 
@@ -144,28 +145,30 @@ public class ControllerDB extends SQLiteOpenHelper{
         cv.put("RECIPE_TEXT", String.valueOf(recipe.getRecipeText()));
         cv.put("FATTEN", String.valueOf(recipe.getFatten()));
         cv.put("TYPEOFFOOD", String.valueOf(recipe.getFatten()));
-        cv.put("IMAGE",getBitmapAsByteArray(recipe.getImg()));
+        cv.put("IMAGE", getBitmapAsByteArray(recipe.getImg()));
         ref_db.insert("RECIPES", null, cv);
         Cursor c2 = ref_db.rawQuery("SELECT ID FROM INGREDIENTS WHERE NAME_RECIPE=?", new String[]{recipe.getName()});
         c2.moveToFirst();
         int idRecipe = c2.getInt(0);
-        for(int i=0;i<=recipe.getIngredients().size();i++){
+        for (int i = 0; i <= recipe.getIngredients().size(); i++) {
             ContentValues cv2 = new ContentValues();
             cv2.put("ID_RECIPE", Integer.valueOf(recipe.getId()));
             cv2.put("ID_INGREDIENT", Integer.valueOf(recipe.getIngredients().get(i).getIngredient().getId()));
-            cv2.put("AMOUNT",Integer.valueOf(recipe.getIngredients().get(i).getAmount()));
-            ref_db.insert("RECIPES_INGREDIENTS",null,cv2);
+            cv2.put("AMOUNT", Integer.valueOf(recipe.getIngredients().get(i).getAmount()));
+            ref_db.insert("RECIPES_INGREDIENTS", null, cv2);
         }
         ref_db.close();
     }
+
     public void deleteRecipe(Recipe recipe) {
         SQLiteDatabase ref_db = this.getWritableDatabase();
 
-        ref_db.delete("RECIPES", "RECIPE=? AND userID=?",new String[]{recipe.getName(),String.valueOf(recipe.getId())});
+        ref_db.delete("RECIPES", "RECIPE=? AND userID=?", new String[]{recipe.getName(), String.valueOf(recipe.getId())});
         ref_db.close();
     }
-    public List<Recipe> getRecipes(User user){
-        List<Recipe> recipes= new ArrayList<Recipe>();
+
+    public List<Recipe> getRecipes(User user) {
+        List<Recipe> recipes = new ArrayList<Recipe>();
         SQLiteDatabase ref_db = this.getReadableDatabase();
         Cursor c2 = ref_db.rawQuery("SELECT * FROM RECIPES WHERE userId = ?", new String[]{String.valueOf(user.getId())});
         int cant_reg = c2.getCount();
@@ -191,7 +194,8 @@ public class ControllerDB extends SQLiteOpenHelper{
             return recipes;
         }
     }
-    public Recipe getRecipeIngredient(Recipe recipe){
+
+    public Recipe getRecipeIngredient(Recipe recipe) {
         SQLiteDatabase ref_db = this.getReadableDatabase();
         Cursor c2 = ref_db.rawQuery("SELECT * FROM RECIPES_INGREDIENTS WHERE ID_INGREDIENT = ? ", new String[]{String.valueOf(recipe.getId())});
         int cant_reg = c2.getCount();
@@ -212,11 +216,12 @@ public class ControllerDB extends SQLiteOpenHelper{
             return recipe;
         }
     }
-    
-    public Bitmap blobToBitmap(byte[] img){
+
+    public Bitmap blobToBitmap(byte[] img) {
 
 
-        return BitmapFactory.decodeByteArray(img, 0, img.length);  }
+        return BitmapFactory.decodeByteArray(img, 0, img.length);
+    }
 
     public byte[] getBitmapAsByteArray(Bitmap bitmap) {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -224,5 +229,11 @@ public class ControllerDB extends SQLiteOpenHelper{
         return stream.toByteArray();
     }
 
+    public int getIngredients() {
+        SQLiteDatabase ref_db = this.getReadableDatabase();
+        Cursor c2 = ref_db.rawQuery("SELECT * FROM INGREDIENTS", null);
+        return c2.getCount();
+
+    }
 
 }
