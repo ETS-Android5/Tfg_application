@@ -47,7 +47,7 @@ public class AddRecipe extends AppCompatActivity {
         loadSeekBar();
         //addRecipe();
         controllerDB = new ControllerDB(this);
-        Toast.makeText(this, "" + controllerDB.getIngredients(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "" + controllerDB.getAllIngredient(), Toast.LENGTH_SHORT).show();
 
     }
 
