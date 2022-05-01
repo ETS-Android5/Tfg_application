@@ -1,9 +1,7 @@
 package com.example.tfg_plication;
 
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +16,7 @@ import com.example.tfg_plication.entity.User;
 public class Login extends AppCompatActivity {
     private ControllerDB controllerDB;
     private final String FONT_STYLE_SPLASH = "Little Comet Demo Version.otf";
+    private Button buttonSign;
 
 
 
@@ -28,8 +27,17 @@ public class Login extends AppCompatActivity {
 
         controllerDB = new ControllerDB(this);
         getSupportActionBar().hide();
+        buttonSign = (Button) findViewById(R.id.button_sign);
 
         //changeFont();
+
+        buttonSign.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+              Intent changeSign = new Intent (Login.this,MainActivity.class);
+              startActivity(changeSign);
+            }
+        });
     }
 
     /*private void changeFont() {
@@ -39,7 +47,7 @@ public class Login extends AppCompatActivity {
     }
 */
     public void createAccount(View view) {
-        Intent intent = new Intent(this, Check_in.class);
+        Intent intent = new Intent(this, Sign_in.class);
         startActivity(intent);
     }
 
@@ -72,7 +80,9 @@ public class Login extends AppCompatActivity {
     }
 
     public void moveToSignUp(View view) {
-        Intent intent = new Intent(this, Check_in.class);
+        Intent intent = new Intent(this, Sign_in.class);
         startActivity(intent);
     }
+
+
 }

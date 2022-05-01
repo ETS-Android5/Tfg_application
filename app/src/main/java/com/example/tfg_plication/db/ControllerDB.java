@@ -223,4 +223,6 @@ public class ControllerDB extends SQLiteOpenHelper{
         bitmap.compress(Bitmap.CompressFormat.PNG, 0, stream);
         return stream.toByteArray();
     }
+
+    
 }

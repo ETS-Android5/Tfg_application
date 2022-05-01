@@ -2,34 +2,32 @@ package com.example.tfg_plication;
 
 import android.content.Intent;
 
-import android.graphics.Typeface;
-
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tfg_plication.db.ControllerDB;
 import com.example.tfg_plication.entity.User;
-public class Check_in extends AppCompatActivity {
+public class Sign_in extends AppCompatActivity {
     ControllerDB controllerDB;
     private Button buttonCheck_in;
     EditText boxUser;
     EditText pass;
+    private Button buttonBack;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_check_in);
+        setContentView(R.layout.activity_sign_in);
 
 
 
         buttonCheck_in = (Button) findViewById(R.id.buttonCheck_in);
         controllerDB = new ControllerDB(this);
+        buttonBack = (Button) findViewById(R.id.buttonBack);
 
         buttonCheck_in.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,23 +42,31 @@ public class Check_in extends AppCompatActivity {
                     if(user.getPass().toString().length()!=0){
 
                         if(controllerDB.checkIfUserExists(user)>0){
-                            Toast userExist = Toast.makeText(Check_in.this, "Ya existe este usuario", Toast.LENGTH_LONG);
+                            Toast userExist = Toast.makeText(Sign_in.this, "Ya existe este usuario", Toast.LENGTH_LONG);
                             userExist.show();
                         }else{
                             controllerDB.insertNewUser(user);
-                            Toast userCreate = Toast.makeText(Check_in.this, "User Create", Toast.LENGTH_LONG);
+                            Toast userCreate = Toast.makeText(Sign_in.this, "User Create", Toast.LENGTH_LONG);
                             userCreate.show();
-                            Intent intent = new Intent(Check_in.this,MainActivity.class);
+                            Intent intent = new Intent(Sign_in.this,MainActivity.class);
                             startActivity(intent);
                         }
                     }else{
-                        Toast passEmpty = Toast.makeText(Check_in.this, "Pass cannot be empty", Toast.LENGTH_LONG);
+                        Toast passEmpty = Toast.makeText(Sign_in.this, "Pass cannot be empty", Toast.LENGTH_LONG);
                         passEmpty.show();
                     }
                 }else{
-                    Toast userEmpty = Toast.makeText(Check_in.this, "User cannot be empty", Toast.LENGTH_LONG);
+                    Toast userEmpty = Toast.makeText(Sign_in.this, "User cannot be empty", Toast.LENGTH_LONG);
                     userEmpty.show();
                 }
+            }
+        });
+
+        buttonBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentBack = new Intent (Sign_in.this,Login.class);
+                startActivity(intentBack);
             }
         });
     }
