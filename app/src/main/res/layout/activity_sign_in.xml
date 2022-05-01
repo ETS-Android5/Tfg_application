@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Sign_in">
+    tools:context=".Sign_in"
+    android:background="@color/green_soft">
 
     <ImageView
         android:id="@+id/imageView"
@@ -14,9 +15,9 @@
         android:src="@mipmap/healthy"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.228"
-        tools:layout_editor_absoluteX="16dp"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintVertical_bias="0.163"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="23dp" />
 
     <LinearLayout
         android:id="@+id/box_check_in"
@@ -24,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="284dp"
+        android:layout_marginBottom="280dp"
         android:background="@color/purple_200"
         android:orientation="vertical"
         android:padding="20dp"
@@ -40,7 +41,7 @@
             android:layout_height="35dp"
             android:layout_marginBottom="10dp"
             android:hint="@string/user"
-            android:inputType="textPersonName"/>
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/boxPass"

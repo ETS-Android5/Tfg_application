@@ -58,11 +58,11 @@ public class ControllerDB extends SQLiteOpenHelper{
         db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Lechuga')");
         db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Zanahoria')");
         db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Limon')");
-<<<<<<< Updated upstream
+
         db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('levadura')");
-=======
+
         db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Levadura')");
->>>>>>> Stashed changes
+
         db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Sal')");
         db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Coliflor')");
     }
@@ -224,5 +224,5 @@ public class ControllerDB extends SQLiteOpenHelper{
         return stream.toByteArray();
     }
 
-    
+
 }

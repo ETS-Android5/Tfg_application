@@ -7,7 +7,9 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     app:layoutDescription="@xml/activity_login_scene"
-    tools:context=".Login">
+    tools:context=".Login"
+    android:backgroundTint="@color/green_soft"
+  >
 
 
     <ImageView
@@ -18,16 +20,17 @@
         android:src="@mipmap/healthy"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.132"
+        app:layout_constraintVertical_bias="0.154"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="14dp" />
+        tools:layout_editor_absoluteX="14dp"
+        />
 
     <TextView
         android:id="@+id/tittle_log"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/login"
-        android:textColor="@color/white"
+        android:textColor="@color/teal_700"
         android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,10 +49,10 @@
         android:padding="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tittle_log"
-        app:layout_constraintVertical_bias="0.295">
+        app:layout_constraintVertical_bias="0.445">
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
