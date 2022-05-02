@@ -40,7 +40,7 @@ public class ControllerDB extends SQLiteOpenHelper {
                 "FATTEN TEXT ," +
                 "TYPEOFFOOD TEXT," +
                 "IMAGE BLOB," +
-                "FOREIGN KEY (userID) REFERENCES USERS(ID));");
+                "FOREIGN KEY (userId) REFERENCES USERS(ID));");
         db.execSQL("CREATE TABLE RECIPES_INGREDIENTS (ID_RECIPE INTEGER NOT NULL," +
                 "ID_INGREDIENT INTEGER NOT NULL," +
                 "AMOUNT INT NOT NULL," +
