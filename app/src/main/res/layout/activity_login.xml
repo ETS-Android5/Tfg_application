@@ -45,7 +45,7 @@
         <EditText
             android:id="@+id/user_til"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="40dp"
             android:layout_marginBottom="10dp"
             android:hint="@string/user"
             android:inputType="textPersonName" />
@@ -82,7 +82,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/purple_700"
-            android:onClick="moveToSignUp"
             android:text="@string/sign_up"
             android:textColor="@color/white" />
     </LinearLayout>

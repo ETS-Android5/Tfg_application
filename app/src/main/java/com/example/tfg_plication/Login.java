@@ -35,7 +35,7 @@ public class Login extends AppCompatActivity {
         buttonSign.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              Intent changeSign = new Intent (Login.this,MainActivity.class);
+              Intent changeSign = new Intent (Login.this,Sign_in.class);
               startActivity(changeSign);
             }
         });
@@ -47,10 +47,7 @@ public class Login extends AppCompatActivity {
         loading.setTypeface(font);
     }
 */
-    public void createAccount(View view) {
-        Intent intent = new Intent(this, Sign_in.class);
-        startActivity(intent);
-    }
+
 
     public void LogTheAccount(View view) {
         TextView user = (TextView) findViewById(R.id.user_til);
@@ -80,10 +77,7 @@ public class Login extends AppCompatActivity {
         }
     }
 
-    public void moveToSignUp(View view) {
-        Intent intent = new Intent(this, Sign_in.class);
-        startActivity(intent);
-    }
+
 
 
 }
