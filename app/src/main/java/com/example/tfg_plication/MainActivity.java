@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         buttonDessert = findViewById(R.id.buttonDesserts);
         buttonRecipe = findViewById(R.id.allRecipes);
         controllerDB = new ControllerDB(this);
-        buttonRecipe = findViewById(R.id.addRecipe);
+        buttonAddRecipe = findViewById(R.id.addRecipe);
 
         buttonRecipe.setOnClickListener(new View.OnClickListener() {
             @Override
