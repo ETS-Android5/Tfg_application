@@ -23,7 +23,7 @@ import java.util.List;
 public class ControllerDB extends SQLiteOpenHelper {
 
     public ControllerDB(Context context) {
-        super(context, "com.damedix.Tfg_application", null, 11);
+        super(context, "com.damedix.Tfg_application", null, 12);
 
     }
 
