@@ -39,7 +39,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 
-public class AddRecipe extends AppCompatActivity implements View.OnClickListener{
+public class AddRecipe extends AppCompatActivity implements View.OnClickListener {
     private LinearLayout ly;
     private Button plusIngredient;
     private View view_name;
@@ -47,18 +47,16 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
     private EditText et;
 
 
-
-
     private RecipeManager recipeManager;
     //ControllerDB controllerDB;
     private ImageButton imgRecipe;
     private Bitmap bmImg;
-    private EditText txt_recipe, info_recipe, num_kl, ingredient;
+    private EditText name_recipe, info_recipe, num_kl;
     private Spinner type_food, ingredients;
     private User user;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)  {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_recipe);
         initValues();
@@ -102,12 +100,11 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         recipeManager = new RecipeManager();
         //ControllerDB controllerDB = new ControllerDB(this);
         imgRecipe = findViewById(R.id.imgRecipe);
-        bmImg = ((BitmapDrawable) imgRecipe.getDrawable()).getBitmap();
-        //txt_recipe = (EditText) findViewById(R.id.name_recipe);
-        //info_recipe = (EditText) findViewById(R.id.info_about);
-        //num_kl = (EditText) findViewById(R.id.num_kal);
+        //bmImg = ((BitmapDrawable) imgRecipe.getDrawable()).getBitmap();
+        name_recipe = (EditText) findViewById(R.id.name_recipe);
+        info_recipe = (EditText) findViewById(R.id.info_about);
+        num_kl = (EditText) findViewById(R.id.num_kal);
         type_food = (Spinner) findViewById(R.id.type_of_food);
-        //ingredient = (EditText) findViewById(R.id.orNewIngredient);
         //user = new User();
     }
 
@@ -124,7 +121,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         view_name = getLayoutInflater().inflate(R.layout.ingredient_format, null, false);
         ingredients = view_name.findViewById(R.id.ingredients);
         ArrayList<String> test = new ArrayList<>();
-        for(int i = 0;i < recipeManager.getIngredients(this).size();i++){
+        for (int i = 0; i < recipeManager.getIngredients(this).size(); i++) {
             test.add(recipeManager.getIngredients(this).get(i).getName());
             ArrayAdapter arrayAdapter = new ArrayAdapter(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, test);
             ingredients.setAdapter(arrayAdapter);
@@ -133,20 +130,67 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
 
     }
 
-    public void saveInfo(View view){
+    public void saveInfo(View view) {
+        /*bmImg = ((BitmapDrawable) imgRecipe.getDrawable()).getBitmap();
+        int idUser = this.getIntent().getExtras().getInt("USER_I_NEED");
+        user.setId(idUser);
+        String name = name_recipe.getText().toString();
+        String description = info_recipe.getText().toString();
+        String calories = name_recipe.getText().toString();
+        String typeFood = type_food.getSelectedItem().toString();
 
-        Toast.makeText(this,"Image-->"+bmImg,Toast.LENGTH_SHORT).show();
-        //EditText txt_recipe = (EditText) findViewById(R.id.name_recipe);
-        //Bitmap getBitMap = ((BitmapDrawable)imgBtn1.getDrawable()).getBitmap();
+        Recipe recipe = new Recipe(1,name,description,calories,null,user,bmImg,typeFood);
 
-
-        //testDifferentIngredients();
-
-
-
+        ArrayList<RecipeIngredient> listIngredients = new ArrayList<>();
+        for (int i = 0; i < ly.getChildCount(); i++) {
+            View cricketView = ly.getChildAt(i);
+            et = (EditText) cricketView.findViewById(R.id.amount);
+            Spinner spinner = (Spinner) cricketView.findViewById(R.id.ingredients);
+            x_del_ingredient = (ImageView) cricketView.findViewById(R.id.remove);
+            if (view_name != null && et != null) {
+                listIngredients.add(new RecipeIngredient(new Ingredient(i+1, spinner.getSelectedItem().toString()), recipe,Integer.parseInt(et.getText().toString())));
+            }
+            recipe.addListIngredient(listIngredients);
+            recipeManager.addRecipeToDB(recipe,this);*/
     }
 
-    private  void testDifferentIngredients () {
+        /*
+        ArrayList<RecipeIngredient> lIngredients = new ArrayList<>();
+        Log.v("DynamicLY", "Num: " + ly.getChildCount());
+        for (int i = 0; i < ly.getChildCount(); i++) {
+            View cricketView = ly.getChildAt(i);
+            et = (EditText) cricketView.findViewById(R.id.amount);
+            Spinner spinner = (Spinner) cricketView.findViewById(R.id.ingredients);
+            x_del_ingredient = (ImageView) cricketView.findViewById(R.id.remove);
+            if (view_name != null && et != null) {
+                lIngredients.add(new TestIngredient(i + 1, et.getText().toString(), spinner.getSelectedItem().toString()));
+            }
+        }
+        for (TestIngredient ig : lIngredients) {
+            Toast.makeText(this, ig.getId() + "-" + ig.getIngredient() + "-" + ig.getAmount(), Toast.LENGTH_SHORT).show();
+        }
+        */
+
+        /*listIngredients.add(new RecipeIngredient(new Ingredient(1, ingredients.getSelectedItem().toString()), recipe, seekBar.getProgress()));
+
+        recipe.addListIngredient(listIngredients);
+
+        recipeManager.addRecipeToDB(recipe,this);*/
+
+        /*Toast.makeText(this,"Name Recipe-->"+name_recipe.getText().toString(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,"Info Recipe-->"+info_recipe.getText().toString(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,"Num Calories-->"+num_kl.getText().toString(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,"Type Of Food-->"+type_food.getSelectedItem().toString(),Toast.LENGTH_SHORT).show();*/
+
+
+    //EditText txt_recipe = (EditText) findViewById(R.id.name_recipe);
+    //Bitmap getBitMap = ((BitmapDrawable)imgBtn1.getDrawable()).getBitmap();
+
+
+    //testDifferentIngredients();
+
+
+    private void testDifferentIngredients() {
         ArrayList<TestIngredient> lIngredients = new ArrayList<>();
         Log.v("DynamicLY", "Num: " + ly.getChildCount());
         for (int i = 0; i < ly.getChildCount(); i++) {
@@ -189,15 +233,15 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
 
     }*/
 
-    public void chooseImage (View view){
+    public void chooseImage(View view) {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI).setType("image/*");
-        startActivityForResult(intent.createChooser(intent,"Select The Application"),10);
+        startActivityForResult(intent.createChooser(intent, "Select The Application"), 10);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == RESULT_OK){
+        if (resultCode == RESULT_OK) {
             Uri path = data.getData();
             imgRecipe.setImageURI(path);
         }
