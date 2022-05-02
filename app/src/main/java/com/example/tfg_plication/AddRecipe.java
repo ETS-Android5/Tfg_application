@@ -9,9 +9,14 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -23,31 +28,39 @@ import com.example.tfg_plication.db.ControllerDB;
 import com.example.tfg_plication.entity.Ingredient;
 import com.example.tfg_plication.entity.Recipe;
 import com.example.tfg_plication.entity.RecipeIngredient;
+import com.example.tfg_plication.entity.TestIngredient;
 import com.example.tfg_plication.entity.User;
 import com.example.tfg_plication.relation.RecipeManager;
 
 import java.util.ArrayList;
 
-public class AddRecipe extends AppCompatActivity {
+public class AddRecipe extends AppCompatActivity implements View.OnClickListener{
+    private LinearLayout ly;
+    private Button plusIngredient;
+    private View view_name;
+    private ImageView x_del_ingredient;
+    private EditText et;
+
+
+
+
     private RecipeManager recipeManager;
-    ControllerDB controllerDB;
+    //ControllerDB controllerDB;
     private ImageButton imgRecipe;
     private Bitmap bmImg;
     private EditText txt_recipe, info_recipe, num_kl, ingredient;
     private Spinner type_food, ingredients;
-    private SeekBar seekBar;
     private User user;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_recipe);
         initValues();
         dynamicSpinners();
-        loadSeekBar();
         //addRecipe();
-        controllerDB = new ControllerDB(this);
-        Toast.makeText(this, "" + controllerDB.getAllIngredient(), Toast.LENGTH_SHORT).show();
+        //controllerDB = new ControllerDB(this);
+        //Toast.makeText(this, "" + controllerDB.getAllIngredient(), Toast.LENGTH_SHORT).show();
 
     }
 
@@ -63,23 +76,6 @@ public class AddRecipe extends AppCompatActivity {
         recipeManager.addRecipeToDB(recipe,this);*/
     }
 
-    private void loadSeekBar() {
-        TextView tw1 = findViewById(R.id.show_amount_ingredients);
-        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                tw1.setText(String.valueOf(i));
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-            }
-        });
-    }
 
     private void dynamicSpinners() {
 
@@ -91,16 +87,21 @@ public class AddRecipe extends AppCompatActivity {
         ArrayAdapter arrayAdapter2 = new ArrayAdapter(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, type);
         type_food.setAdapter(arrayAdapter2);
 
-        ArrayList<String> test = new ArrayList<>();
+        /*ArrayList<String> test = new ArrayList<>();
         for(int i = 0;i < recipeManager.getIngredients(this).size();i++){
             test.add(recipeManager.getIngredients(this).get(i).getName());
             ArrayAdapter arrayAdapter = new ArrayAdapter(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, test);
             ingredients.setAdapter(arrayAdapter);
-        }
+        }*/
 
     }
 
     private void initValues() {
+        ly = findViewById(R.id.ly);
+        plusIngredient = findViewById(R.id.plus_ingredient);
+        plusIngredient.setOnClickListener(this);
+
+
         recipeManager = new RecipeManager();
         //ControllerDB controllerDB = new ControllerDB(this);
         //imgRecipe = findViewById(R.id.imgRecipe);
@@ -109,10 +110,58 @@ public class AddRecipe extends AppCompatActivity {
         //info_recipe = (EditText) findViewById(R.id.info_about);
         //num_kl = (EditText) findViewById(R.id.num_kal);
         type_food = (Spinner) findViewById(R.id.type_of_food);
-        ingredients = (Spinner) findViewById(R.id.ingredients);
         //ingredient = (EditText) findViewById(R.id.orNewIngredient);
-        seekBar = (SeekBar) findViewById(R.id.sb_cant_ingredients);
         //user = new User();
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.plus_ingredient:
+                addView();
+                break;
+        }
+    }
+
+    private void addView() {
+        view_name = getLayoutInflater().inflate(R.layout.ingredient_format, null, false);
+        ingredients = view_name.findViewById(R.id.ingredients);
+        ArrayList<String> test = new ArrayList<>();
+        for(int i = 0;i < recipeManager.getIngredients(this).size();i++){
+            test.add(recipeManager.getIngredients(this).get(i).getName());
+            ArrayAdapter arrayAdapter = new ArrayAdapter(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, test);
+            ingredients.setAdapter(arrayAdapter);
+        }
+        ly.addView(view_name);
+        /*spinnerTeam = (Spinner) view_name.findViewById(R.id.things);
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, teamList);
+        spinnerTeam.setAdapter(arrayAdapter);*/
+
+        /*
+        for(int i = 0;i < recipeManager.getIngredients(this).size();i++){
+            test.add(recipeManager.getIngredients(this).get(i).getName());
+            ArrayAdapter arrayAdapter = new ArrayAdapter(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, test);
+            ingredients.setAdapter(arrayAdapter);
+        }*/
+    }
+
+    public void saveInfo(View view){
+        //EditText txt_recipe = (EditText) findViewById(R.id.name_recipe);
+        //Bitmap getBitMap = ((BitmapDrawable)imgBtn1.getDrawable()).getBitmap();
+        ArrayList<TestIngredient> lIngredients = new ArrayList<>();
+        Log.v("DynamicLY", "Num: " + ly.getChildCount());
+        for (int i = 0; i < ly.getChildCount(); i++) {
+            View cricketView = ly.getChildAt(i);
+            et = (EditText) cricketView.findViewById(R.id.amount);
+            Spinner spinner = (Spinner) cricketView.findViewById(R.id.ingredients);
+            x_del_ingredient = (ImageView) cricketView.findViewById(R.id.remove);
+            if (view_name != null && et != null) {
+                lIngredients.add(new TestIngredient(i + 1, et.getText().toString(), spinner.getSelectedItem().toString()));
+            }
+        }
+        for (TestIngredient ig : lIngredients) {
+            Toast.makeText(this, ig.getId() + "-" + ig.getIngredient() + "-" + ig.getAmount(), Toast.LENGTH_SHORT).show();
+        }
     }
 
 

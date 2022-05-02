@@ -9,9 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Tfg_Plication">
-        <meta-data
+        <!--<meta-data
             android:name="com.google.android.actions"
-            android:resource="@xml/activity_generateCalendar" />
+            android:resource="@xml/activity_generateCalendar" />-->
 
         <activity
             android:name=".AddRecipe"

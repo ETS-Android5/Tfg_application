@@ -11,4 +11,5 @@
     <color name="orange_light">#964B00</color>
     <color name ="orange_soft">#ffa420</color>
     <color name ="green_soft">#BFE479</color>
+    <color name="grey">#C0C0C0</color>
 </resources>
