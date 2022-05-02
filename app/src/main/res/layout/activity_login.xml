@@ -19,11 +19,11 @@
         android:scaleType="fitStart"
         android:src="@mipmap/healthy"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.154"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="14dp"
-        />
+        tools:ignore="MissingConstraints" />
 
     <LinearLayout
         android:id="@+id/box_login"
@@ -39,8 +39,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.526">
-
+        app:layout_constraintVertical_bias="0.573">
 
 
         <EditText
