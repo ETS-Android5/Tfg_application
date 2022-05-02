@@ -42,7 +42,7 @@ public class Sign_in extends AppCompatActivity {
                     if(user.getPass().toString().length()!=0){
 
                         if(controllerDB.checkIfUserExists(user)>0){
-                            Toast userExist = Toast.makeText(Sign_in.this, "Ya existe este usuario", Toast.LENGTH_LONG);
+                            Toast userExist = Toast.makeText(Sign_in.this, "This username already exists", Toast.LENGTH_LONG);
                             userExist.show();
                         }else{
                             controllerDB.insertNewUser(user);

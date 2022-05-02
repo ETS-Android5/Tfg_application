@@ -18,6 +18,7 @@ public class Login extends AppCompatActivity {
     private ControllerDB controllerDB;
     private final String FONT_STYLE_SPLASH = "Little Comet Demo Version.otf";
     private Button buttonSign;
+    private Button buttonLogin;
 
 
 
@@ -29,6 +30,7 @@ public class Login extends AppCompatActivity {
         controllerDB = new ControllerDB(this);
         getSupportActionBar().hide();
         buttonSign = (Button) findViewById(R.id.button_sign);
+        buttonLogin =(Button) findViewById(R.id.login_button);
 
         //changeFont();
 
@@ -39,7 +41,41 @@ public class Login extends AppCompatActivity {
               startActivity(changeSign);
             }
         });
+
+        buttonLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TextView user = (TextView) findViewById(R.id.user_til);
+                String user_name = user.getText().toString();
+                TextView pass = (TextView) findViewById(R.id.pass_til);
+                String pass_user = pass.getText().toString();
+                User user1 = new User();
+                user1.setName(user.getText().toString());
+                user1.setPass(pass.getText().toString());
+                if (user1.getName().isEmpty() || user1.getPass().isEmpty()) {
+                    Toast toast = Toast.makeText(Login.this, "Please don't let boxes empty", Toast.LENGTH_SHORT);
+                    toast.show();
+                } else {
+                    if (controllerDB.checkIfUserExists(user1) != 0) {
+                        if (controllerDB.checkIfPassExists(user1) != 0) {
+                            Intent intent = new Intent(Login.this, MainActivity.class);
+                            intent.putExtra("USER_I_NEED", (Parcelable) user1);
+                            startActivity(intent);
+                        } else {
+                            Toast toast = Toast.makeText(Login.this, "Invalid password", Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
+                    } else {
+                        Toast toast = Toast.makeText(Login.this, "Invalid user", Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                }
+            }
+        });
     }
+    }
+
+
 
     /*private void changeFont() {
         Typeface font = Typeface.createFromAsset(getAssets(), FONT_STYLE_SPLASH);
@@ -49,35 +85,8 @@ public class Login extends AppCompatActivity {
 */
 
 
-    public void LogTheAccount(View view) {
-        TextView user = (TextView) findViewById(R.id.user_til);
-        String user_name = user.getText().toString();
-        TextView pass = (TextView) findViewById(R.id.pass_til);
-        String pass_user = pass.getText().toString();
-        User user1 = new User();
-        user1.setName(user.getText().toString());
-        user1.setPass(pass.getText().toString());
-        if (user1.getName().isEmpty() || user1.getPass().isEmpty()) {
-            Toast toast = Toast.makeText(this, "Please don't let boxes empty", Toast.LENGTH_SHORT);
-            toast.show();
-        } else {
-            if (controllerDB.checkIfUserExists(user1) != 0) {
-                if (controllerDB.checkIfPassExists(user1) != 0) {
-                    Intent intent = new Intent(this, MainActivity.class);
-                    intent.putExtra("USER_I_NEED", (Parcelable) user1);
-                    startActivity(intent);
-                } else {
-                    Toast toast = Toast.makeText(this, "Invalid password", Toast.LENGTH_SHORT);
-                    toast.show();
-                }
-            } else {
-                Toast toast = Toast.makeText(this, "Invalid user", Toast.LENGTH_SHORT);
-                toast.show();
-            }
-        }
-    }
 
 
 
 
-}
+
