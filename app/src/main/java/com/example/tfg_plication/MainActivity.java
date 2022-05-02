@@ -41,30 +41,32 @@ public class MainActivity extends AppCompatActivity {
         buttonRecipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentBack = new Intent (MainActivity.this,Listrecipes.class);
-                startActivity(intentBack);
+                Intent intentListRecipes = new Intent (MainActivity.this,ListRecipes.class);
+                startActivity(intentListRecipes);
             }
         });
+
         buttonBreakfast.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentBack = new Intent (MainActivity.this,Recipe.class);
-                startActivity(intentBack);
+                Intent intentBreakfast = new Intent (MainActivity.this,Recipe.class);
+                startActivity(intentBreakfast);
             }
         });
         buttonMainCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentBack = new Intent (MainActivity.this,Recipe.class);
-                startActivity(intentBack);
+                Intent intentMainCourse = new Intent (MainActivity.this,Recipe.class);
+                startActivity(intentMainCourse);
             }
         });
         buttonDessert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentBack = new Intent (MainActivity.this,Recipe.class);
-                startActivity(intentBack);
+                Intent intentDessert = new Intent (MainActivity.this,Recipe.class);
+                startActivity(intentDessert);
             }
         });
+
     }
 }
