@@ -23,7 +23,7 @@ import java.util.List;
 public class ControllerDB extends SQLiteOpenHelper {
 
     public ControllerDB(Context context) {
-        super(context, "com.damedix.Tfg_application", null, 12);
+        super(context, "com.damedix.Tfg_application", null, 11);
 
     }
 
@@ -40,7 +40,7 @@ public class ControllerDB extends SQLiteOpenHelper {
                 "FATTEN TEXT ," +
                 "TYPEOFFOOD TEXT," +
                 "IMAGE BLOB," +
-                "FOREIGN KEY (userId) REFERENCES USERS(ID));");
+                "FOREIGN KEY (userID) REFERENCES USERS(ID));");
         db.execSQL("CREATE TABLE RECIPES_INGREDIENTS (ID_RECIPE INTEGER NOT NULL," +
                 "ID_INGREDIENT INTEGER NOT NULL," +
                 "AMOUNT INT NOT NULL," +
@@ -51,6 +51,20 @@ public class ControllerDB extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
+        db.execSQL("CREATE TABLE INGREDIENTS (ID INTEGER PRIMARY KEY AUTOINCREMENT,INGREDIENT TEXT NOT NULL);");
+        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Tomate')");
+        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Pollo')");
+        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Harina')");
+        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Huevo')");
+        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Leche')");
+        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Queso Untable')");
+        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Lechuga')");
+        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Zanahoria')");
+        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Limon')");
+        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('levadura')");
+        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Levadura')");
+        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Sal')");
+        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Coliflor')");
     }
 
     public int checkIfUserExists(User user) {
@@ -251,16 +265,5 @@ public class ControllerDB extends SQLiteOpenHelper {
         }
 
     }
-    public int getIngredients(){
-        SQLiteDatabase ref_db = this.getReadableDatabase();
-        Cursor c2 = ref_db.rawQuery("SELECT * FROM INGREDIENTS",null);
-        return c2.getCount();
-    }
 
-    public int getUserId(String name) {
-        SQLiteDatabase ref_db = this.getReadableDatabase();
-        Cursor c1 = ref_db.rawQuery("SELECT ID FROM USERS WHERE USER=? ", new String[]{name});
-        c1.moveToFirst();
-        return c1.getInt(0);
-    }
 }

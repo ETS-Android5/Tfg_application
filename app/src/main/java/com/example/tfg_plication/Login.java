@@ -3,7 +3,6 @@ package com.example.tfg_plication;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,10 +32,6 @@ public class Login extends AppCompatActivity {
         buttonSign = (Button) findViewById(R.id.button_sign);
         buttonLogin =(Button) findViewById(R.id.login_button);
 
-        controllerDB.getIngredients();
-        Log.v("Login", ""+controllerDB.getIngredients());
-
-
         //changeFont();
 
         buttonSign.setOnClickListener(new View.OnClickListener() {
@@ -64,7 +59,7 @@ public class Login extends AppCompatActivity {
                     if (controllerDB.checkIfUserExists(user1) != 0) {
                         if (controllerDB.checkIfPassExists(user1) != 0) {
                             Intent intent = new Intent(Login.this, MainActivity.class);
-                            intent.putExtra("USER_I_NEED", controllerDB.getUserId(user1.getName()));
+                            intent.putExtra("USER_I_NEED", (Parcelable) user1);
                             startActivity(intent);
                         } else {
                             Toast toast = Toast.makeText(Login.this, "Invalid password", Toast.LENGTH_SHORT);
