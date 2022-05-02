@@ -1,14 +1,17 @@
 package com.example.tfg_plication;
 
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 
 
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -31,6 +34,8 @@ import com.example.tfg_plication.entity.RecipeIngredient;
 import com.example.tfg_plication.entity.TestIngredient;
 import com.example.tfg_plication.entity.User;
 import com.example.tfg_plication.relation.RecipeManager;
+
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 
@@ -87,13 +92,6 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         ArrayAdapter arrayAdapter2 = new ArrayAdapter(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, type);
         type_food.setAdapter(arrayAdapter2);
 
-        /*ArrayList<String> test = new ArrayList<>();
-        for(int i = 0;i < recipeManager.getIngredients(this).size();i++){
-            test.add(recipeManager.getIngredients(this).get(i).getName());
-            ArrayAdapter arrayAdapter = new ArrayAdapter(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, test);
-            ingredients.setAdapter(arrayAdapter);
-        }*/
-
     }
 
     private void initValues() {
@@ -101,11 +99,10 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         plusIngredient = findViewById(R.id.plus_ingredient);
         plusIngredient.setOnClickListener(this);
 
-
         recipeManager = new RecipeManager();
         //ControllerDB controllerDB = new ControllerDB(this);
-        //imgRecipe = findViewById(R.id.imgRecipe);
-        //bmImg = ((BitmapDrawable) imgRecipe.getDrawable()).getBitmap();
+        imgRecipe = findViewById(R.id.imgRecipe);
+        bmImg = ((BitmapDrawable) imgRecipe.getDrawable()).getBitmap();
         //txt_recipe = (EditText) findViewById(R.id.name_recipe);
         //info_recipe = (EditText) findViewById(R.id.info_about);
         //num_kl = (EditText) findViewById(R.id.num_kal);
@@ -133,21 +130,23 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
             ingredients.setAdapter(arrayAdapter);
         }
         ly.addView(view_name);
-        /*spinnerTeam = (Spinner) view_name.findViewById(R.id.things);
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, teamList);
-        spinnerTeam.setAdapter(arrayAdapter);*/
 
-        /*
-        for(int i = 0;i < recipeManager.getIngredients(this).size();i++){
-            test.add(recipeManager.getIngredients(this).get(i).getName());
-            ArrayAdapter arrayAdapter = new ArrayAdapter(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, test);
-            ingredients.setAdapter(arrayAdapter);
-        }*/
     }
 
     public void saveInfo(View view){
+
+        Toast.makeText(this,"Image-->"+bmImg,Toast.LENGTH_SHORT).show();
         //EditText txt_recipe = (EditText) findViewById(R.id.name_recipe);
         //Bitmap getBitMap = ((BitmapDrawable)imgBtn1.getDrawable()).getBitmap();
+
+
+        //testDifferentIngredients();
+
+
+
+    }
+
+    private  void testDifferentIngredients () {
         ArrayList<TestIngredient> lIngredients = new ArrayList<>();
         Log.v("DynamicLY", "Num: " + ly.getChildCount());
         for (int i = 0; i < ly.getChildCount(); i++) {
@@ -188,7 +187,8 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         EditText txt_recipe = (EditText) findViewById(R.id.name_recipe);
         Bitmap getBitMap = ((BitmapDrawable)imgBtn1.getDrawable()).getBitmap();
 
-    }
+    }*/
+
     public void chooseImage (View view){
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI).setType("image/*");
         startActivityForResult(intent.createChooser(intent,"Select The Application"),10);
@@ -199,7 +199,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK){
             Uri path = data.getData();
-            imgBtn1.setImageURI(path);
+            imgRecipe.setImageURI(path);
         }
-    }*/
+    }
 }

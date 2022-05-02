@@ -2,6 +2,7 @@ package com.example.tfg_plication;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -66,7 +67,7 @@ public class Login extends AppCompatActivity {
             if (controllerDB.checkIfUserExists(user1) != 0) {
                 if (controllerDB.checkIfPassExists(user1) != 0) {
                     Intent intent = new Intent(this, MainActivity.class);
-                    //intent.putExtra("USER_I_NEED", (Parcelable) user1);
+                    intent.putExtra("USER_I_NEED", (Parcelable) user1);
                     startActivity(intent);
                 } else {
                     Toast toast = Toast.makeText(this, "Invalid password", Toast.LENGTH_SHORT);

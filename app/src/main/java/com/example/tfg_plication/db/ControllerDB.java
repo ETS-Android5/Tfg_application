@@ -156,7 +156,7 @@ public class ControllerDB extends SQLiteOpenHelper {
         cv.put("NAME_RECIPE", String.valueOf(recipe.getName()));
         cv.put("RECIPE_TEXT", String.valueOf(recipe.getRecipeText()));
         cv.put("FATTEN", String.valueOf(recipe.getFatten()));
-        cv.put("TYPEOFFOOD", String.valueOf(recipe.getFatten()));
+        cv.put("TYPEOFFOOD", String.valueOf(recipe.getTypeofFood()));
         cv.put("IMAGE", getBitmapAsByteArray(recipe.getImg()));
         ref_db.insert("RECIPES", null, cv);
         Cursor c2 = ref_db.rawQuery("SELECT ID FROM INGREDIENTS WHERE NAME_RECIPE=?", new String[]{recipe.getName()});
