@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private Button buttonBreakfast;
     private Button buttonMainCourse;
     private Button buttonDessert;
+    private Button buttonAddRecipe;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,11 +38,20 @@ public class MainActivity extends AppCompatActivity {
         buttonDessert = findViewById(R.id.buttonDesserts);
         buttonRecipe = findViewById(R.id.allRecipes);
         controllerDB = new ControllerDB(this);
+        buttonRecipe = findViewById(R.id.addRecipe);
 
         buttonRecipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intentListRecipes = new Intent (MainActivity.this,ListRecipes.class);
+                startActivity(intentListRecipes);
+            }
+        });
+
+        buttonAddRecipe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentListRecipes = new Intent (MainActivity.this,AddRecipe.class);
                 startActivity(intentListRecipes);
             }
         });
