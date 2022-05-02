@@ -171,6 +171,7 @@ public class ControllerDB extends SQLiteOpenHelper {
             cv2.put("ID_INGREDIENT", Integer.valueOf(recipe.getIngredients().get(i).getIngredient().getId()));
             cv2.put("AMOUNT", Integer.valueOf(recipe.getIngredients().get(i).getAmount()));
             ref_db.insert("RECIPES_INGREDIENTS", null, cv2);
+
         }
         ref_db.close();
     }
@@ -203,7 +204,7 @@ public class ControllerDB extends SQLiteOpenHelper {
                 recipe.setFatten(c2.getString(4));
                 recipe.setImg(blobToBitmap(c2.getBlob(5)));
                 recipes.add(recipe);
-
+                c2.moveToNext();
             }
             ref_db.close();
             return recipes;
@@ -226,6 +227,7 @@ public class ControllerDB extends SQLiteOpenHelper {
                 recipeIngredient.setIngredient(getIngredient(c2.getInt(1)));
                 recipeIngredient.setAmount(c2.getInt(2));
                 recipe.addIngredient(recipeIngredient);
+                c2.moveToNext();
             }
             ref_db.close();
             return recipe;
@@ -241,8 +243,8 @@ public class ControllerDB extends SQLiteOpenHelper {
         bitmap.compress(Bitmap.CompressFormat.PNG, 0, stream);
         return stream.toByteArray();
     }
-    public List<Recipe> getAllRecipes(){
-        List<Recipe> recipes= new ArrayList<Recipe>();
+    public List<Recipe> getAllRecipes() {
+        List<Recipe> recipes = new ArrayList<Recipe>();
         SQLiteDatabase ref_db = this.getReadableDatabase();
         Cursor c2 = ref_db.rawQuery("SELECT * FROM RECIPES", null);
         int cant_reg = c2.getCount();
@@ -255,18 +257,40 @@ public class ControllerDB extends SQLiteOpenHelper {
             for (int i = 0; i < cant_reg; i++) {
                 Recipe recipe = new Recipe();
                 recipe.setId(c2.getInt(0));
-                recipe.setUser(getUser(c2.getInt(1) ));
+                recipe.setUser(getUser(c2.getInt(1)));
                 recipe.setName(c2.getString(2));
                 recipe.setRecipeText(c2.getString(3));
                 recipe.setFatten(c2.getString(4));
                 recipe.setImg(blobToBitmap(c2.getBlob(5)));
                 recipes.add(recipe);
-
+                c2.moveToNext();
             }
             ref_db.close();
             return recipes;
         }
-
+    }
+    public Recipe getRecipe(int id)
+    {
+        SQLiteDatabase ref_db = this.getReadableDatabase();
+        Cursor c2 = ref_db.rawQuery("SELECT * FROM RECIPES WHERE id =?", new String[]{String.valueOf(id)});
+        int cant_reg = c2.getCount();
+        if (cant_reg == 0) {
+            ref_db.close();
+            return null;
+        } else {
+            c2.moveToFirst();
+            String[] tasks = new String[cant_reg];
+                Recipe recipe = new Recipe();
+                recipe.setId(c2.getInt(0));
+                recipe.setUser(getUser(c2.getInt(1) ));
+                recipe.setName(c2.getString(2));
+                recipe.setRecipeText(c2.getString(3));
+                recipe.setFatten(c2.getString(4));
+                recipe.setImg(blobToBitmap(c2.getBlob(5)));
+                getRecipeIngredient(recipe);
+            ref_db.close();
+            return recipe;
+    }
     }
 
 }
