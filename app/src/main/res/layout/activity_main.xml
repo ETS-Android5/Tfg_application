@@ -111,8 +111,8 @@
         android:id="@+id/buttonDesserts"
         android:layout_width="48dp"
         android:layout_height="54dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="16dp"
         android:background="@mipmap/arrow_right"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/desserts"
@@ -142,5 +142,29 @@
         app:layout_constraintTop_toBottomOf="@+id/starters"
         app:layout_constraintVertical_bias="0.536"
         app:srcCompat="@mipmap/pancakes" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="119dp"
+        android:layout_height="91dp"
+        app:layout_constraintBottom_toTopOf="@+id/desserts"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.054"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainCourses"
+        app:layout_constraintVertical_bias="0.633"
+        app:srcCompat="@mipmap/curry_chicken" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="119dp"
+        android:layout_height="91dp"
+        app:layout_constraintBottom_toTopOf="@+id/allRecipes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.054"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/desserts"
+        app:layout_constraintVertical_bias="0.258"
+        app:srcCompat="@mipmap/coulant" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
