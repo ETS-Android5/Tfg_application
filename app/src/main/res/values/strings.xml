@@ -20,4 +20,5 @@
     <string name="starters">Starters</string>
     <string name="recipe_today">Recipe Today!</string>
     <string name="all_recipes">All recipes</string>
+    <string name="breakfast">Breakfast</string>
 </resources>
