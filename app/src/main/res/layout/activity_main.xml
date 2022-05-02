@@ -167,4 +167,31 @@
         app:layout_constraintVertical_bias="0.258"
         app:srcCompat="@mipmap/coulant" />
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delicious pancakes"
+        android:textSize="18dp"
+        tools:layout_editor_absoluteX="169dp"
+        tools:layout_editor_absoluteY="167dp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Indian curry chicken"
+        android:textSize="18dp"
+        tools:layout_editor_absoluteX="173dp"
+        tools:layout_editor_absoluteY="329dp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="The best Coulant"
+        android:textSize="18dp"
+        tools:layout_editor_absoluteX="171dp"
+        tools:layout_editor_absoluteY="492dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
