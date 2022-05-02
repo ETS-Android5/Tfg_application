@@ -131,6 +131,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
     }
 
     public void saveInfo(View view) {
+        testDifferentIngredients();
         /*bmImg = ((BitmapDrawable) imgRecipe.getDrawable()).getBitmap();
         int idUser = this.getIntent().getExtras().getInt("USER_I_NEED");
         user.setId(idUser);
