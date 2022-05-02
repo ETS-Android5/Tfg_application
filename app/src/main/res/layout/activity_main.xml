@@ -7,6 +7,8 @@
     tools:context=".MainActivity"
     >
 
+
+
     <TextView
         android:id="@+id/welcomebar"
         android:layout_width="match_parent"
