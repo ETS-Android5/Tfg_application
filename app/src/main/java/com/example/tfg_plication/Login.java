@@ -59,7 +59,9 @@ public class Login extends AppCompatActivity {
                     if (controllerDB.checkIfUserExists(user1) != 0) {
                         if (controllerDB.checkIfPassExists(user1) != 0) {
                             Intent intent = new Intent(Login.this, MainActivity.class);
-                            intent.putExtra("USER_I_NEED", (Parcelable) user1);
+                            intent.putExtra("idUser",user1.getId());
+                            intent.putExtra("user", user1.getName());
+                            intent.putExtra("pass",user1.getPass());
                             startActivity(intent);
                         } else {
                             Toast toast = Toast.makeText(Login.this, "Invalid password", Toast.LENGTH_SHORT);

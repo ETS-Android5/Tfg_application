@@ -25,9 +25,9 @@ public class Sign_in extends AppCompatActivity {
 
 
 
-        buttonCheck_in = (Button) findViewById(R.id.buttonCheck_in);
+        buttonCheck_in =  findViewById(R.id.buttonCheck_in);
         controllerDB = new ControllerDB(this);
-        buttonBack = (Button) findViewById(R.id.buttonBack);
+        buttonBack =  findViewById(R.id.buttonBack);
 
         buttonCheck_in.setOnClickListener(new View.OnClickListener() {
             @Override
