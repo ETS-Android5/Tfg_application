@@ -51,8 +51,7 @@ public class ControllerDB extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-        /*
-          db.execSQL("CREATE TABLE INGREDIENTS (ID INTEGER PRIMARY KEY AUTOINCREMENT,INGREDIENT TEXT NOT NULL);");
+
         db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Tomate')");
         db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Pollo')");
         db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Harina')");
@@ -66,7 +65,6 @@ public class ControllerDB extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Levadura')");
         db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Sal')");
         db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Coliflor')");
-         */
 
     }
 

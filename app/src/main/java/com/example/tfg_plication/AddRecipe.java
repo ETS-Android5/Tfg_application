@@ -4,6 +4,7 @@ package com.example.tfg_plication;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -37,6 +38,10 @@ import com.example.tfg_plication.relation.RecipeManager;
 
 import org.jetbrains.annotations.Nullable;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class AddRecipe extends AppCompatActivity implements View.OnClickListener {
@@ -189,6 +194,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
 
 
     //testDifferentIngredients();
+
 
 
     private void testDifferentIngredients() {
