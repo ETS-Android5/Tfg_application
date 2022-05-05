@@ -34,8 +34,8 @@ public class RecipeManager {
         recipe.setRecipeText(recipeText);
         recipe.addListIngredient(ingredients);
     }
-    public List<RecipeIngredient> addToListRecipeIngredient(Recipe recipe,Ingredient  ingredient,int amount,List<RecipeIngredient> ingredients){
-        RecipeIngredient recipeIngredient = new RecipeIngredient(ingredient,recipe,amount);
+    public List<RecipeIngredient> addToListRecipeIngredient(Ingredient  ingredient,int amount,List<RecipeIngredient> ingredients){
+        RecipeIngredient recipeIngredient = new RecipeIngredient(ingredient,amount);
         ingredients.add(recipeIngredient);
         return ingredients;
     }

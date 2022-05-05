@@ -151,27 +151,30 @@ public class ControllerDB extends SQLiteOpenHelper {
 
     public void addRecipe(Recipe recipe) {
         SQLiteDatabase ref_db = this.getWritableDatabase();
-
-
         ContentValues cv = new ContentValues();
+        cv.put("userId",recipe.getUser().getId());
         cv.put("NAME_RECIPE", String.valueOf(recipe.getName()));
         cv.put("RECIPE_TEXT", String.valueOf(recipe.getRecipeText()));
         cv.put("FATTEN", String.valueOf(recipe.getFatten()));
         cv.put("TYPEOFFOOD", String.valueOf(recipe.getTypeofFood()));
         cv.put("IMAGE", getBitmapAsByteArray(recipe.getImg()));
         ref_db.insert("RECIPES", null, cv);
-        Cursor c2 = ref_db.rawQuery("SELECT ID FROM INGREDIENTS WHERE NAME_RECIPE=?", new String[]{recipe.getName()});
+        Cursor c2 = ref_db.rawQuery("SELECT ID FROM RECIPES WHERE NAME_RECIPE=?", new String[]{recipe.getName()});
         c2.moveToFirst();
-        int idRecipe = c2.getInt(0);
-        for (int i = 0; i <= recipe.getIngredients().size(); i++) {
-            ContentValues cv2 = new ContentValues();
-            cv2.put("ID_RECIPE", Integer.valueOf(recipe.getId()));
-            cv2.put("ID_INGREDIENT", Integer.valueOf(recipe.getIngredients().get(i).getIngredient().getId()));
-            cv2.put("AMOUNT", Integer.valueOf(recipe.getIngredients().get(i).getAmount()));
-            ref_db.insert("RECIPES_INGREDIENTS", null, cv2);
+        int id = c2.getInt(0);
 
+        for (int i = 0; i < recipe.getIngredients().size(); i++) {
+            ContentValues cv2 = new ContentValues();
+            cv2.put("ID_RECIPE", id);
+            cv2.put("ID_INGREDIENT", recipe.getIngredients().get(i).getIngredient().getId());
+            cv2.put("AMOUNT", recipe.getIngredients().get(i).getAmount());
+            ref_db.insert("RECIPES_INGREDIENTS", null, cv2);
+            c2.moveToNext();
         }
         ref_db.close();
+
+
+
     }
 
     public void deleteRecipe(Recipe recipe) {
@@ -209,7 +212,7 @@ public class ControllerDB extends SQLiteOpenHelper {
         }
     }
 
-    public Recipe getRecipeIngredient(Recipe recipe) {
+    /*public Recipe getRecipeIngredient(Recipe recipe) {
         SQLiteDatabase ref_db = this.getReadableDatabase();
         Cursor c2 = ref_db.rawQuery("SELECT * FROM RECIPES_INGREDIENTS WHERE ID_INGREDIENT = ? ", new String[]{String.valueOf(recipe.getId())});
         int cant_reg = c2.getCount();
@@ -230,7 +233,7 @@ public class ControllerDB extends SQLiteOpenHelper {
             ref_db.close();
             return recipe;
         }
-    }
+    }*/
 
     public Bitmap blobToBitmap(byte[] img) {
         return BitmapFactory.decodeByteArray(img, 0, img.length);
@@ -267,7 +270,7 @@ public class ControllerDB extends SQLiteOpenHelper {
             return recipes;
         }
     }
-    public Recipe getRecipe(int id)
+    /*public Recipe getRecipe(int id)
     {
         SQLiteDatabase ref_db = this.getReadableDatabase();
         Cursor c2 = ref_db.rawQuery("SELECT * FROM RECIPES WHERE id =?", new String[]{String.valueOf(id)});
@@ -289,6 +292,6 @@ public class ControllerDB extends SQLiteOpenHelper {
             ref_db.close();
             return recipe;
     }
-    }
+    }*/
 
 }

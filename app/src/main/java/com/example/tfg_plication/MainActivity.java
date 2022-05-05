@@ -41,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
         controllerDB = new ControllerDB(this);
         buttonAddRecipe = findViewById(R.id.addRecipe);
 
+        int idUser = this.getIntent().getExtras().getInt("idUser");
+
         buttonRecipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intentListRecipes = new Intent (MainActivity.this,AddRecipe.class);
+                intentListRecipes.putExtra("idUser", idUser);
                 startActivity(intentListRecipes);
             }
         });

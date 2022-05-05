@@ -53,12 +53,12 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
 
 
     private RecipeManager recipeManager;
-    //ControllerDB controllerDB;
+    ControllerDB cDB;
     private ImageButton imgRecipe;
-    private Bitmap bmImg;
     private EditText name_recipe, info_recipe, num_kl;
     private Spinner type_food, ingredients;
     private User user;
+    private Recipe recipe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,24 +66,23 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         setContentView(R.layout.activity_add_recipe);
         initValues();
         dynamicSpinners();
-        //addRecipe();
-        //controllerDB = new ControllerDB(this);
-        //Toast.makeText(this, "" + controllerDB.getAllIngredient(), Toast.LENGTH_SHORT).show();
-
     }
 
-    private void addRecipe() {
-        /*int idUser = this.getIntent().getExtras().getInt("USER_I_NEED");
+    private void initValuesRecipe() {
+        String name = name_recipe.getText().toString();
+        String description = info_recipe.getText().toString();
+        String calories = num_kl.getText().toString();
+        String typeFood = type_food.getSelectedItem().toString();
+        int idUser = this.getIntent().getExtras().getInt("idUser");
         user.setId(idUser);
-        Recipe recipe = new Recipe(1, txt_recipe.getText().toString(), info_recipe.getText().toString(), num_kl.getText().toString(), null, user, bmImg, type_food.getSelectedItem().toString());
-        ArrayList<RecipeIngredient> listIngredients = new ArrayList<>();
-        //ingredient.getText().toString();
-        listIngredients.add(new RecipeIngredient(new Ingredient(1, ingredients.getSelectedItem().toString()), recipe, seekBar.getProgress()));
-
-        recipe.addListIngredient(listIngredients);
-        recipeManager.addRecipeToDB(recipe,this);*/
+        Bitmap bmImg = ((BitmapDrawable) imgRecipe.getDrawable()).getBitmap();
+        recipe.setName(name);
+        recipe.setRecipeText(description);
+        recipe.setFatten(calories);
+        recipe.setUser(user);
+        recipe.setImg(bmImg);
+        recipe.setTypeofFood(typeFood);
     }
-
 
     private void dynamicSpinners() {
 
@@ -98,19 +97,18 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
     }
 
     private void initValues() {
+        recipe = new Recipe();
         ly = findViewById(R.id.ly);
         plusIngredient = findViewById(R.id.plus_ingredient);
         plusIngredient.setOnClickListener(this);
-
         recipeManager = new RecipeManager();
-        //ControllerDB controllerDB = new ControllerDB(this);
+        cDB = new ControllerDB(this);
         imgRecipe = findViewById(R.id.imgRecipe);
-        //bmImg = ((BitmapDrawable) imgRecipe.getDrawable()).getBitmap();
         name_recipe = (EditText) findViewById(R.id.name_recipe);
         info_recipe = (EditText) findViewById(R.id.info_about);
         num_kl = (EditText) findViewById(R.id.num_kal);
         type_food = (Spinner) findViewById(R.id.type_of_food);
-        //user = new User();
+        user = new User();
     }
 
     @Override
@@ -136,109 +134,30 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
     }
 
     public void saveInfo(View view) {
-        testDifferentIngredients();
-        /*bmImg = ((BitmapDrawable) imgRecipe.getDrawable()).getBitmap();
-        int idUser = this.getIntent().getExtras().getInt("USER_I_NEED");
-        user.setId(idUser);
-        String name = name_recipe.getText().toString();
-        String description = info_recipe.getText().toString();
-        String calories = name_recipe.getText().toString();
-        String typeFood = type_food.getSelectedItem().toString();
+        initValuesRecipe();
 
-        Recipe recipe = new Recipe(1,name,description,calories,null,user,bmImg,typeFood);
-
-        ArrayList<RecipeIngredient> listIngredients = new ArrayList<>();
+        ArrayList<RecipeIngredient> addIngredients = new ArrayList<>();
+        Ingredient ingredient = null;
         for (int i = 0; i < ly.getChildCount(); i++) {
             View cricketView = ly.getChildAt(i);
             et = (EditText) cricketView.findViewById(R.id.amount);
             Spinner spinner = (Spinner) cricketView.findViewById(R.id.ingredients);
-            x_del_ingredient = (ImageView) cricketView.findViewById(R.id.remove);
-            if (view_name != null && et != null) {
-                listIngredients.add(new RecipeIngredient(new Ingredient(i+1, spinner.getSelectedItem().toString()), recipe,Integer.parseInt(et.getText().toString())));
-            }
-            recipe.addListIngredient(listIngredients);
-            recipeManager.addRecipeToDB(recipe,this);*/
-    }
-
-        /*
-        ArrayList<RecipeIngredient> lIngredients = new ArrayList<>();
-        Log.v("DynamicLY", "Num: " + ly.getChildCount());
-        for (int i = 0; i < ly.getChildCount(); i++) {
-            View cricketView = ly.getChildAt(i);
-            et = (EditText) cricketView.findViewById(R.id.amount);
-            Spinner spinner = (Spinner) cricketView.findViewById(R.id.ingredients);
-            x_del_ingredient = (ImageView) cricketView.findViewById(R.id.remove);
-            if (view_name != null && et != null) {
-                lIngredients.add(new TestIngredient(i + 1, et.getText().toString(), spinner.getSelectedItem().toString()));
+            if (view_name != null && et != null && spinner != null) {
+                ingredient = new Ingredient(i + 1, spinner.getSelectedItem().toString());
+                addIngredients.add(new RecipeIngredient(ingredient, Integer.parseInt(et.getText().toString())));
             }
         }
-        for (TestIngredient ig : lIngredients) {
-            Toast.makeText(this, ig.getId() + "-" + ig.getIngredient() + "-" + ig.getAmount(), Toast.LENGTH_SHORT).show();
+        ArrayList<RecipeIngredient> sendIngredients = new ArrayList<>();
+        for (int i = 0; i < addIngredients.size(); i++) {
+            sendIngredients.add(new RecipeIngredient(new Ingredient(addIngredients.get(i).getIngredient().getId(), addIngredients.get(i).getIngredient().getName()), addIngredients.get(i).getAmount()));
         }
-        */
-
-        /*listIngredients.add(new RecipeIngredient(new Ingredient(1, ingredients.getSelectedItem().toString()), recipe, seekBar.getProgress()));
-
-        recipe.addListIngredient(listIngredients);
-
-        recipeManager.addRecipeToDB(recipe,this);*/
-
-        /*Toast.makeText(this,"Name Recipe-->"+name_recipe.getText().toString(),Toast.LENGTH_SHORT).show();
-        Toast.makeText(this,"Info Recipe-->"+info_recipe.getText().toString(),Toast.LENGTH_SHORT).show();
-        Toast.makeText(this,"Num Calories-->"+num_kl.getText().toString(),Toast.LENGTH_SHORT).show();
-        Toast.makeText(this,"Type Of Food-->"+type_food.getSelectedItem().toString(),Toast.LENGTH_SHORT).show();*/
-
-
-    //EditText txt_recipe = (EditText) findViewById(R.id.name_recipe);
-    //Bitmap getBitMap = ((BitmapDrawable)imgBtn1.getDrawable()).getBitmap();
-
-
-    //testDifferentIngredients();
-
-
-
-    private void testDifferentIngredients() {
-        ArrayList<TestIngredient> lIngredients = new ArrayList<>();
-        Log.v("DynamicLY", "Num: " + ly.getChildCount());
-        for (int i = 0; i < ly.getChildCount(); i++) {
-            View cricketView = ly.getChildAt(i);
-            et = (EditText) cricketView.findViewById(R.id.amount);
-            Spinner spinner = (Spinner) cricketView.findViewById(R.id.ingredients);
-            x_del_ingredient = (ImageView) cricketView.findViewById(R.id.remove);
-            if (view_name != null && et != null) {
-                lIngredients.add(new TestIngredient(i + 1, et.getText().toString(), spinner.getSelectedItem().toString()));
-            }
-        }
-        for (TestIngredient ig : lIngredients) {
-            Toast.makeText(this, ig.getId() + "-" + ig.getIngredient() + "-" + ig.getAmount(), Toast.LENGTH_SHORT).show();
-        }
+        recipe.addListIngredient(sendIngredients);
+        cDB.addRecipe(recipe);
+        Toast.makeText(this,"Recipe Added!!!",Toast.LENGTH_SHORT).show();
     }
 
 
-    /*
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.support.design.R.layout.support_simple_spinner_dropdown_item,ingredients);
 
-
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,ingredients);
-
-        spinner1.setAdapter(arrayAdapter);
-
-        Spinner spinner2 = findViewById(R.id.numIngredients);
-        ArrayAdapter arrayAdapter2 = new ArrayAdapter(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,amount);
-        spinner2.setAdapter(arrayAdapter2);
-
-        //listIngredients.add(new RecipeIngredient(new Ingredient(2, "Salmon"), recipe, 4));
-        //listIngredients.add(new RecipeIngredient(new Ingredient(3, "Rice"), recipe, 5));
-        //listIngredients.add(new RecipeIngredient(new Ingredient(4, "Wasabi"), recipe, 5));
-
-    }
-
-    public void saveInfo(View view){
-
-        EditText txt_recipe = (EditText) findViewById(R.id.name_recipe);
-        Bitmap getBitMap = ((BitmapDrawable)imgBtn1.getDrawable()).getBitmap();
-
-    }*/
 
     public void chooseImage(View view) {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI).setType("image/*");
