@@ -21,11 +21,27 @@ public class ListRecipes extends AppCompatActivity {
         controllerDB = new ControllerDB(this);
         listRecipe = findViewById(R.id.listRecipe);
 
-        actualizarUI();
+        /**
+         *
+         *      /**********                     **********/
+                /**********  AVISO INFORMATIVO  **********/
+                /**********                     **********
+         *
+         * Para recuperar la imagen de la BD simplemente este formato
+                 ImageView image = findViewById(R.id.imageView);
+         *       Drawable d = new BitmapDrawable(getResources(), recipe.getImg());
+         *       image.setImageDrawable(d);
+         *
+         * @author  Adrian Fernandez
+         * @version 1.0
+         *
+         */
+
+        //actualizarUI();
 
     }
 
-    private void actualizarUI(){
+    /*private void actualizarUI(){
 
         if (controllerDB.getAllRecipes().size() == 0) {
             listRecipe.setAdapter(null);
@@ -34,5 +50,5 @@ public class ListRecipes extends AppCompatActivity {
             listRecipe.setAdapter(miAdapter);
 
         }
-    }
+    }*/
 }

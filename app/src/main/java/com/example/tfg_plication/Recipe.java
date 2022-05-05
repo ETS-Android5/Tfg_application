@@ -11,4 +11,19 @@ public class Recipe extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe);
     }
+    /**
+     *
+     /**********                     **********/
+    /**********  AVISO INFORMATIVO  **********/
+    /**********                     **********
+     *
+     * Para recuperar la imagen de la BD simplemente este formato
+             ImageView image = findViewById(R.id.imageView);
+     *       Drawable d = new BitmapDrawable(getResources(), recipe.getImg());
+     *       image.setImageDrawable(d);
+     *
+     * @author  Adrian Fernandez
+     * @version 1.0
+     *
+     */
 }
