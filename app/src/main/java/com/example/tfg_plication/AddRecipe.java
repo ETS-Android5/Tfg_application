@@ -150,7 +150,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         }
         recipe.addListIngredient(test);
         cDB.addRecipe(recipe);
-        Toast.makeText(this,"Recipe Added!!!",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,"ShowRecipe Added!!!",Toast.LENGTH_SHORT).show();
     }
 
 

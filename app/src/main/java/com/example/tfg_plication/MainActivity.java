@@ -2,23 +2,13 @@ package com.example.tfg_plication;
 
 
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tfg_plication.db.ControllerDB;
-import com.example.tfg_plication.entity.User;
-
-import android.os.Bundle;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -63,21 +53,21 @@ public class MainActivity extends AppCompatActivity {
         buttonBreakfast.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentBreakfast = new Intent (MainActivity.this,Recipe.class);
+                Intent intentBreakfast = new Intent (MainActivity.this, ShowRecipe.class);
                 startActivity(intentBreakfast);
             }
         });
         buttonMainCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentMainCourse = new Intent (MainActivity.this,Recipe.class);
+                Intent intentMainCourse = new Intent (MainActivity.this, ShowRecipe.class);
                 startActivity(intentMainCourse);
             }
         });
         buttonDessert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentDessert = new Intent (MainActivity.this,Recipe.class);
+                Intent intentDessert = new Intent (MainActivity.this, ShowRecipe.class);
                 startActivity(intentDessert);
             }
         });

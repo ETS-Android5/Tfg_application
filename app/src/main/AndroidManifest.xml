@@ -15,7 +15,7 @@
             android:name=".ListRecipes"
             android:exported="false" />
         <activity
-            android:name=".Recipe"
+            android:name=".ShowRecipe"
             android:exported="false" />
         <!--
         <meta-data

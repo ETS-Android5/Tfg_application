@@ -7,12 +7,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.tfg_plication.db.ControllerDB;
+import com.example.tfg_plication.entity.Recipe;
 
 public class ListRecipes extends AppCompatActivity {
 
     ControllerDB controllerDB;
     ListView listRecipe;
-    private ArrayAdapter<String> miAdapter;
+    private ArrayAdapter<Recipe> miAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,18 +38,19 @@ public class ListRecipes extends AppCompatActivity {
          *
          */
 
-        //actualizarUI();
+        UpdateUI();
 
     }
 
-    /*private void actualizarUI(){
+    private void UpdateUI(){
 
         if (controllerDB.getAllRecipes().size() == 0) {
             listRecipe.setAdapter(null);
         }else{
-            miAdapter = new ArrayAdapter<>(this,R.layout.activity_list_view,R.id.recipeTittle,controllerDB.getAllRecipes());
+            //adaptLv = new ArrayAdapter<>(this, R.layout.format_task, R.id.contentTask, controllerDB.getAllTasks());
+            //lv.setAdapter(adaptLv);
+            miAdapter = new ArrayAdapter<>(this,R.layout.format_recipes,R.id.listRecipe,controllerDB.getAllRecipes());
             listRecipe.setAdapter(miAdapter);
-
         }
-    }*/
+    }
 }
