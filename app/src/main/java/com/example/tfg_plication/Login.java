@@ -28,6 +28,9 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         controllerDB = new ControllerDB(this);
+        controllerDB.getTestRecipe();
+        controllerDB.getMoreInfo();
+
         getSupportActionBar().hide();
         buttonSign = (Button) findViewById(R.id.button_sign);
         buttonLogin =(Button) findViewById(R.id.login_button);

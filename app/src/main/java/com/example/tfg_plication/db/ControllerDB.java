@@ -23,7 +23,7 @@ import java.util.List;
 public class ControllerDB extends SQLiteOpenHelper {
 
     public ControllerDB(Context context) {
-        super(context, "com.damedix.Tfg_application", null, 12);
+        super(context, "com.damedix.Tfg_application", null, 13);
 
     }
 
@@ -51,21 +51,16 @@ public class ControllerDB extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-
-        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Tomate')");
-        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Pollo')");
-        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Harina')");
-        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Huevo')");
-        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Leche')");
-        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Queso Crema')");
-        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Lechuga')");
-        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Zanahoria')");
-        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Limon')");
-        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('levadura')");
-        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Levadura')");
-        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Sal')");
-        db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Coliflor')");
-
+        db.execSQL("DROP TABLE IF EXISTS RECIPES");
+        db.execSQL("CREATE TABLE RECIPES (" +
+                "ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "userId INT NOT NULL," +
+                "NAME_RECIPE TEXT NOT NULL," +
+                "RECIPE_TEXT TEXT NOT NULL ," +
+                "FATTEN TEXT ," +
+                "TYPEOFFOOD TEXT," +
+                "IMAGE BLOB," +
+                "FOREIGN KEY (userId) REFERENCES USERS(ID));");
     }
 
     public int checkIfUserExists(User user) {
@@ -172,9 +167,6 @@ public class ControllerDB extends SQLiteOpenHelper {
             c2.moveToNext();
         }
         ref_db.close();
-
-
-
     }
 
     public void deleteRecipe(Recipe recipe) {
@@ -268,6 +260,42 @@ public class ControllerDB extends SQLiteOpenHelper {
             }
             ref_db.close();
             return recipes;
+        }
+    }
+
+    public void getTestRecipe() {
+        SQLiteDatabase ref_db = this.getReadableDatabase();
+        Cursor c2 = ref_db.rawQuery("SELECT * FROM RECIPES", null);
+        int cant_reg = c2.getCount();
+        if (cant_reg != 0) {
+            c2.moveToFirst();
+            for (int i = 0; i < cant_reg; i++) {
+                Log.v("ControllerDB", "id-->" + c2.getInt(0));
+                Log.v("ControllerDB", "UserId" + c2.getInt(1));
+                Log.v("ControllerDB", c2.getString(2));
+                Log.v("ControllerDB", c2.getString(3));
+                Log.v("ControllerDB", c2.getString(4));
+                Log.v("ControllerDB", c2.getString(5));
+                Log.v("ControllerDB","Img-->"+blobToBitmap(c2.getBlob(6)));
+                c2.moveToNext();
+            }
+        }
+        ref_db.close();
+    }
+
+    public void getMoreInfo() {
+        SQLiteDatabase ref_db = this.getReadableDatabase();
+        Cursor c2 = ref_db.rawQuery("SELECT * FROM RECIPES_INGREDIENTS", null);
+        int cant_reg = c2.getCount();
+        if (cant_reg != 0) {
+            c2.moveToFirst();
+            for (int i = 0; i < cant_reg; i++) {
+                Log.v("ControllerDB", "ID_RECIPE -->" + c2.getInt(0));
+                Log.v("ControllerDB", "ID_INGREDIENT -->" + c2.getInt(1));
+                Log.v("ControllerDB", "ID_AMOUNT -->" + c2.getInt(2));
+
+                c2.moveToNext();
+            }
         }
     }
     /*public Recipe getRecipe(int id)

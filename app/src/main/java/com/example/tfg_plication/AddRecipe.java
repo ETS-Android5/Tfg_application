@@ -48,17 +48,17 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
     private LinearLayout ly;
     private Button plusIngredient;
     private View view_name;
-    private ImageView x_del_ingredient;
     private EditText et;
 
 
     private RecipeManager recipeManager;
-    ControllerDB cDB;
-    private ImageButton imgRecipe;
+    private ControllerDB cDB;
+
     private EditText name_recipe, info_recipe, num_kl;
+    private ImageButton imgRecipe;
     private Spinner type_food, ingredients;
     private User user;
-    private Recipe recipe;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,21 +68,6 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         dynamicSpinners();
     }
 
-    private void initValuesRecipe() {
-        String name = name_recipe.getText().toString();
-        String description = info_recipe.getText().toString();
-        String calories = num_kl.getText().toString();
-        String typeFood = type_food.getSelectedItem().toString();
-        int idUser = this.getIntent().getExtras().getInt("idUser");
-        user.setId(idUser);
-        Bitmap bmImg = ((BitmapDrawable) imgRecipe.getDrawable()).getBitmap();
-        recipe.setName(name);
-        recipe.setRecipeText(description);
-        recipe.setFatten(calories);
-        recipe.setUser(user);
-        recipe.setImg(bmImg);
-        recipe.setTypeofFood(typeFood);
-    }
 
     private void dynamicSpinners() {
 
@@ -97,7 +82,6 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
     }
 
     private void initValues() {
-        recipe = new Recipe();
         ly = findViewById(R.id.ly);
         plusIngredient = findViewById(R.id.plus_ingredient);
         plusIngredient.setOnClickListener(this);
@@ -134,24 +118,37 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
     }
 
     public void saveInfo(View view) {
-        initValuesRecipe();
+        String name = name_recipe.getText().toString();
+        String description = info_recipe.getText().toString();
+        String calories = num_kl.getText().toString();
+        String typeFood = type_food.getSelectedItem().toString();
+        int idUser = this.getIntent().getExtras().getInt("idUser");
+        user.setId(idUser);
+        Bitmap bmImg = ((BitmapDrawable) imgRecipe.getDrawable()).getBitmap();
+        Recipe recipe = new Recipe();
+        recipe.setName(name);
+        recipe.setRecipeText(description);
+        recipe.setFatten(calories);
+        recipe.setUser(user);
+        recipe.setImg(bmImg);
+        recipe.setTypeofFood(typeFood);
 
-        ArrayList<RecipeIngredient> addIngredients = new ArrayList<>();
+        ArrayList<RecipeIngredient> listIngredients = new ArrayList<>();
         Ingredient ingredient = null;
         for (int i = 0; i < ly.getChildCount(); i++) {
             View cricketView = ly.getChildAt(i);
             et = (EditText) cricketView.findViewById(R.id.amount);
             Spinner spinner = (Spinner) cricketView.findViewById(R.id.ingredients);
             if (view_name != null && et != null && spinner != null) {
-                ingredient = new Ingredient(i + 1, spinner.getSelectedItem().toString());
-                addIngredients.add(new RecipeIngredient(ingredient, Integer.parseInt(et.getText().toString())));
+                ingredient = new Ingredient(i + 1,spinner.getSelectedItem().toString());
+                listIngredients.add(new RecipeIngredient(ingredient,Integer.parseInt(et.getText().toString())));
             }
         }
-        ArrayList<RecipeIngredient> sendIngredients = new ArrayList<>();
-        for (int i = 0; i < addIngredients.size(); i++) {
-            sendIngredients.add(new RecipeIngredient(new Ingredient(addIngredients.get(i).getIngredient().getId(), addIngredients.get(i).getIngredient().getName()), addIngredients.get(i).getAmount()));
+        ArrayList<RecipeIngredient> test = new ArrayList<>();
+        for (int i = 0; i < listIngredients.size(); i++) {
+            test.add(new RecipeIngredient(new Ingredient(listIngredients.get(i).getIngredient().getId(),listIngredients.get(i).getIngredient().getName()),listIngredients.get(i).getAmount()));
         }
-        recipe.addListIngredient(sendIngredients);
+        recipe.addListIngredient(test);
         cDB.addRecipe(recipe);
         Toast.makeText(this,"Recipe Added!!!",Toast.LENGTH_SHORT).show();
     }
