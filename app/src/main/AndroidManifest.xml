@@ -13,11 +13,8 @@
         android:theme="@style/Theme.Tfg_Plication">
         <activity
             android:name=".ListRecipes"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:exported="false">
+
         </activity>
         <activity
             android:name=".ShowRecipe"
@@ -32,12 +29,17 @@
             android:exported="false" />
         <activity
             android:name=".Splash"
-            android:exported="false">
-
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".Login"
-            android:exported="false" />
+            android:exported="true">
+
+        </activity>
         <activity
             android:name=".Sign_in"
             android:exported="false" />
