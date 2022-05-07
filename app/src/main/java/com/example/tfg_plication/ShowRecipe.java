@@ -19,7 +19,6 @@ public class ShowRecipe extends AppCompatActivity {
     private EditText infoRecipe,showIngredients;
     private ControllerDB controllerDB;
 
-    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,8 +26,8 @@ public class ShowRecipe extends AppCompatActivity {
         initValues();
         controllerDB = new ControllerDB(this);
         Recipe recipeAux = controllerDB.getRecipe();
-        Drawable d = new BitmapDrawable(getResources(), recipeAux.getImg());
-        imgRecipe.setImageDrawable(d);
+        //Drawable d = new BitmapDrawable(getResources(), recipeAux.getImg());
+        //imgRecipe.setImageDrawable(d);
         nameRecipe.setText(recipeAux.getName());
         infoRecipe.setText(recipeAux.getRecipeText());
         typeFood.setText(recipeAux.getTypeofFood());

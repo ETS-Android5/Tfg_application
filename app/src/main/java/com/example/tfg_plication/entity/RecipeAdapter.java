@@ -31,12 +31,11 @@ public class RecipeAdapter extends ArrayAdapter<Recipe> {
         }
         // Lookup view for data population
 
-        ImageView imgRecipe = (ImageView) convertView.findViewById(R.id.img);
-        TextView tvName = (TextView) convertView.findViewById(R.id.getNameRecipe);
-        EditText info = (EditText) convertView.findViewById(R.id.getInfoFromRecipe);
-        TextView cal = (TextView) convertView.findViewById(R.id.getNumCal);
-        TextView type = (TextView) convertView.findViewById(R.id.getTypeFood);
-
+        ImageView imgRecipe = (ImageView) convertView.findViewById(R.id.img_from_all);
+        TextView tvName = (TextView) convertView.findViewById(R.id.name_from_all);
+        EditText info = (EditText) convertView.findViewById(R.id.info_from_all);
+        TextView cal = (TextView) convertView.findViewById(R.id.cal_from_all);
+        TextView type = (TextView) convertView.findViewById(R.id.type_from_all);
         // Populate the data into the template view using the data object
         imgRecipe.setImageBitmap(recipe.img);
         tvName.setText(recipe.name);

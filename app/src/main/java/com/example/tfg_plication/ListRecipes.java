@@ -16,9 +16,7 @@ import com.example.tfg_plication.entity.RecipeAdapter;
 import java.util.ArrayList;
 
 public class ListRecipes extends AppCompatActivity {
-
     ControllerDB controllerDB;
-    private ImageView imgRecipe;
     ListView lv;
     private ArrayAdapter<Recipe> miAdapter;
 
@@ -28,7 +26,6 @@ public class ListRecipes extends AppCompatActivity {
         setContentView(R.layout.activity_list_recipes);
         controllerDB = new ControllerDB(this);
         lv = findViewById(R.id.listRecipe);
-        imgRecipe = findViewById(R.id.img);
 
         /**
          *
@@ -57,7 +54,7 @@ public class ListRecipes extends AppCompatActivity {
         for (Recipe recipe : controllerDB.getAllRecipes()) {
             Recipe reAux = new Recipe();
             Drawable d = new BitmapDrawable(getResources(), recipe.getImg());
-            imgRecipe.setImageDrawable(d);
+            reAux.setConvertImg(d);
             reAux.setName(recipe.getName());
             reAux.setRecipeText(recipe.getRecipeText());
             reAux.setFatten(recipe.getFatten());

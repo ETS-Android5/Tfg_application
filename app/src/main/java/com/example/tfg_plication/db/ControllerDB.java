@@ -246,15 +246,15 @@ public class ControllerDB extends SQLiteOpenHelper {
             return null;
         } else {
             c2.moveToFirst();
-            String[] tasks = new String[cant_reg];
             for (int i = 0; i < cant_reg; i++) {
                 Recipe recipe = new Recipe();
                 recipe.setId(c2.getInt(0));
-                recipe.setUser(getUser(c2.getInt(1)));
+                //recipe.setUser(getUser(c2.getInt(1)));
                 recipe.setName(c2.getString(2));
                 recipe.setRecipeText(c2.getString(3));
                 recipe.setFatten(c2.getString(4));
-                recipe.setImg(blobToBitmap(c2.getBlob(5)));
+                recipe.setTypeofFood(c2.getString(5));
+                recipe.setImg(blobToBitmap(c2.getBlob(6)));
                 recipes.add(recipe);
                 c2.moveToNext();
             }
