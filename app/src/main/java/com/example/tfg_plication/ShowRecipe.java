@@ -34,9 +34,6 @@ public class ShowRecipe extends AppCompatActivity {
         typeFood.setText(recipeAux.getTypeofFood());
         calories.setText(recipeAux.getFatten());
 
-        /*for (int i = 0;i < recipeAux.getIngredients().size();i++){
-            showIngredients.setText(recipeAux.getIngredients().get(i).getIngredient().getName()+" - "+recipeAux.getIngredients().get(i).getAmount());
-        }*/
     }
 
     private void initValues() {

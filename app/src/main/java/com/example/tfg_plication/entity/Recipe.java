@@ -1,5 +1,6 @@
 package com.example.tfg_plication.entity;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 
 import com.example.tfg_plication.entity.Ingredient;
 import com.example.tfg_plication.entity.User;
@@ -9,14 +10,11 @@ public class Recipe {
     private int id;
 
     private User user;
-    private String name;
-    private String recipeText;
-    private String fatten;
-    private String typeofFood;
-
-
-
-    private Bitmap img;
+    String name;
+    String recipeText;
+    String fatten;
+    String typeofFood;
+    Bitmap img;
     private List <RecipeIngredient> recipeIngredients;
 
 
@@ -102,4 +100,10 @@ public class Recipe {
     public void setImg(Bitmap img) {
         this.img = img;
     }
+
+    public void setImg(Drawable img) {
+
+    }
+
+
 }
