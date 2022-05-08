@@ -15,8 +15,7 @@ import com.example.tfg_plication.entity.Recipe;
 
 public class ShowRecipe extends AppCompatActivity {
     private ImageView imgRecipe;
-    private TextView nameRecipe, typeFood, calories;
-    private EditText infoRecipe,showIngredients;
+    private TextView nameRecipe, typeFood, calories,infoRecipe;
     private ControllerDB controllerDB;
 
     @Override
@@ -41,7 +40,6 @@ public class ShowRecipe extends AppCompatActivity {
         infoRecipe = findViewById(R.id.getInfoFromRecipe);
         typeFood = findViewById(R.id.getTypeFood);
         calories = findViewById(R.id.getNumCal);
-        showIngredients = findViewById(R.id.getIngredientsRecipe);
     }
 
 

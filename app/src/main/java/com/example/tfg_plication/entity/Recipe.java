@@ -24,8 +24,8 @@ public class Recipe {
         return convertImg;
     }
 
-    public void setConvertImg(Drawable convertImg) {
-        this.convertImg = convertImg;
+    public void setConvertImg(Bitmap bitmap) {
+
     }
 
     public Recipe(){}

@@ -3,12 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="@drawable/gradient"
     tools:context=".AddRecipe">
 
+
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@color/white"
         android:orientation="vertical"
         android:padding="6dp">
 
@@ -16,17 +19,18 @@
             android:id="@+id/textView8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add Your New Recipe"
+            android:text="Form Recipe"
             android:textAlignment="center"
             android:textSize="32sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tw13"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Main Info"
-            android:textAlignment="center"
+            android:layout_marginTop="34dp"
+            android:background="@color/light_blue"
+            android:text="MAIN INFO"
+            android:textColor="@color/soft_blue"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -35,34 +39,87 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="Image"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="90dp"
+                android:text="Name"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
             <ImageButton
                 android:id="@+id/imgRecipe"
-                android:layout_width="170dp"
+                android:layout_width="140dp"
                 android:layout_height="120dp"
                 android:onClick="chooseImage"
-                android:scaleType="fitXY" />
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_restaurant" />
 
             <EditText
                 android:id="@+id/name_recipe"
-                android:layout_width="wrap_content"
-                android:layout_height="80dp"
-                android:layout_marginStart="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="10dp"
                 android:gravity="top|start"
-                android:hint="Title e.g. Baked chicken like my mother's "
+                android:hint="Enter your recipe name ..."
                 android:inputType="textMultiLine"
                 android:lines="2"
                 android:maxLines="3"
-                android:scrollbars="vertical" />
+                android:paddingStart="10dp"
+                android:scrollbars="vertical"
+                android:textColor="@color/black" />
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textView10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ingredients"
+            android:layout_marginTop="10dp"
+            android:text="Description"
             android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/info_about"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:gravity="top"
+            android:hint="Describe your recipe ..."
+            android:inputType="textMultiLine"
+            android:maxLines="50"
+            android:padding="10dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@color/light_blue"
+            android:text="INGREDIENTS"
+            android:textColor="@color/soft_blue"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -71,13 +128,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:text="List"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
 
             <LinearLayout
                 android:id="@+id/ly"
@@ -101,37 +151,21 @@
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/tw12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Description"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/info_about"
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:gravity="top"
-            android:hint="Valid Info about your Recipe ..."
-            android:inputType="textMultiLine"
-            android:maxLines="50"
-            android:padding="10dp" />
-
-        <TextView
-            android:id="@+id/tw14"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Additional Info"
-            android:textAlignment="center"
+            android:layout_marginTop="26dp"
+            android:background="@color/light_blue"
+            android:text="MORE INFO"
+            android:textColor="@color/soft_blue"
             android:textSize="20sp"
             android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -142,9 +176,11 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="kilocalories"
+                    android:text="Kilocalories"
                     android:textAlignment="center"
-                    android:textSize="16sp" />
+                    android:textColor="@color/black"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/num_kal"
@@ -166,7 +202,9 @@
                     android:layout_height="wrap_content"
                     android:text="Type Of Food"
                     android:textAlignment="center"
-                    android:textSize="16sp" />
+                    android:textColor="@color/black"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
 
                 <Spinner
                     android:id="@+id/type_of_food"
@@ -181,6 +219,7 @@
             android:id="@+id/send"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:backgroundTint="@color/teal_700"
             android:hint="Save"
             android:onClick="saveInfo"

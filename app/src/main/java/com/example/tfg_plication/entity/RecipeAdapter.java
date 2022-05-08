@@ -1,8 +1,10 @@
 package com.example.tfg_plication.entity;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +21,7 @@ public class RecipeAdapter extends ArrayAdapter<Recipe> {
 
     public RecipeAdapter(Context context, ArrayList<Recipe> users) {
         super(context, 0, users);
+            Resources res = context.getResources();
     }
 
     @Override
@@ -36,8 +39,11 @@ public class RecipeAdapter extends ArrayAdapter<Recipe> {
         EditText info = (EditText) convertView.findViewById(R.id.info_from_all);
         TextView cal = (TextView) convertView.findViewById(R.id.cal_from_all);
         TextView type = (TextView) convertView.findViewById(R.id.type_from_all);
+
         // Populate the data into the template view using the data object
         imgRecipe.setImageBitmap(recipe.img);
+        Drawable mDrawable = new BitmapDrawable(getContext().getResources(), recipe.img);
+        imgRecipe.setImageDrawable(mDrawable);
         tvName.setText(recipe.name);
         info.setText(recipe.recipeText);
         cal.setText(recipe.fatten);
@@ -46,4 +52,5 @@ public class RecipeAdapter extends ArrayAdapter<Recipe> {
         // Return the completed view to render on screen
         return convertView;
     }
+
 }

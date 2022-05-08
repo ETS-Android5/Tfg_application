@@ -255,6 +255,7 @@ public class ControllerDB extends SQLiteOpenHelper {
                 recipe.setFatten(c2.getString(4));
                 recipe.setTypeofFood(c2.getString(5));
                 recipe.setImg(blobToBitmap(c2.getBlob(6)));
+                Log.v("ControllerDB", "All_images-->" + blobToBitmap(c2.getBlob(6)));
                 recipes.add(recipe);
                 c2.moveToNext();
             }
@@ -293,7 +294,6 @@ public class ControllerDB extends SQLiteOpenHelper {
                 Log.v("ControllerDB", "ID_RECIPE -->" + c2.getInt(0));
                 Log.v("ControllerDB", "ID_INGREDIENT -->" + c2.getInt(1));
                 Log.v("ControllerDB", "ID_AMOUNT -->" + c2.getInt(2));
-
                 c2.moveToNext();
             }
         }
@@ -339,34 +339,6 @@ public class ControllerDB extends SQLiteOpenHelper {
             recipe.setFatten(c1.getString(4));
             recipe.setTypeofFood(c1.getString(5));
             recipe.setImg(blobToBitmap(c1.getBlob(6)));
-            /*Cursor c2 = ref_db.rawQuery("SELECT ID FROM RECIPES WHERE NAME_RECIPE=?", new String[]{recipe.getName()});
-            c2.moveToFirst();
-            int id = c2.getInt(0);
-            Cursor c3 = ref_db.rawQuery("SELECT ID_INGREDIENT FROM RECIPES_INGREDIENTS WHERE ID_RECIPE=?", new String[]{String.valueOf(id)});
-            int val = c3.getCount();
-            c3.moveToFirst();
-            for (int i = 0; i < val; i++) {
-                Cursor c4 = ref_db.rawQuery("SELECT INGREDIENT FROM INGREDIENTS WHERE ID=?", new String[]{String.valueOf(c3.getInt(0))});
-                String ingredientName = c4.getString(0);
-                ingredient = new Ingredient(c3.getInt(0),ingredientName);
-                listIngredients.add(new RecipeIngredient(ingredient, 0));
-                c3.moveToNext();
-                c4.moveToNext();
-            }
-            recipe.addListIngredient(listIngredients);*/
-
-            /*c2.moveToFirst();
-            for (int i = 0; i < recipe.getIngredients().size(); i++) { //Ingredient Name and Amount
-                //recipe.getIngredients().get(i).getIngredient().getId();// 1 // 2  // 3 // 4
-                Cursor c3 = ref_db.rawQuery("SELECT ID_ FROM INGREDIENTS WHERE ID=?", new String[]{String.valueOf(recipe.getIngredients().get(i).getIngredient().getId())});
-                c3.moveToFirst();
-                String ingredientName = c3.getString(0);
-                recipe.getIngredients().get(i).getAmount();
-                ingredient = new Ingredient(recipe.getIngredients().get(i).getIngredient().getId(),ingredientName);
-                listIngredients.add(new RecipeIngredient(ingredient,recipe.getIngredients().get(i).getAmount()));
-                c3.moveToNext();
-            }
-            ;*/
             ref_db.close();
             return recipe;
         }
