@@ -2,9 +2,11 @@ package com.example.tfg_plication;
 
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,6 +20,9 @@ public class MainActivity extends AppCompatActivity {
     private Button buttonMainCourse;
     private Button buttonDessert;
     private Button buttonAddRecipe;
+    private final String FONT_STYLE_SPLASH = "StreetExplorer.otf";
+    private Typeface font;
+    private TextView app_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
         buttonRecipe = findViewById(R.id.allRecipes);
         controllerDB = new ControllerDB(this);
         buttonAddRecipe = findViewById(R.id.addRecipe);
+
+        updateFont();
 
         int idUser = this.getIntent().getExtras().getInt("idUser");
 
@@ -72,5 +79,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void updateFont() {
+        font = Typeface.createFromAsset(getAssets(), FONT_STYLE_SPLASH);
+        app_name = (TextView) findViewById(R.id.tws);
+        app_name.setTypeface(font);
     }
 }

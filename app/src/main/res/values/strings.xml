@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Tfg_Plication</string>
+    <string name="app_name">Tfg_Application</string>
     <string name="title_activity_check_in">Check_in</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -16,7 +16,7 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="check_in">Check_In</string>
     <string name="user">User</string>
-    <string name="deliciosapp">DELICIOSAPP</string>
+    <string name="deliciosapp">DELICIOUSAPP</string>
     <string name="starters">Starters</string>
     <string name="recipe_today">Recipe Today!</string>
     <string name="all_recipes">All recipes</string>

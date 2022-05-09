@@ -5,25 +5,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/beige"
     app:layoutDescription="@xml/activity_login_scene"
     tools:context=".Login"
-    android:backgroundTint="@color/green_soft"
+
   >
 
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="365dp"
-        android:layout_height="137dp"
-        android:scaleType="fitStart"
-        android:src="@mipmap/healthy"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <TextView
+        android:id="@+id/tws"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_gravity="center"
+        android:layout_marginTop="104dp"
+        android:layout_marginEnd="36dp"
+        android:text="@string/deliciosapp"
+        android:textColor="@color/orange_light"
+        android:textSize="50sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.154"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/box_login"
@@ -31,7 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
-        android:background="@color/purple_200"
+        android:background="@color/grey"
         android:orientation="vertical"
         android:padding="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -63,8 +64,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:backgroundTint="@color/teal_700"
-            android:text="@string/login" />
+            android:backgroundTint="@color/soft_blue"
+            android:text="@string/login"
+
+            />
 
         <TextView
             android:id="@+id/textView5"
@@ -79,9 +82,9 @@
             android:id="@+id/button_sign"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/purple_700"
+            android:backgroundTint="@color/soft_blue"
             android:text="@string/sign_up"
-            android:textColor="@color/white" />
+            android:textColor="@color/black" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
