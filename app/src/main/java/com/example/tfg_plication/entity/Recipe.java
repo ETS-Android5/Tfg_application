@@ -6,9 +6,11 @@ import android.graphics.drawable.Drawable;
 
 import com.example.tfg_plication.entity.Ingredient;
 import com.example.tfg_plication.entity.User;
+
+import java.io.Serializable;
 import java.util.List;
 
-public class Recipe {
+public class Recipe implements Serializable {
     private int id;
 
     private User user;
@@ -81,6 +83,7 @@ public class Recipe {
     public List<RecipeIngredient> getIngredients() {
         return recipeIngredients;
     }
+
     public void addIngredient(RecipeIngredient recipeIngredient) {
         recipeIngredients.add(recipeIngredient);
     }
