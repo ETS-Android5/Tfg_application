@@ -9,16 +9,10 @@ public class RecipeIngredient {
     private Recipe recipe;
     private int amount;
 
-<<<<<<< Updated upstream
-    public RecipeIngredient() {
-    }
 
-    public RecipeIngredient(Ingredient ingredient, int amount) {
-=======
     public RecipeIngredient(){}
     public RecipeIngredient(long recipeId, Ingredient ingredient,int amount) {
         this.recipeId = recipeId;
->>>>>>> Stashed changes
         this.ingredient = ingredient;
         this.amount = amount;
     }

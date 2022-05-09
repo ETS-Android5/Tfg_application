@@ -123,7 +123,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         String description = info_recipe.getText().toString();
         String calories = num_kl.getText().toString();
         String typeFood = type_food.getSelectedItem().toString();
-        int idUser = this.getIntent().getExtras().getInt("idUser");
+        long idUser = this.getIntent().getExtras().getLong("idUser");
         user.setId(idUser);
         Bitmap bmImg = ((BitmapDrawable) imgRecipe.getDrawable()).getBitmap();
         Recipe recipe = new Recipe();

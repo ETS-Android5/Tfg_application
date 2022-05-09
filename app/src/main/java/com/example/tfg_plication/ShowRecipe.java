@@ -18,14 +18,14 @@ import java.util.List;
 
 public class ShowRecipe extends AppCompatActivity {
     private ImageView imgRecipe;
-<<<<<<< Updated upstream
-    private TextView nameRecipe, typeFood, calories,infoRecipe;
-    private ControllerDB controllerDB;
-=======
+
+    //private TextView nameRecipe, typeFood, calories,infoRecipe;
+    //private ControllerDB controllerDB;
+
     private TextView nameRecipe, typeFood, calories;
     private EditText infoRecipe,showIngredients;
     private ControllerFB controllerFB;
->>>>>>> Stashed changes
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +59,7 @@ public class ShowRecipe extends AppCompatActivity {
                 infoRecipe.setText(recipe.getRecipeText());
                 typeFood.setText(recipe.getTypeofFood());
                 calories.setText(recipe.getFatten());
+
             }
         });
 
