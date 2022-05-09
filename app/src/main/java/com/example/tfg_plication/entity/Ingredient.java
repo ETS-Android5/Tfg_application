@@ -1,20 +1,20 @@
 package com.example.tfg_plication.entity;
 
 public class Ingredient {
-    private int id;
+    private long id;
     private String name;
 
     public Ingredient(){}
-    public Ingredient(int id, String name)
+    public Ingredient(long id, String name)
     {
         this.id=id;
         this.name=name;
     }
-    public void setId(int id)
+    public void setId(long id)
     {
         this.id=id;
     }
-    public int getId()
+    public long getId()
     {
         return id;
     }

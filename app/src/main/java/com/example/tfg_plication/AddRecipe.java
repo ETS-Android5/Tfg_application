@@ -28,7 +28,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.tfg_plication.db.ControllerDB;
+import com.example.tfg_plication.db.ControllerFB;
 import com.example.tfg_plication.entity.Ingredient;
 import com.example.tfg_plication.entity.Recipe;
 import com.example.tfg_plication.entity.RecipeIngredient;
@@ -52,7 +52,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
 
 
     private RecipeManager recipeManager;
-    private ControllerDB cDB;
+    private ControllerFB cFB;
 
     private EditText name_recipe, info_recipe, num_kl;
     private ImageButton imgRecipe;
@@ -87,7 +87,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         plusIngredient = findViewById(R.id.plus_ingredient);
         plusIngredient.setOnClickListener(this);
         recipeManager = new RecipeManager();
-        cDB = new ControllerDB(this);
+        cFB = new ControllerFB(this);
         imgRecipe = findViewById(R.id.imgRecipe);
         name_recipe = (EditText) findViewById(R.id.name_recipe);
         info_recipe = (EditText) findViewById(R.id.info_about);
@@ -142,15 +142,15 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
             Spinner spinner = (Spinner) cricketView.findViewById(R.id.ingredients);
             if (view_name != null && et != null && spinner != null) {
                 ingredient = new Ingredient(i + 1,spinner.getSelectedItem().toString());
-                listIngredients.add(new RecipeIngredient(ingredient,Integer.parseInt(et.getText().toString())));
+                listIngredients.add(new RecipeIngredient(recipe.getId(),ingredient,Integer.parseInt(et.getText().toString())));
             }
         }
         ArrayList<RecipeIngredient> test = new ArrayList<>();
         for (int i = 0; i < listIngredients.size(); i++) {
-            test.add(new RecipeIngredient(new Ingredient(listIngredients.get(i).getIngredient().getId(),listIngredients.get(i).getIngredient().getName()),listIngredients.get(i).getAmount()));
+            test.add(new RecipeIngredient(recipe.getId(),new Ingredient(listIngredients.get(i).getIngredient().getId(),listIngredients.get(i).getIngredient().getName()),listIngredients.get(i).getAmount()));
         }
         recipe.addListIngredient(test);
-        cDB.addRecipe(recipe);
+        cFB.addRecipe(recipe);
         Toast.makeText(this,"ShowRecipe Added!!!",Toast.LENGTH_SHORT).show();
     }
 

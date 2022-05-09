@@ -4,12 +4,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class User {
-    private int id;
+    private long id;
     private String name;
     private String pass;
 
     public User(){}
-    public User(int id, String name, String pass) {
+    public User(long id, String name, String pass) {
         this.id = id;
         this.name = name;
         this.pass = pass;
@@ -18,11 +18,11 @@ public class User {
     public User(TextView boxUser, EditText pass) {
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

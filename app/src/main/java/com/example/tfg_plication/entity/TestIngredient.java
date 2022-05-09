@@ -1,23 +1,23 @@
 package com.example.tfg_plication.entity;
 
 public class TestIngredient {
-    private int id;
+    private long id;
     private String ingredient;
     private String amount;
 
     public TestIngredient(){}
 
-    public TestIngredient(int id, String ingredient, String amount) {
+    public TestIngredient(long id, String ingredient, String amount) {
         this.id = id;
         this.ingredient = ingredient;
         this.amount = amount;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

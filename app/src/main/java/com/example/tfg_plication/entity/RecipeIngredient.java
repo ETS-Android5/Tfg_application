@@ -2,14 +2,23 @@ package com.example.tfg_plication.entity;
 
 
 public class RecipeIngredient {
+
+
+    private long recipeId;
     private Ingredient ingredient;
     private Recipe recipe;
     private int amount;
 
+<<<<<<< Updated upstream
     public RecipeIngredient() {
     }
 
     public RecipeIngredient(Ingredient ingredient, int amount) {
+=======
+    public RecipeIngredient(){}
+    public RecipeIngredient(long recipeId, Ingredient ingredient,int amount) {
+        this.recipeId = recipeId;
+>>>>>>> Stashed changes
         this.ingredient = ingredient;
         this.amount = amount;
     }
@@ -37,6 +46,12 @@ public class RecipeIngredient {
     public void setAmount(int amount) {
         this.amount = amount;
     }
+    public long getRecipeId() {
+        return recipeId;
+    }
 
+    public void setRecipeId(long recipeId) {
+        recipeId = recipeId;
+    }
 
 }

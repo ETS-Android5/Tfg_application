@@ -10,8 +10,13 @@ import com.example.tfg_plication.entity.User;
 import java.io.Serializable;
 import java.util.List;
 
+<<<<<<< Updated upstream
 public class Recipe implements Serializable {
     private int id;
+=======
+public class Recipe {
+    private long id;
+>>>>>>> Stashed changes
 
     private User user;
     String name;
@@ -31,7 +36,7 @@ public class Recipe implements Serializable {
     }
 
     public Recipe(){}
-    public Recipe(int id, String name, String recipeText, String fatten,List<RecipeIngredient> recipeIngredients,User user, Bitmap img,String typeofFood   ) {
+    public Recipe(long id, String name, String recipeText, String fatten,List<RecipeIngredient> recipeIngredients,User user, Bitmap img,String typeofFood   ) {
         this.id = id;
         this.name = name;
         this.recipeText = recipeText;
@@ -41,11 +46,11 @@ public class Recipe implements Serializable {
         this.user=user;
         this.img=img;
     }
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
