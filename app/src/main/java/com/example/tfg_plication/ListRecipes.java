@@ -14,13 +14,15 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.tfg_plication.db.ControllerDB;
+import com.example.tfg_plication.db.ControllerFB;
 import com.example.tfg_plication.entity.Recipe;
 import com.example.tfg_plication.entity.RecipeAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListRecipes extends AppCompatActivity {
-    ControllerDB controllerDB;
+    ControllerFB controllerFB;
     ListView lv;
     private ArrayAdapter<Recipe> miAdapter;
 
@@ -28,7 +30,7 @@ public class ListRecipes extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_recipes);
-        controllerDB = new ControllerDB(this);
+        controllerFB = new ControllerFB(this);
         lv = findViewById(R.id.listRecipe);
 
         UpdateUI();
@@ -37,24 +39,47 @@ public class ListRecipes extends AppCompatActivity {
 
     private void UpdateUI(){
         lv = findViewById(R.id.listRecipe);
-        controllerDB = new ControllerDB(this);
+        controllerFB = new ControllerFB(this);
         ArrayList<Recipe> arrayOfUsers = new ArrayList<Recipe>();
-        for (Recipe recipe : controllerDB.getAllRecipes()) {
-            Recipe reAux = new Recipe();
-            reAux.setId(recipe.getId());
-            reAux.setConvertImg(reAux.getImg());
-            //Drawable d = new BitmapDrawable(getResources(), reAux.getImg());
-            //reAux.getImg().setImageDrawable(d);
-            //Toast.makeText(this,"-->"+recipe.getImg(),Toast.LENGTH_LONG).show();
-            reAux.setName(recipe.getName());
-            reAux.setRecipeText(recipe.getRecipeText());
-            reAux.setFatten(recipe.getFatten());
-            reAux.setTypeofFood(recipe.getTypeofFood());
-            Toast.makeText(this,"-->"+recipe.getIngredients(),Toast.LENGTH_LONG).show();
-            //reAux.addListIngredient(recipe.getIngredients());
-            //controllerDB.show_Test_Recipe(recipe);
-            arrayOfUsers.add(reAux);
-        }
+
+        controllerFB.getRecipe(1, new ControllerFB.RecipeDataStatus() {
+            @Override
+            public void getUserRecipe(List<Recipe> userRecipes) {
+
+            }
+
+            @Override
+            public void getRecipeIngredients(Recipe recipe) {
+
+            }
+
+            @Override
+            public void getAllRecipe(List<Recipe> allRecipe) {
+                for (Recipe recipe : allRecipe) {
+                    Recipe reAux = new Recipe();
+                    reAux.setId(recipe.getId());
+                    reAux.setConvertImg(reAux.getImg());
+                    //Drawable d = new BitmapDrawable(getResources(), reAux.getImg());
+                    //reAux.getImg().setImageDrawable(d);
+                    //Toast.makeText(this,"-->"+recipe.getImg(),Toast.LENGTH_LONG).show();
+                    reAux.setName(recipe.getName());
+                    reAux.setRecipeText(recipe.getRecipeText());
+                    reAux.setFatten(recipe.getFatten());
+                    reAux.setTypeofFood(recipe.getTypeofFood());
+                    //Toast.makeText(this,"-->"+recipe.getIngredients(),Toast.LENGTH_LONG).show();
+                    //reAux.addListIngredient(recipe.getIngredients());
+                    //controllerDB.show_Test_Recipe(recipe);
+                    arrayOfUsers.add(reAux);
+                }
+            }
+
+            @Override
+            public void getRecipe(Recipe recipe) {
+
+            }
+        });
+
+
         RecipeAdapter adapter = new RecipeAdapter(this, arrayOfUsers);
         lv.setAdapter(adapter);
 

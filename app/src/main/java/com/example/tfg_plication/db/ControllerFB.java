@@ -391,7 +391,7 @@ public class ControllerFB {
             }
         });
     }
-    public Recipe getRecipe(int id,RecipeDataStatus dataStatus)
+    public void getRecipe(int id,RecipeDataStatus dataStatus)
     {
         DatabaseReference reff = firebaseDatabase.getReference().child("Recipe");
         Query query = reff.orderByKey().equalTo(id);
@@ -409,27 +409,6 @@ public class ControllerFB {
         });
 
 
-
-
-
-
-
-        final Recipe[] recipe = {new Recipe()};
-        databaseReference.child("Recipe").addValueEventListener(new ValueEventListener() {
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot ojbSnapshot : snapshot.getChildren())
-                {
-                    Recipe recipeAux = ojbSnapshot.getValue(Recipe.class);
-                    if(recipeAux.getId()==id){
-                        recipe[0] = recipeAux;
-                    }
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
-        return recipe[0];
     }
 
 }
