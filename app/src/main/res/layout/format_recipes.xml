@@ -31,12 +31,12 @@
         android:layout_height="wrap_content"
         android:text="Tipo: "/>
 
-    <EditText
+    <!--<TextView
         android:id="@+id/info_from_all"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="top"
-        android:inputType="text|textMultiLine" />
+        android:inputType="text|textMultiLine" />-->
 
 
     <TextView

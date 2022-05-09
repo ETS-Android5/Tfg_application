@@ -36,7 +36,7 @@ public class RecipeAdapter extends ArrayAdapter<Recipe> {
 
         ImageView imgRecipe = (ImageView) convertView.findViewById(R.id.img_from_all);
         TextView tvName = (TextView) convertView.findViewById(R.id.name_from_all);
-        EditText info = (EditText) convertView.findViewById(R.id.info_from_all);
+        //TextView info = (TextView) convertView.findViewById(R.id.info_from_all);
         TextView cal = (TextView) convertView.findViewById(R.id.cal_from_all);
         TextView type = (TextView) convertView.findViewById(R.id.type_from_all);
 
@@ -45,7 +45,7 @@ public class RecipeAdapter extends ArrayAdapter<Recipe> {
         Drawable mDrawable = new BitmapDrawable(getContext().getResources(), recipe.img);
         imgRecipe.setImageDrawable(mDrawable);
         tvName.setText(recipe.name);
-        info.setText(recipe.recipeText);
+        //info.setText(recipe.recipeText);
         cal.setText(recipe.fatten);
         type.setText(recipe.typeofFood);
 
