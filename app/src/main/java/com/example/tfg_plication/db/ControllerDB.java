@@ -13,6 +13,10 @@ import com.example.tfg_plication.entity.Ingredient;
 import com.example.tfg_plication.entity.Recipe;
 import com.example.tfg_plication.entity.RecipeIngredient;
 import com.example.tfg_plication.entity.User;
+import com.google.firebase.FirebaseApiNotAvailableException;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.ByteArrayOutputStream;
 import java.sql.Blob;
@@ -26,6 +30,7 @@ public class ControllerDB extends SQLiteOpenHelper {
         super(context, "com.damedix.Tfg_application", null, 13);
 
     }
+
 
 
     @Override

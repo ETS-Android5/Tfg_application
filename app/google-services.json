@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "961510297302",
+    "project_id": "tfgdelisiosapp",
+    "storage_bucket": "tfgdelisiosapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:961510297302:android:6b7a99e1b9da43d16cc377",
+        "android_client_info": {
+          "package_name": "com.example.tfg_plication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "961510297302-u096qvb262rpub0vd0r8iiihh580h973.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYcsVoiSF7pQvweTbWJknSz-jO0j1dEA8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "961510297302-u096qvb262rpub0vd0r8iiihh580h973.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

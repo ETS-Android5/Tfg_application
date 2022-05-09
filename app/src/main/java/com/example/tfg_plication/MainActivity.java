@@ -11,11 +11,12 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tfg_plication.db.ControllerDB;
+import com.example.tfg_plication.db.ControllerFB;
 
 public class MainActivity extends AppCompatActivity {
 
     private Button buttonRecipe;
-    ControllerDB controllerDB;
+    ControllerFB controllerFB;
     private Button buttonBreakfast;
     private Button buttonMainCourse;
     private Button buttonDessert;
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         buttonMainCourse = findViewById(R.id.buttonMainCourses);
         buttonDessert = findViewById(R.id.buttonDesserts);
         buttonRecipe = findViewById(R.id.allRecipes);
-        controllerDB = new ControllerDB(this);
+        controllerFB = new ControllerFB(this);
         buttonAddRecipe = findViewById(R.id.addRecipe);
 
         updateFont();
