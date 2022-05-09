@@ -22,8 +22,8 @@ public class ShowRecipe extends AppCompatActivity {
     //private TextView nameRecipe, typeFood, calories,infoRecipe;
     //private ControllerDB controllerDB;
 
-    private TextView nameRecipe, typeFood, calories;
-    private EditText infoRecipe,showIngredients;
+    private TextView nameRecipe, typeFood, calories,infoRecipe;
+    private EditText showIngredients;
     private ControllerFB controllerFB;
 
 
