@@ -5,36 +5,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Sign_in"
-    android:background="@color/green_soft">
+    android:background="@color/beige">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="365dp"
-        android:layout_height="137dp"
-        android:scaleType="fitStart"
-        android:src="@mipmap/healthy"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <TextView
+        android:id="@+id/tittle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_gravity="center"
+        android:layout_marginTop="144dp"
+        android:layout_marginEnd="52dp"
+        android:text="@string/deliciosapp"
+        android:textColor="@color/orange_light"
+        android:textSize="50sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.202"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/box_check_in"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="349dp"
+        android:layout_height="252dp"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
-        android:background="@color/purple_200"
+        android:background="@color/grey"
         android:orientation="vertical"
         android:padding="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.566">
+        app:layout_constraintVertical_bias="0.54">
 
 
         <EditText
@@ -58,9 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:backgroundTint="@color/teal_700"
-
-
+            android:backgroundTint="@color/soft_blue"
             android:text="@string/check_in" />
 
 

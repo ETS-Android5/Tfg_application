@@ -13,13 +13,13 @@
 
 
     <TextView
-        android:id="@+id/tws"
+        android:id="@+id/tittle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
         android:layout_gravity="center"
-        android:layout_marginTop="104dp"
-        android:layout_marginEnd="36dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="68dp"
         android:text="@string/deliciosapp"
         android:textColor="@color/orange_light"
         android:textSize="50sp"

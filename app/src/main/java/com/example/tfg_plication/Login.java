@@ -1,6 +1,7 @@
 package com.example.tfg_plication;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
@@ -17,7 +18,7 @@ import com.example.tfg_plication.entity.User;
 
 public class Login extends AppCompatActivity {
     private ControllerFB controllerFB;
-    private final String FONT_STYLE_SPLASH = "Little Comet Demo Version.otf";
+    private final String FONT_STYLE_SPLASH = "StreetExplorer.otf";
     private Button buttonSign;
     private Button buttonLogin;
 
@@ -35,7 +36,7 @@ public class Login extends AppCompatActivity {
         buttonSign = (Button) findViewById(R.id.button_sign);
         buttonLogin = (Button) findViewById(R.id.login_button);
 
-        //changeFont();
+        changeFont();
 
         buttonSign.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,7 +107,7 @@ public class Login extends AppCompatActivity {
             }
         });
     }
-}
+
      /*buttonLogin.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -156,12 +157,12 @@ public class Login extends AppCompatActivity {
 
 
 
-    /*private void changeFont() {
+    private void changeFont() {
         Typeface font = Typeface.createFromAsset(getAssets(), FONT_STYLE_SPLASH);
-        TextView loading = (TextView) findViewById(R.id.tittle_log);
+        TextView loading = (TextView) findViewById(R.id.tittle);
         loading.setTypeface(font);
     }
-*/
+}
 
 
 
