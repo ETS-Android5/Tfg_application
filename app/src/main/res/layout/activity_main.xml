@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
+
     >
 
 
@@ -31,7 +32,7 @@
         android:layout_height="33dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:background="@color/green_soft"
+        android:background="@color/beige"
         android:text="@string/breakfast"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -62,7 +63,7 @@
         android:layout_height="33dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:background="@color/green_soft"
+        android:background="@color/beige"
         android:text="  Mains Courses"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -94,7 +95,7 @@
         android:layout_height="33dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:background="@color/green_soft"
+        android:background="@color/beige"
         android:text="  Desserts"
 
         android:visibility="visible"
@@ -123,7 +124,7 @@
         android:layout_width="156dp"
         android:layout_height="38dp"
         android:layout_marginBottom="76dp"
-        android:background="@color/purple_200"
+        android:background="@color/soft_blue"
         android:text="@string/all_recipes"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -136,7 +137,7 @@
         android:layout_width="156dp"
         android:layout_height="38dp"
         android:layout_marginBottom="76dp"
-        android:background="@color/purple_200"
+        android:background="@color/soft_blue"
         android:text="@string/add_recipe"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
