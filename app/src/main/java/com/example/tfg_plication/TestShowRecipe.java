@@ -2,7 +2,10 @@ package com.example.tfg_plication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +20,7 @@ public class TestShowRecipe extends AppCompatActivity {
     private ControllerFB controllerFB;
     private Recipe recipe;
     private TextView textView;
+    private ImageView imageView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +28,9 @@ public class TestShowRecipe extends AppCompatActivity {
         controllerFB = new ControllerFB(this);
         recipe = (Recipe) getIntent().getSerializableExtra("recipe");
         textView = findViewById(R.id.getIngredients_);
+        imageView = findViewById(R.id.getImg_);
+        Drawable d = new BitmapDrawable(getResources(), recipe.getImg());
+        imageView.setImageDrawable(d);
         //controllerDB.show_Test_Recipe(recipe);
 
         controllerFB.getRecipe(1, new ControllerFB.RecipeDataStatus() {

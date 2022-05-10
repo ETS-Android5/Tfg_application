@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         controllerFB = new ControllerFB(this);
         buttonAddRecipe = findViewById(R.id.addRecipe);
 
-        updateFont();
+        //updateFont();
 
         int idUser = this.getIntent().getExtras().getInt("idUser");
 
