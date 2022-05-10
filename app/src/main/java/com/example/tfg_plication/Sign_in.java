@@ -2,10 +2,12 @@ package com.example.tfg_plication;
 
 import android.content.Intent;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,11 +21,13 @@ public class Sign_in extends AppCompatActivity {
     EditText boxUser;
     EditText pass;
     private Button buttonBack;
+    private final String FONT_STYLE_SPLASH = "StreetExplorer.otf";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
         getSupportActionBar().hide();
+        changeFont();
 
 
         buttonCheck_in = findViewById(R.id.buttonCheck_in);
@@ -96,5 +100,11 @@ public class Sign_in extends AppCompatActivity {
                     });
 
 
+    }
+
+    private void changeFont() {
+        Typeface font = Typeface.createFromAsset(getAssets(), FONT_STYLE_SPLASH);
+        TextView loading = (TextView) findViewById(R.id.tittle);
+        loading.setTypeface(font);
     }
     }

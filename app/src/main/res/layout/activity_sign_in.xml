@@ -11,14 +11,13 @@
         android:id="@+id/tittle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:layout_gravity="center"
-        android:layout_marginTop="144dp"
-        android:layout_marginEnd="52dp"
-        android:text="@string/deliciosapp"
+        android:layout_marginTop="148dp"
+        android:text="Check-in"
         android:textColor="@color/orange_light"
         android:textSize="50sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
