@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private Button buttonMainCourse;
     private Button buttonDessert;
     private Button buttonAddRecipe;
-    private final String FONT_STYLE_SPLASH = "StreetExplorer.otf";
+    private final String FONT_TITTLE = "StreetExplorer.otf";
     private Typeface font;
     private TextView app_name;
 
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateFont() {
-        font = Typeface.createFromAsset(getAssets(), FONT_STYLE_SPLASH);
+        font = Typeface.createFromAsset(getAssets(), FONT_TITTLE);
         app_name = (TextView) findViewById(R.id.tws);
         app_name.setTypeface(font);
     }

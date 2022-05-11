@@ -64,7 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:background="@drawable/button_login"
+            android:background="@drawable/button_custom"
             app:cornerRadius="25dp"
             android:text="@string/login"
 
@@ -83,7 +83,7 @@
             android:id="@+id/button_sign"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_login"
+            android:background="@drawable/button_custom"
             android:text="@string/sign_up"
             android:textColor="@color/black" />
     </LinearLayout>
