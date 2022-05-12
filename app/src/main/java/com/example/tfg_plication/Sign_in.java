@@ -16,7 +16,7 @@ import com.example.tfg_plication.db.ControllerDB;
 import com.example.tfg_plication.db.ControllerFB;
 import com.example.tfg_plication.entity.User;
 public class Sign_in extends AppCompatActivity {
-    ControllerFB controllerFB;
+    ControllerDB controllerDB;
     private Button buttonCheck_in;
     EditText boxUser;
     EditText pass;
@@ -31,7 +31,7 @@ public class Sign_in extends AppCompatActivity {
 
 
         buttonCheck_in = findViewById(R.id.buttonCheck_in);
-        controllerFB = new ControllerFB(this);
+        controllerDB = new ControllerDB(this);
         buttonBack = findViewById(R.id.buttonBack);
 
         buttonCheck_in.setOnClickListener(new View.OnClickListener() {
@@ -44,7 +44,37 @@ public class Sign_in extends AppCompatActivity {
 
                               user.setName(boxUser.getText().toString());
                               user.setPass(pass.getText().toString());
-                              if (user.getName().toString().length() != 0) {
+                              if(user.getName().toString().length()!=0) {
+                                  if(user.getPass().toString().length()!=0){
+                                     if (controllerDB.checkIfUserExists(user) > 0) {
+                                      Toast userExist = Toast.makeText(Sign_in.this, "This username already exists", Toast.LENGTH_LONG);
+                                      userExist.show();
+                                    } else {
+                                      Toast userCreate = Toast.makeText(Sign_in.this, "User Create", Toast.LENGTH_LONG);
+                                      userCreate.show();
+                                      controllerDB.insertNewUser(user);
+                                      Intent intent = new Intent(Sign_in.this, MainActivity.class);
+                                      intent.putExtra("idUser", user.getId());
+                                      startActivity(intent);
+                                  }
+                              }else{
+                                  Toast passEmpty = Toast.makeText(Sign_in.this, "Pass cannot be empty", Toast.LENGTH_LONG);
+                                  passEmpty.show();
+                              }
+                          }else{
+                              Toast userEmpty = Toast.makeText(Sign_in.this, "User cannot be empty", Toast.LENGTH_LONG);
+                               userEmpty.show();
+                          }
+
+
+
+
+
+
+
+
+
+                           /*  if (user.getName().toString().length() != 0) {
                                   if (user.getPass().toString().length() != 0) {
                                       controllerFB.checkIfUserExists(user, new ControllerFB.UserDataStatus() {
                                           @Override
@@ -66,16 +96,17 @@ public class Sign_in extends AppCompatActivity {
 
                                       });
                                   }
-                              }
+                              }*/
                           }
 
-                       /* if(controllerFB.checkIfUserExists(user)){
+                       /* if(controllerDB.checkIfUserExists(user)){
                           Toast userExist = Toast.makeText(Sign_in.this, "This username already exists", Toast.LENGTH_LONG);
                             userExist.show();
                         }else{
 
                             Toast userCreate = Toast.makeText(Sign_in.this, "User Create", Toast.LENGTH_LONG);
                             userCreate.show();
+                            controllerDB.insertNewUser
                             Intent intent = new Intent(Sign_in.this,MainActivity.class);
                             intent.putExtra("idUser",user.getId());
                             startActivity(intent);

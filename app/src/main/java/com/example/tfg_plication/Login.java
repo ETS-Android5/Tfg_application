@@ -17,7 +17,7 @@ import com.example.tfg_plication.db.ControllerFB;
 import com.example.tfg_plication.entity.User;
 
 public class Login extends AppCompatActivity {
-    private ControllerFB controllerFB;
+    private ControllerDB controllerDB;
     private final String FONT_STYLE_SPLASH = "StreetExplorer.otf";
     private Button buttonSign;
     private Button buttonLogin;
@@ -28,7 +28,7 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        controllerFB = new ControllerFB(this);
+        controllerDB = new ControllerDB(this);
         //controllerFB.getTestRecipe();
         //controllerFB.getMoreInfo();
 
@@ -60,7 +60,26 @@ public class Login extends AppCompatActivity {
                     Toast toast = Toast.makeText(Login.this, "Please don't let boxes empty", Toast.LENGTH_SHORT);
                     toast.show();
                 } else {
-                    controllerFB.checkIfUserExists(user1, new ControllerFB.UserDataStatus() {
+
+                    if (controllerDB.checkIfUserExists(user1)!=0) {
+                        if (controllerDB.checkIfPassExists(user1) != 0) {
+                            Intent intent = new Intent(Login.this, MainActivity.class);
+                            intent.putExtra("idUser",user1.getId());
+                            startActivity(intent);
+                        } else {
+                            Toast toast = Toast.makeText(Login.this, "Invalid password", Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
+                    } else {
+                        Toast toast = Toast.makeText(Login.this, "Invalid user", Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                }
+            }
+        });
+    }
+
+                   /* controllerFB.checkIfUserExists(user1, new ControllerFB.UserDataStatus() {
                         @Override
                         public void onUserExist() {
                             controllerFB.checkIfPassExists(user1, new ControllerFB.PassDataStatus() {
@@ -86,27 +105,11 @@ public class Login extends AppCompatActivity {
                             toast.show();
                         }
                     });
+*/
 
 
 
-                    /*
-                    if (controllerFB.checkIfUserExists(user1,this) ) {
-                        if (controllerFB.checkIfPassExists(user1) != 0) {
-                            Intent intent = new Intent(Login.this, MainActivity.class);
-                            intent.putExtra("idUser",user1.getId());
-                            startActivity(intent);
-                        } else {
-                            Toast toast = Toast.makeText(Login.this, "Invalid password", Toast.LENGTH_SHORT);
-                            toast.show();
-                        }
-                    } else {
-                        Toast toast = Toast.makeText(Login.this, "Invalid user", Toast.LENGTH_SHORT);
-                        toast.show();
-                    }*/
-                }
-            }
-        });
-    }
+
 
      /*buttonLogin.setOnClickListener(new View.OnClickListener() {
         @Override
