@@ -15,26 +15,30 @@ import com.example.tfg_plication.db.ControllerFB;
 import com.example.tfg_plication.entity.Recipe;
 
 import java.util.List;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class ShowRecipe extends AppCompatActivity {
     private ImageView imgRecipe;
 
-    //private TextView nameRecipe, typeFood, calories,infoRecipe;
-    //private ControllerDB controllerDB;
-
     private TextView nameRecipe, typeFood, calories,infoRecipe;
-    private EditText showIngredients;
-    private ControllerFB controllerFB;
-
+    private ControllerDB controllerDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_recipe);
         initValues();
-        controllerFB = new ControllerFB(this);
+        controllerDB = new ControllerDB(this);
+        Recipe recipe = controllerDB.getRecipe();
+        Drawable d = new BitmapDrawable(getResources(), recipe.getImg());
+        imgRecipe.setImageDrawable(d);
+        nameRecipe.setText(recipe.getName());
+        infoRecipe.setText(recipe.getRecipeText());
+        typeFood.setText(recipe.getTypeofFood());
+        calories.setText(recipe.getFatten());
 
-        controllerFB.getRecipe(1, new ControllerFB.RecipeDataStatus() {
+
+        /*controllerFB.getRecipe(1, new ControllerFB.RecipeDataStatus() {
             @Override
             public void getUserRecipe(List<Recipe> userRecipes) {
 
@@ -61,7 +65,7 @@ public class ShowRecipe extends AppCompatActivity {
                 calories.setText(recipe.getFatten());
 
             }
-        });
+        });*/
 
 
     }
@@ -75,24 +79,21 @@ public class ShowRecipe extends AppCompatActivity {
     }
 
 
+        /**
+         *
+         /**********                     **********/
+        /**********  AVISO INFORMATIVO  **********/
+        /**********                     **********
+         *
+         * Para recuperar la imagen de la BD simplemente este formato
+         ImageView image = findViewById(R.id.imageView);
+         *       Drawable d = new BitmapDrawable(getResources(), recipe.getImg());
+         *       image.setImageDrawable(d);
+         *
+         * @author Adrian Fernandez
+         * @version 1.0
+         *
+         */
 
 
-
-    /**
-     *
-     /**********                     **********/
-    /**********  AVISO INFORMATIVO  **********/
-    /**********                     **********
-     *
-     * Para recuperar la imagen de la BD simplemente este formato
-     ImageView image = findViewById(R.id.imageView);
-     *       Drawable d = new BitmapDrawable(getResources(), recipe.getImg());
-     *       image.setImageDrawable(d);
-     *
-     * @author Adrian Fernandez
-     * @version 1.0
-     *
-     */
-
-
-}
+    }

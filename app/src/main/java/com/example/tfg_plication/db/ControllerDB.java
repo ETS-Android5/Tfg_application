@@ -210,8 +210,9 @@ public class ControllerDB extends SQLiteOpenHelper {
         return ingredient;
     }
 
-    public Recipe show_Test_Recipe(Recipe recipe) {
+    public Recipe getRecipeIngredient(Recipe recipe) {
         SQLiteDatabase ref_db = this.getReadableDatabase();
+        Log.v("ControllerDB","id-->"+recipe.getId());
         Cursor c2 = ref_db.rawQuery("SELECT * FROM RECIPES_INGREDIENTS WHERE ID_RECIPE = ? ", new String[]{String.valueOf(recipe.getId())});
         c2.moveToFirst();
         ArrayList<RecipeIngredient> recipeIngredients = new ArrayList<>();
@@ -378,7 +379,7 @@ public class ControllerDB extends SQLiteOpenHelper {
         SQLiteDatabase ref_db = this.getReadableDatabase();
         ArrayList<RecipeIngredient> listIngredients = new ArrayList<>();
         Ingredient ingredient = null;
-        Cursor c1 = ref_db.rawQuery("SELECT * FROM RECIPES WHERE id = 1", null);
+        Cursor c1 = ref_db.rawQuery("SELECT * FROM RECIPES WHERE id = 2", null);
         int cant_reg = c1.getCount();
         if (cant_reg == 0) {
             ref_db.close();

@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ControllerFB {
-    FirebaseDatabase firebaseDatabase;
+    /*FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     private long initValueUser=0;
     private long initValueIngredient=0;
@@ -80,7 +80,7 @@ public class ControllerFB {
     }
 
 
-    /*public void onUpgrade(SQLiteDatabase db, int i, int i1) {
+    public void onUpgrade(SQLiteDatabase db, int i, int i1) {
 
         db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Tomate')");
         db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Pollo')");
@@ -96,7 +96,7 @@ public class ControllerFB {
         db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Sal')");
         db.execSQL("INSERT INTO INGREDIENTS (INGREDIENT) VALUES ('Coliflor')");
 
-    }*/
+    }
 
     public void checkIfUserExists(User user,UserDataStatus dataStatus) {
 
@@ -214,14 +214,14 @@ public class ControllerFB {
 
     }
 
-    /*public int getCantRegisters(User user) {
+    public int getCantRegisters(User user) {
         SQLiteDatabase ref_db = this.getReadableDatabase();
         Cursor c1 = ref_db.rawQuery("SELECT ID FROM USERS WHERE USER=?", new String[]{user.getName()});
         c1.moveToFirst();
         int id = c1.getInt(0);
         Cursor c2 = ref_db.rawQuery("SELECT TASK FROM TASKS WHERE userID=?", new String[]{String.valueOf(id)});
         return c2.getCount();
-    }*/
+    }
     public void addIngredient(Ingredient ingredient) {
         DatabaseReference reff = firebaseDatabase.getReference().child("Ingredient");
         reff.addValueEventListener(new ValueEventListener() {
@@ -409,6 +409,6 @@ public class ControllerFB {
         });
 
 
-    }
+    }*/
 
 }

@@ -87,7 +87,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         plusIngredient = findViewById(R.id.plus_ingredient);
         plusIngredient.setOnClickListener(this);
         recipeManager = new RecipeManager();
-        cFB = new ControllerFB(this);
+        //cFB = new ControllerFB(this);
         imgRecipe = findViewById(R.id.imgRecipe);
         name_recipe = (EditText) findViewById(R.id.name_recipe);
         info_recipe = (EditText) findViewById(R.id.info_about);
@@ -97,6 +97,11 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
     }
 
     @Override
+    public void onClick(View view) {
+
+    }
+
+    /*@Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.plus_ingredient:
@@ -169,5 +174,5 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
             Uri path = data.getData();
             imgRecipe.setImageURI(path);
         }
-    }
+    }*/
 }

@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         buttonMainCourse = findViewById(R.id.buttonMainCourses);
         buttonDessert = findViewById(R.id.buttonDesserts);
         buttonRecipe = findViewById(R.id.allRecipes);
-        controllerFB = new ControllerFB(this);
+        //controllerFB = new ControllerFB(this);
         buttonAddRecipe = findViewById(R.id.addRecipe);
 
         //updateFont();
