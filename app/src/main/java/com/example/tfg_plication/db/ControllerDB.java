@@ -81,7 +81,7 @@ public class ControllerDB extends SQLiteOpenHelper {
     }
 
 
-    public User getUser(int id) {
+    public User getUser(long id) {
         SQLiteDatabase ref_db = this.getReadableDatabase();
         Cursor c1 = ref_db.rawQuery("SELECT ID FROM USERS WHERE USER=? ", new String[]{String.valueOf(id)});
         User user = new User();

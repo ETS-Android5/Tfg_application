@@ -61,6 +61,11 @@ public class TestShowRecipe extends AppCompatActivity {
 
         /*controllerFB.getRecipe(1, new ControllerFB.RecipeDataStatus() {
             @Override
+            public void OnRecipeGetId(Long idRecipe) {
+
+            }
+
+            @Override
             public void getUserRecipe(List<Recipe> userRecipes) {
 
             }

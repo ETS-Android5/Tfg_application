@@ -104,6 +104,16 @@ public class Login extends AppCompatActivity {
                             Toast toast = Toast.makeText(Login.this, "Invalid user", Toast.LENGTH_SHORT);
                             toast.show();
                         }
+
+                        @Override
+                        public void onUserCreated(User user) {
+
+                        }
+
+                        @Override
+                        public void onUserGetUser(Long id) {
+
+                        }
                     });
 */
 

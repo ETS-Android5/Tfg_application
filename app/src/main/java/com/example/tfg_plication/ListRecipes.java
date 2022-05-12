@@ -51,7 +51,7 @@ public class ListRecipes extends AppCompatActivity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(ListRecipes.this,TestShowRecipe.class);
+                Intent intent = new Intent(ListRecipes.this, TestShowRecipe.class);
                 //Toast.makeText(ListRecipes.this,""+arrayOfUsers.get(i).getImg(),Toast.LENGTH_SHORT).show();
                 //arrayOfUsers.remove(2);
                 //Toast.makeText(ListRecipes.this,"Id Recipe-->"+arrayOfUsers.get(i).getId(),Toast.LENGTH_SHORT).show();
@@ -59,7 +59,17 @@ public class ListRecipes extends AppCompatActivity {
                 intent.putExtra("BitmapImage", arrayOfUsers.get(i).getImg());
                 //Intent intent = new Intent(this, NewActivity.class);
                 //intent.putExtra("BitmapImage", bitmap);
+            }
+        });
 
+        /*controllerFB.getRecipe(1, new ControllerFB.RecipeDataStatus() {
+            @Override
+            public void OnRecipeGetId(Long idRecipe) {
+
+            }
+
+            @Override
+            public void getUserRecipe(List<Recipe> userRecipes) {
 
 
                 startActivity(intent);
@@ -70,7 +80,7 @@ public class ListRecipes extends AppCompatActivity {
 
     }
 
-    /*private void UpdateUI(){
+    private void UpdateUI(){
         ArrayList<Recipe> arrayOfUsers = new ArrayList<Recipe>();
 
 
@@ -90,4 +100,5 @@ public class ListRecipes extends AppCompatActivity {
                     arrayOfUsers.add(reAux);
 
     }*/
+    }
 }

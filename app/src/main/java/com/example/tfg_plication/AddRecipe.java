@@ -155,7 +155,17 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
             test.add(new RecipeIngredient(recipe.getId(),new Ingredient(listIngredients.get(i).getIngredient().getId(),listIngredients.get(i).getIngredient().getName()),listIngredients.get(i).getAmount()));
         }
         recipe.addListIngredient(test);
-        cFB.addRecipe(recipe);
+        cFB.addRecipe(recipe, new ControllerFB.CreateDataStatus() {
+            @Override
+            public void OnCreateIngredient(Ingredient ingredient) {
+
+            }
+
+            @Override
+            public void OnCreateRecipe(Recipe recipe) {
+
+            }
+        });
         Toast.makeText(this,"ShowRecipe Added!!!",Toast.LENGTH_SHORT).show();
     }
 
