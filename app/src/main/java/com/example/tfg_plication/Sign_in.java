@@ -13,14 +13,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tfg_plication.db.ControllerDB;
-import com.example.tfg_plication.db.ControllerFB;
-import com.example.tfg_plication.entity.Ingredient;
-import com.example.tfg_plication.entity.Recipe;
-import com.example.tfg_plication.entity.RecipeIngredient;
 import com.example.tfg_plication.entity.User;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Sign_in extends AppCompatActivity {
     ControllerDB controllerDB;
@@ -28,7 +21,7 @@ public class Sign_in extends AppCompatActivity {
     EditText boxUser;
     EditText pass;
     private Button buttonBack;
-    private final String FONT_STYLE_SPLASH = "StreetExplorer.otf";
+    private final String FONT_STYLE_SPLASH = "font/street_explorer.otf";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
