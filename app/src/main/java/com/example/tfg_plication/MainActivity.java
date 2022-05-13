@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.tfg_plication.db.ControllerDB;
 import com.example.tfg_plication.db.ControllerFB;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private Button buttonMainCourse;
     private Button buttonDessert;
     private Button buttonAddRecipe;
-    private final String FONT_TITTLE = "font/street_explorer.otf";
+    private final String FONT_TITTLE = "StreetExplorer.otf";
     private Typeface font;
     private TextView app_name;
 

@@ -22,7 +22,5 @@
         android:text="@string/deliciosapp"
         android:textColor="@color/orange_light"
         android:layout_gravity="center"
-        android:textSize="50sp"
-        android:fontFamily="@font/street_explorer"
-        />
+        android:textSize="50sp" />
 </LinearLayout>

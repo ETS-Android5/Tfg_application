@@ -16,10 +16,12 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import pl.droidsonroids.gif.GifImageView;
 
 public class Splash extends AppCompatActivity implements Animation.AnimationListener {
-    private final String FONT_STYLE_SPLASH = "font/street_explorer.otf";
+    private final String FONT_STYLE_SPLASH = "StreetExplorer.otf";
     private Typeface font;
     private TextView app_name;
     private GifImageView app_image;
