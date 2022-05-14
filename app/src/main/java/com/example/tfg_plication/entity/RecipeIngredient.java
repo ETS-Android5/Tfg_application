@@ -11,8 +11,8 @@ public class RecipeIngredient {
 
 
     public RecipeIngredient(){}
-    public RecipeIngredient(long recipeId, Ingredient ingredient,int amount) {
-        this.recipeId = recipeId;
+    public RecipeIngredient(/*long recipeId,*/Ingredient ingredient,int amount) {
+        //this.recipeId = recipeId;
         this.ingredient = ingredient;
         this.amount = amount;
     }
