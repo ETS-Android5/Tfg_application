@@ -56,8 +56,8 @@
         android:background="@mipmap/arrow_right"
         app:layout_constraintBottom_toTopOf="@+id/mainCourses"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.958"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.733"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/starters"
         app:layout_constraintVertical_bias="0.45"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
@@ -124,6 +124,8 @@
         android:layout_marginEnd="16dp"
         android:background="@mipmap/arrow_right"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/desserts"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
@@ -133,11 +135,11 @@
         android:layout_height="38dp"
         android:layout_marginBottom="76dp"
         android:background="@drawable/button_custom"
-        android:text="@string/all_recipes"
         android:fontFamily="@font/fuente"
+        android:text="@string/all_recipes"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.156"
+        app:layout_constraintEnd_toStartOf="@+id/addRecipe"
+        app:layout_constraintHorizontal_bias="0.62"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="TouchTargetSizeCheck" />
 
@@ -147,11 +149,11 @@
         android:layout_height="38dp"
         android:layout_marginBottom="76dp"
         android:background="@drawable/button_custom"
-        android:text="@string/add_recipe"
         android:fontFamily="@font/fuente"
+        android:text="@string/add_recipe"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.89"
+        app:layout_constraintHorizontal_bias="0.839"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="TouchTargetSizeCheck" />
 
