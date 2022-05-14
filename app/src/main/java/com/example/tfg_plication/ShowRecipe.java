@@ -6,8 +6,11 @@ import android.annotation.SuppressLint;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.example.tfg_plication.db.ControllerDB;
@@ -19,7 +22,8 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class ShowRecipe extends AppCompatActivity {
     private ImageView imgRecipe;
-
+    RatingBar ratingBar;
+    Button button;
     private TextView nameRecipe, typeFood, calories,infoRecipe;
     private ControllerDB controllerDB;
 
@@ -36,6 +40,16 @@ public class ShowRecipe extends AppCompatActivity {
         infoRecipe.setText(recipe.getRecipeText());
         typeFood.setText(recipe.getTypeofFood());
         calories.setText(recipe.getFatten());
+        ratingBar = (RatingBar) findViewById(R.id.ratingBar);
+        ratingBar.setRating(recipe.getRating());
+        button = (Button) findViewById(R.id.buttonRating);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                float aux = (ratingBar.getRating()+recipe.getRating())/2;
+                ratingBar.setRating(aux);
+            }
+        });
 
 
         /*controllerFB.getRecipe(1, new ControllerFB.RecipeDataStatus() {

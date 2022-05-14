@@ -74,7 +74,8 @@
                 android:layout_height="120dp"
                 android:onClick="chooseImage"
                 android:scaleType="fitXY"
-                android:src="@drawable/ic_restaurant" />
+                android:src="@drawable/ic_restaurant"
+                 />
 
             <EditText
                 android:id="@+id/name_recipe"

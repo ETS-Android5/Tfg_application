@@ -20,6 +20,10 @@ public class Recipe implements Serializable {
     String recipeText;
     String fatten;
     String typeofFood;
+
+
+
+    Float rating;
     transient Bitmap img;
     Drawable convertImg;
     private List<RecipeIngredient> recipeIngredients;
@@ -35,7 +39,7 @@ public class Recipe implements Serializable {
     public Recipe() {
     }
 
-    public Recipe(int id, String name, String recipeText, String fatten, List<RecipeIngredient> recipeIngredients, User user, Bitmap img, String typeofFood) {
+    public Recipe(int id, String name, String recipeText, String fatten, List<RecipeIngredient> recipeIngredients, User user, Bitmap img, String typeofFood,Float rating) {
         this.id = id;
         this.name = name;
         this.recipeText = recipeText;
@@ -44,6 +48,7 @@ public class Recipe implements Serializable {
         this.recipeIngredients = recipeIngredients;
         this.user = user;
         this.img = img;
+        this.rating = rating;
     }
 
     public int getId() {
@@ -121,5 +126,11 @@ public class Recipe implements Serializable {
     public void setImg(Bitmap img) {
         this.img = img;
     }
+    public Float getRating() {
+        return rating;
+    }
 
+    public void setRating(Float rating) {
+        this.rating = rating;
+    }
 }
