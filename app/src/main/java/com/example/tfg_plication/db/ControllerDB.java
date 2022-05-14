@@ -150,7 +150,7 @@ public class ControllerDB extends SQLiteOpenHelper {
         cv.put("FATTEN", String.valueOf(recipe.getFatten()));
         cv.put("TYPEOFFOOD", String.valueOf(recipe.getTypeofFood()));
         cv.put("IMAGE", getBitmapAsByteArray(recipe.getImg()));
-        cv.put("RATING", recipe.getRating());
+        //cv.put("RATING", recipe.getRating());
         ref_db.insert("RECIPES", null, cv);
         Cursor c2 = ref_db.rawQuery("SELECT ID FROM RECIPES WHERE NAME_RECIPE=?", new String[]{recipe.getName()});
         c2.moveToFirst();
@@ -329,7 +329,7 @@ public class ControllerDB extends SQLiteOpenHelper {
                 Log.v("ControllerDB", c2.getString(4));
                 Log.v("ControllerDB", c2.getString(5));
                 Log.v("ControllerDB", "Img-->" + blobToBitmap(c2.getBlob(6)));
-                Log.v("ControllerDB", String.valueOf(c2.getLong(7)));
+                //Log.v("ControllerDB", String.valueOf(c2.getLong(7)));
 
 
 

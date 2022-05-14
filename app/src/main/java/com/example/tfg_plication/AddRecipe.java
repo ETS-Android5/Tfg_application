@@ -102,15 +102,14 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
                     @Override
                     public void onActivityResult(ActivityResult result) {
                         //here we will handle the result of our intent
-                        if (result.getResultCode() == Activity.RESULT_OK){
+                        if (result.getResultCode() == Activity.RESULT_OK) {
                             //image picked
                             //get uri of image
                             Intent data = result.getData();
                             Uri imageUri = data.getData();
 
                             imgRecipe.setImageURI(imageUri);
-                        }
-                        else {
+                        } else {
                             //cancelled
                             Toast.makeText(AddRecipe.this, "Cancelled...", Toast.LENGTH_SHORT).show();
                         }
@@ -138,7 +137,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         plusIngredient = findViewById(R.id.plus_ingredient);
         plusIngredient.setOnClickListener(this);
         recipeManager = new RecipeManager();
-        //cFB = new ControllerFB(this);
+        cDB = new ControllerDB(this);
         imgRecipe = findViewById(R.id.imgRecipe);
         name_recipe = (EditText) findViewById(R.id.name_recipe);
         info_recipe = (EditText) findViewById(R.id.info_about);
@@ -146,43 +145,55 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         type_food = (Spinner) findViewById(R.id.type_of_food);
         user = new User();
 
-
     }
 
-    @Override
+   @Override
     public void onClick(View view) {
-        SelectImage();
+        switch (view.getId()) {
+            case R.id.plus_ingredient:
+                //SelectImage();
+                addView();
+                break;
+        }
     }
+
+    private void addView() {
+        view_name = getLayoutInflater().inflate(R.layout.ingredient_format, null, false);
+        ingredients = view_name.findViewById(R.id.ingredients);
+        ArrayList<String> test = new ArrayList<>();
+        for (int i = 0; i < recipeManager.getIngredients(this).size(); i++) {
+            test.add(recipeManager.getIngredients(this).get(i).getName());
+            ArrayAdapter arrayAdapter = new ArrayAdapter(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, test);
+            ingredients.setAdapter(arrayAdapter);
+        }
+        ly.addView(view_name);
+    }
+
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds options to the action bar if it is present.
         //getMenuInflater().inflate(R.id.addRecipe.class,menu);
         return true;
     }
 
-    private void SelectImage(){
-        final CharSequence[] options = { "Take Photo", "Choose from Gallery","Cancel" };
+    private void SelectImage() {
+        final CharSequence[] options = {"Take Photo", "Choose from Gallery", "Cancel"};
         AlertDialog.Builder builder = new AlertDialog.Builder(AddRecipe.this);
         builder.setTitle("Add Photo!");
         builder.setItems(options, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
-                if (options[item].equals("Take Photo"))
-                {
-
+                if (options[item].equals("Take Photo")) {
 
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     File f = new File(android.os.Environment.getExternalStorageDirectory(), "temp.jpg");
                     intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
                     galleryActivityResultLauncher.launch(intent);
 
-                }
-                else if (options[item].equals("Choose from Gallery"))
-                {
-                    Intent intent = new   Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                } else if (options[item].equals("Choose from Gallery")) {
+                    Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     galleryActivityResultLauncher.launch(intent);
 
-                }
-                else if (options[item].equals("Cancel")) {
+                } else if (options[item].equals("Cancel")) {
                     dialog.dismiss();
                 }
             }
@@ -190,7 +201,6 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         builder.show();
 
     }
-
 
 
     public void saveInfo(View view) {
@@ -207,7 +217,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         recipe.setFatten(calories);
         recipe.setUser(user);
         recipe.setImg(bmImg);
-        recipe.setRating(Float.intBitsToFloat(0));
+        //recipe.setRating(Float.intBitsToFloat(0));
         recipe.setTypeofFood(typeFood);
 
         ArrayList<RecipeIngredient> listIngredients = new ArrayList<>();
@@ -217,39 +227,38 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
             et = (EditText) cricketView.findViewById(R.id.amount);
             Spinner spinner = (Spinner) cricketView.findViewById(R.id.ingredients);
             if (view_name != null && et != null && spinner != null) {
-                ingredient = new Ingredient(i + 1,spinner.getSelectedItem().toString());
-                listIngredients.add(new RecipeIngredient(recipe.getId(),ingredient,Integer.parseInt(et.getText().toString())));
+                ingredient = new Ingredient(i + 1, spinner.getSelectedItem().toString());
+                listIngredients.add(new RecipeIngredient(ingredient, Integer.parseInt(et.getText().toString())));
             }
         }
         ArrayList<RecipeIngredient> test = new ArrayList<>();
         for (int i = 0; i < listIngredients.size(); i++) {
-            test.add(new RecipeIngredient(recipe.getId(),new Ingredient(listIngredients.get(i).getIngredient().getId(),listIngredients.get(i).getIngredient().getName()),listIngredients.get(i).getAmount()));
+            test.add(new RecipeIngredient(new Ingredient(listIngredients.get(i).getIngredient().getId(), listIngredients.get(i).getIngredient().getName()), listIngredients.get(i).getAmount()));
         }
         recipe.addListIngredient(test);
         cDB.addRecipe(recipe);
-
-
-        Toast.makeText(this,"ShowRecipe Added!!!",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "ShowRecipe Added!!!", Toast.LENGTH_SHORT).show();
     }
 
     public void chooseImage(View view) {
-        ComprobarPermisos();
-
+        //ComprobarPermisos();
+        SelectImage();
     }
+
     private void ComprobarPermisos() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
                 == PackageManager.PERMISSION_GRANTED) {
 
-            /* Ya se ha obtenido el permiso previamente
-            Iniciamos Cámara*/
+            // Ya se ha obtenido el permiso previamente Iniciamos Cámara
 
             SelectImage();
-
         } else {
             // No se tiene el permiso, es necesario pedirlo al usuario
             PedirPermisoCamara();
         }
     }
+
+
     private void PedirPermisoCamara() {
         //Comprobación 'Racional'
         if (ActivityCompat.shouldShowRequestPermissionRationale(this,
@@ -266,8 +275,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
 
-                    /*Cuando el usuario pulse sobre el botón del AlertDialog se procede a solicitar
-                     el permiso con el siguiente código:*/
+                    //Cuando el usuario pulse sobre el botón del AlertDialog se procede a solicitar el permiso con el siguiente código
 
                     ActivityCompat.requestPermissions(
                             AddRecipe.this,
@@ -282,8 +290,8 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
 
 
         } else {
-            /*Si no hay necesidad de una explicación racional, pasamos a solicitar el
-            permiso directamente*/
+            //Si no hay necesidad de una explicación racional, pasamos a solicitar el permiso directamente
+
             ActivityCompat.requestPermissions(
                     AddRecipe.this,
                     new String[]{Manifest.permission.CAMERA},
@@ -292,14 +300,15 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
 
 
     }
+
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
 
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == PERMISO_CAMARA) {
-            /* Resultado de la solicitud para permiso de cámara
-             Si la solicitud es cancelada por el usuario, el método .lenght sobre el array
-             'grantResults' devolverá null.*/
+            //Resultado de la solicitud para permiso de cámara Si la solicitud es cancelada por el usuario, el método .lenght sobre el array
+            //             'grantResults' devolverá null.
+
 
             if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
@@ -308,16 +317,8 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
                 SelectImage();
 
             } else {
-                /* Permiso no concedido
-                 Aquí habría que explicar al usuario el por qué de este permiso
-                 y volver a solicitarlo .*/
-//
+                ///Permiso no concedido Aquí habría que explicar al usuario el por qué de este permiso y volver a solicitarlo .
             }
         }
     }
-
-
-
-
-
 }
