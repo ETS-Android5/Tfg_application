@@ -35,7 +35,8 @@
         <Button
             android:id="@+id/buttonRating"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:hint="Vote"/>
     </RelativeLayout>
 
     <TextView
