@@ -39,26 +39,20 @@ public class ListRecipes extends AppCompatActivity {
             reAux.setName(recipe.getName());
             reAux.setRecipeText(recipe.getRecipeText());
             reAux.setImg(recipe.getImg());
-            reAux.setFatten(recipe.getFatten());
+            reAux.setFatten(recipe.getFatten()+" kcal.");
             reAux.setTypeofFood(recipe.getTypeofFood());
             arrayOfUsers.add(reAux);
         }
 
         RecipeAdapter adapter = new RecipeAdapter(this, arrayOfUsers);
-        //arrayOfUsers.remove(2);
         lv.setAdapter(adapter);
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(ListRecipes.this, TestShowRecipe.class);
-                //Toast.makeText(ListRecipes.this,""+arrayOfUsers.get(i).getImg(),Toast.LENGTH_SHORT).show();
-                //arrayOfUsers.remove(2);
-                //Toast.makeText(ListRecipes.this,"Id Recipe-->"+arrayOfUsers.get(i).getId(),Toast.LENGTH_SHORT).show();
-                //intent.putExtra("recipe",arrayOfUsers.get(i));
-                intent.putExtra("BitmapImage", arrayOfUsers.get(i).getImg());
-                //Intent intent = new Intent(this, NewActivity.class);
-                //intent.putExtra("BitmapImage", bitmap);
+                intent.putExtra("recipe", arrayOfUsers.get(i));
+                startActivity(intent);
             }
         });
 

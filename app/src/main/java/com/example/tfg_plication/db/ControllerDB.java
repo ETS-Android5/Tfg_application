@@ -305,8 +305,8 @@ public class ControllerDB extends SQLiteOpenHelper {
                 recipe.setFatten(c2.getString(4));
                 recipe.setTypeofFood(c2.getString(5));
                 recipe.setImg(blobToBitmap(c2.getBlob(6)));
-                recipe.setRating(c2.getFloat(7));
-                Log.v("ControllerDB", "All_images-->" + blobToBitmap(c2.getBlob(6)));
+                //recipe.setRating(c2.getFloat(7));
+                //Log.v("ControllerDB", "All_images-->" + blobToBitmap(c2.getBlob(6)));
                 recipes.add(recipe);
                 c2.moveToNext();
             }
@@ -330,9 +330,6 @@ public class ControllerDB extends SQLiteOpenHelper {
                 Log.v("ControllerDB", c2.getString(5));
                 Log.v("ControllerDB", "Img-->" + blobToBitmap(c2.getBlob(6)));
                 //Log.v("ControllerDB", String.valueOf(c2.getLong(7)));
-
-
-
                 c2.moveToNext();
             }
         }

@@ -2,11 +2,14 @@ package com.example.tfg_plication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,7 +26,7 @@ public class TestShowRecipe extends AppCompatActivity {
     private ControllerDB controllerDB;
     private Recipe recipe;
     private TextView textView;
-    private ImageView imageView;
+    private Button button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,15 +34,22 @@ public class TestShowRecipe extends AppCompatActivity {
         controllerDB = new ControllerDB(this);
         recipe = (Recipe) getIntent().getSerializableExtra("recipe");
         textView = findViewById(R.id.getIngredients_);
-        Bitmap bitmap = (Bitmap) getIntent().getParcelableExtra("BitmapImage");
-        //imageView = findViewById(R.id.getImg_);
-        //Drawable d = new BitmapDrawable(getResources(), recipe.getImg());
-        //imageView.setImageDrawable(d);
+        button = findViewById(R.id.goBackToListView);
         String txt = "";
+        controllerDB.getRecipeIngredient(recipe);
         for (RecipeIngredient recipeIngredient : controllerDB.getRecipeIngredient(recipe).getIngredients()){
             txt += String.valueOf(recipeIngredient.getAmount()+" -- "+recipeIngredient.getIngredient().getName())+"\n";
             textView.setText(txt);
         }
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent changeSign = new Intent(TestShowRecipe.this, ListRecipes.class);
+                startActivity(changeSign);
+            }
+        });
+
         /*
         * for (RecipeIngredient recipeIngredient : recipe.getIngredients()){
                     textView.setText(String.valueOf(recipeIngredient.getAmount()+" -- "+recipeIngredient.getIngredient().getName()));
