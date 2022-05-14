@@ -51,8 +51,9 @@ public class ListRecipes extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(ListRecipes.this, TestShowRecipe.class);
-                intent.putExtra("recipe", arrayOfUsers.get(i));
+                intent.putExtra("idRecipe", arrayOfUsers.get(i).getId());
                 startActivity(intent);
+                //Toast.makeText(ListRecipes.this,"Id -->"+arrayOfUsers.get(i).getId(),Toast.LENGTH_SHORT).show();
             }
         });
 

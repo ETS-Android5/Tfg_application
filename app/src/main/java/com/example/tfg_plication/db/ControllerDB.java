@@ -32,7 +32,6 @@ public class ControllerDB extends SQLiteOpenHelper {
     }
 
 
-
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE USERS (ID INTEGER PRIMARY KEY AUTOINCREMENT,USER TEXT NOT NULL,PASS TEXT NOT NULL);");
@@ -45,7 +44,7 @@ public class ControllerDB extends SQLiteOpenHelper {
                 "FATTEN TEXT ," +
                 "TYPEOFFOOD TEXT," +
                 "IMAGE BLOB," +
-                "RATING FLOAT,"+
+                "RATING FLOAT," +
                 "FOREIGN KEY (userId) REFERENCES USERS(ID));");
         db.execSQL("CREATE TABLE RECIPES_INGREDIENTS (ID_RECIPE INTEGER NOT NULL," +
                 "ID_INGREDIENT INTEGER NOT NULL," +
@@ -216,7 +215,7 @@ public class ControllerDB extends SQLiteOpenHelper {
 
     public Recipe getRecipeIngredient(Recipe recipe) {
         SQLiteDatabase ref_db = this.getReadableDatabase();
-        Log.v("ControllerDB","id-->"+recipe.getId());
+        Log.v("ControllerDB", "id-->" + recipe.getId());
         Cursor c2 = ref_db.rawQuery("SELECT * FROM RECIPES_INGREDIENTS WHERE ID_RECIPE = ? ", new String[]{String.valueOf(recipe.getId())});
         c2.moveToFirst();
         ArrayList<RecipeIngredient> recipeIngredients = new ArrayList<>();
@@ -235,7 +234,7 @@ public class ControllerDB extends SQLiteOpenHelper {
                 recipeIngredients.add(recipeIngredient);
 
                 //recipeIngredient.setRecipe(recipe);
-               // recipeIngredient.setIngredient();
+                // recipeIngredient.setIngredient();
                 //Cursor c3 = ref_db.rawQuery("SELECT * FROM INGREDIENTS WHERE ID = ?", new String[]{String.valueOf(c2.getInt(1))});
                 //c3.moveToFirst();
                 //Log.v("ControllerDB","Name Ingredient-->"+c3.getString(1));
@@ -398,6 +397,47 @@ public class ControllerDB extends SQLiteOpenHelper {
             ref_db.close();
             return recipe;
         }
+    }
+
+    public Recipe getRecipe(int id) {
+        SQLiteDatabase ref_db = this.getReadableDatabase();
+        ArrayList<RecipeIngredient> listIngredients = new ArrayList<>();
+        Cursor c1 = ref_db.rawQuery("SELECT * FROM RECIPES WHERE id = ?", new String[]{String.valueOf(id)});
+        int cant_reg = c1.getCount();
+        if (cant_reg == 0) {
+            ref_db.close();
+            return null;
+        } else {
+            c1.moveToFirst();
+            Recipe recipe = new Recipe();
+            recipe.setName(c1.getString(2));
+            recipe.setRecipeText(c1.getString(3));
+            recipe.setFatten(c1.getString(4));
+            recipe.setTypeofFood(c1.getString(5));
+            recipe.setImg(blobToBitmap(c1.getBlob(6)));
+
+            Cursor c2 = ref_db.rawQuery("SELECT * FROM RECIPES_INGREDIENTS WHERE ID_RECIPE = ? ", new String[]{String.valueOf(id)});
+            c2.moveToFirst();
+            ArrayList<RecipeIngredient> recipeIngredients = new ArrayList<>();
+            int amount = c2.getCount();
+            c2.moveToFirst();
+            for (int i = 0; i < amount; i++) {
+                RecipeIngredient recipeIngredient = new RecipeIngredient();
+                Ingredient ig = getIngredient(ref_db, c2.getInt(1));
+                Log.v("ControllerDB","Name-->"+ig.getName());
+
+                recipeIngredient.setIngredient(ig);
+                recipeIngredient.setAmount(c2.getInt(2));
+                Log.v("ControllerDB","Amount-->"+c2.getInt(2));
+
+                recipeIngredients.add(recipeIngredient);
+                c2.moveToNext();
+            }
+            recipe.addListIngredient(recipeIngredients);
+            ref_db.close();
+            return recipe;
+        }
+
     }
 
 }

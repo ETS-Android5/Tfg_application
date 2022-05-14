@@ -26,21 +26,30 @@ public class TestShowRecipe extends AppCompatActivity {
     private ControllerDB controllerDB;
     private Recipe recipe;
     private TextView textView;
+    private ImageView imageView;
     private Button button;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_show_recipe);
         controllerDB = new ControllerDB(this);
-        recipe = (Recipe) getIntent().getSerializableExtra("recipe");
-        textView = findViewById(R.id.getIngredients_);
         button = findViewById(R.id.goBackToListView);
+        imageView = findViewById(R.id.getImg_);
+        textView = findViewById(R.id.getIngredients_);
+        recipe = (Recipe) getIntent().getSerializableExtra("recipe");
+        int id = this.getIntent().getExtras().getInt("idRecipe");
+
+        Recipe recipe = controllerDB.getRecipe(id);
         String txt = "";
-        controllerDB.getRecipeIngredient(recipe);
-        for (RecipeIngredient recipeIngredient : controllerDB.getRecipeIngredient(recipe).getIngredients()){
-            txt += String.valueOf(recipeIngredient.getAmount()+" -- "+recipeIngredient.getIngredient().getName())+"\n";
+        for (RecipeIngredient ri : recipe.getIngredients()) {
+            txt += ri.getAmount()+" -- "+ri.getIngredient().getName()+"\n";
             textView.setText(txt);
         }
+
+        Drawable d = new BitmapDrawable(getResources(), recipe.getImg());
+        imageView.setImageDrawable(d);
+
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,54 +58,6 @@ public class TestShowRecipe extends AppCompatActivity {
                 startActivity(changeSign);
             }
         });
-
-        /*
-        * for (RecipeIngredient recipeIngredient : recipe.getIngredients()){
-                    textView.setText(String.valueOf(recipeIngredient.getAmount()+" -- "+recipeIngredient.getIngredient().getName()));
-                }
-        * */
-
-
-        //Log.v("TestShowRecipe","-->"+controllerDB.show_Test_Recipe(recipe).getIngredients().size());
-
-
-        /*for (int i = 0;i < controllerDB.show_Test_Recipe(recipe).getIngredients().size();i++){
-            textView.setText(String.valueOf(recipeIngredient.getAmount()+" -- "+recipeIngredient.getIngredient().getName()));
-        }*/
-
-
-        /*for (RecipeIngredient recipeIngredient : controllerDB.show_Test_Recipe(recipe).getIngredients()){
-
-        }*/
-
-        /*controllerFB.getRecipe(1, new ControllerFB.RecipeDataStatus() {
-            @Override
-            public void OnRecipeGetId(Long idRecipe) {
-
-            }
-
-            @Override
-            public void getUserRecipe(List<Recipe> userRecipes) {
-
-            }
-
-            @Override
-            public void getRecipeIngredients(Recipe recipe) {
-                for (RecipeIngredient recipeIngredient : recipe.getIngredients()){
-                    textView.setText(String.valueOf(recipeIngredient.getAmount()+" -- "+recipeIngredient.getIngredient().getName()));
-                }
-            }
-
-            @Override
-            public void getAllRecipe(List<Recipe> allRecipe) {
-
-            }
-
-            @Override
-            public void getRecipe(Recipe recipe) {
-
-            }
-        });*/
 
     }
 }
