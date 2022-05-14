@@ -22,4 +22,5 @@
     <string name="all_recipes">All recipes</string>
     <string name="breakfast">Breakfast</string>
     <string name="add_recipe">add recipe</string>
+    <string name="title_activity_list_item_lead">list_item_lead</string>
 </resources>

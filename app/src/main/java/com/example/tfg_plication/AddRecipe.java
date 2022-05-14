@@ -62,6 +62,7 @@ import java.io.OutputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class AddRecipe extends AppCompatActivity implements View.OnClickListener {
     private LinearLayout ly;
@@ -73,6 +74,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
     private RecipeManager recipeManager;
     private ControllerDB cDB;
 
+    //private List<Ingredient> ingredients;
     private EditText name_recipe, info_recipe, num_kl;
     private ImageButton imgRecipe;
     private Spinner type_food, ingredients;
@@ -86,6 +88,13 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         getSupportActionBar().hide();
         initValues();
         dynamicSpinners();
+        /*this.plusIngredient.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });*/
+
 
         this.galleryActivityResultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -136,6 +145,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         num_kl = (EditText) findViewById(R.id.num_kal);
         type_food = (Spinner) findViewById(R.id.type_of_food);
         user = new User();
+
 
     }
 
