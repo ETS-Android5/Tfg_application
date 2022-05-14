@@ -36,7 +36,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="@color/beige"
-        android:text="@string/breakfast"
+        android:text="@string/lunch"
         android:fontFamily="@font/fuente"
         android:textSize="20dp"
         android:visibility="visible"
@@ -69,7 +69,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="@color/beige"
-        android:text="  Mains Courses"
+        android:text="@string/dinner"
         android:textSize="20dp"
         android:fontFamily="@font/fuente"
         android:visibility="visible"
@@ -103,7 +103,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="@color/beige"
-        android:text="  Desserts"
+        android:text="@string/desserts"
         android:textSize="20dp"
         android:fontFamily="@font/fuente"
         android:visibility="visible"
@@ -167,7 +167,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/starters"
         app:layout_constraintVertical_bias="0.536"
-        app:srcCompat="@mipmap/pancakes" />
+        app:srcCompat="@mipmap/curry_chicken" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -179,7 +179,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mainCourses"
         app:layout_constraintVertical_bias="0.633"
-        app:srcCompat="@mipmap/curry_chicken" />
+        app:srcCompat="@mipmap/turkey_skewers" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -198,7 +198,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
-        android:text="Delicious pancakes"
+        android:text="Indian curry chicken"
         android:textSize="18dp"
         app:layout_constraintBottom_toTopOf="@+id/mainCourses"
         app:layout_constraintStart_toEndOf="@+id/imageView2"
@@ -210,7 +210,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
-        android:text="Indian curry chicken"
+        android:text="@string/turkey_skewers"
         android:textSize="18dp"
         app:layout_constraintBottom_toTopOf="@+id/desserts"
         app:layout_constraintStart_toEndOf="@+id/imageView3"
