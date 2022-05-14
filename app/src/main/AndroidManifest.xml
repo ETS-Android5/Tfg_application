@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.tfg_plication">
+
     <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,11 +19,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Tfg_Plication">
         <activity
+            android:name=".Lead"
+            android:exported="false" />
+        <activity
             android:name=".TestShowRecipe"
             android:exported="false" />
         <activity
             android:name=".ListRecipes"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".ShowRecipe"
             android:exported="false" />
@@ -42,7 +49,7 @@
         </activity>
         <activity
             android:name=".Login"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".Sign_in"
             android:exported="false" />
