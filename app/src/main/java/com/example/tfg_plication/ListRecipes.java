@@ -1,14 +1,19 @@
 package com.example.tfg_plication;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -32,6 +37,9 @@ public class ListRecipes extends AppCompatActivity {
     private ControllerDB cDB;
     ListView lv;
     private ArrayAdapter<Recipe> miAdapter;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +71,8 @@ public class ListRecipes extends AppCompatActivity {
                 //Toast.makeText(ListRecipes.this,"Id -->"+arrayOfUsers.get(i).getId(),Toast.LENGTH_SHORT).show();
             }
         });
+
+
 
         /*controllerFB.getRecipe(1, new ControllerFB.RecipeDataStatus() {
             @Override
@@ -103,6 +113,30 @@ public class ListRecipes extends AppCompatActivity {
 
     }*/
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_list_recipes, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        AlertDialog alert = new AlertDialog.Builder(this)
+                .setTitle("Export Dialog")
+                .setMessage("Are you sure to export those files?")
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                createCsv();
+                            }
+                        }
+                )
+                .setNegativeButton("Cancel", null)
+                .create();
+        alert.show();
+        return super.onOptionsItemSelected(item);
+    }
+
     //SEND CSV COMPLETE TO SOCIAL NETWORK
     public void createCsv(){
        StringBuilder data = new StringBuilder();
@@ -138,7 +172,7 @@ public class ListRecipes extends AppCompatActivity {
     }
 
 
-    public void createCsv(View view) {
+    /*public void createCsv(View view) {
         createCsv();
-    }
+    }*/
 }
