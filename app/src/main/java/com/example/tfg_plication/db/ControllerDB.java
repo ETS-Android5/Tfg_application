@@ -376,7 +376,7 @@ public class ControllerDB extends SQLiteOpenHelper {
         SQLiteDatabase ref_db = this.getReadableDatabase();
         ArrayList<RecipeIngredient> listIngredients = new ArrayList<>();
         Ingredient ingredient = null;
-        Cursor c1 = ref_db.rawQuery("SELECT * FROM RECIPES WHERE id = 2", null);
+        Cursor c1 = ref_db.rawQuery("SELECT * FROM RECIPES WHERE ID = 2", null);
         int cant_reg = c1.getCount();
         if (cant_reg == 0) {
             ref_db.close();
@@ -411,7 +411,7 @@ public class ControllerDB extends SQLiteOpenHelper {
             recipe.setTypeofFood(c1.getString(5));
             recipe.setImg(blobToBitmap(c1.getBlob(6)));
 
-            Cursor c2 = ref_db.rawQuery("SELECT * FROM RECIPES_INGREDIENTS WHERE ID_RECIPE = ? ", new String[]{String.valueOf(id)});
+            /*Cursor c2 = ref_db.rawQuery("SELECT * FROM RECIPES_INGREDIENTS WHERE ID_RECIPE = ? ", new String[]{String.valueOf(id)});
             c2.moveToFirst();
             ArrayList<RecipeIngredient> recipeIngredients = new ArrayList<>();
             int amount = c2.getCount();
@@ -428,11 +428,37 @@ public class ControllerDB extends SQLiteOpenHelper {
                 recipeIngredients.add(recipeIngredient);
                 c2.moveToNext();
             }
-            recipe.addListIngredient(recipeIngredients);
+            recipe.addListIngredient(recipeIngredients);*/
             ref_db.close();
             return recipe;
         }
 
     }
+
+    public ArrayList<Integer> getIdsRecipes(String breakFast) {
+        ArrayList<Integer> ids = new ArrayList<Integer>();
+        SQLiteDatabase ref_db = this.getReadableDatabase();
+        Cursor c2 = ref_db.rawQuery("SELECT ID FROM RECIPES WHERE TYPEOFFOOD = ? ", new String[]{breakFast});
+        int cant_reg = c2.getCount();
+        if (cant_reg == 0) {
+            ref_db.close();
+            return null;
+        } else {
+            c2.moveToFirst();
+            for (int i = 0; i < cant_reg; i++) {
+                ids.add(c2.getInt(0));
+                c2.moveToNext();
+            }
+            c2.close();
+            ref_db.close();
+            return ids;
+        }
+    }
+    public int amountIds(String breakFast) {
+        ArrayList<Integer> ids = new ArrayList<Integer>();
+        SQLiteDatabase ref_db = this.getReadableDatabase();
+        Cursor c2 = ref_db.rawQuery("SELECT ID FROM RECIPES WHERE TYPEOFFOOD = ? ", new String[]{breakFast});
+        return  c2.getCount();
+        }
 
 }
