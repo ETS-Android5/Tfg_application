@@ -32,6 +32,7 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ListRecipes extends AppCompatActivity {
     private ControllerDB cDB;
@@ -158,7 +159,7 @@ public class ListRecipes extends AppCompatActivity {
 
            Context context = getApplicationContext();
            File filelocation = new File(getFilesDir(),"data.csv");
-           Uri path = FileProvider.getUriForFile(context,"com.example.exportcsv.fileprovider",filelocation);
+           Uri path = FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID+".provider", filelocation);
            Intent fileIntent = new Intent(Intent.ACTION_SEND);
            fileIntent.setType("text/csv");
            fileIntent.putExtra(Intent.EXTRA_SUBJECT,"Data");
