@@ -1,10 +1,13 @@
 package com.example.tfg_plication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,7 +20,11 @@ import com.example.tfg_plication.db.ControllerDB;
 import com.example.tfg_plication.db.ControllerFB;
 import com.example.tfg_plication.entity.Recipe;
 import com.example.tfg_plication.entity.RecipeAdapter;
+import com.example.tfg_plication.entity.RecipeIngredient;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -95,5 +102,43 @@ public class ListRecipes extends AppCompatActivity {
                     arrayOfUsers.add(reAux);
 
     }*/
+    }
+    //SEND CSV COMPLETE TO SOCIAL NETWORK
+    public void createCsv(){
+       StringBuilder data = new StringBuilder();
+       for(Recipe recipe : cDB.getAllRecipes()){
+           data.append("\n Name:"+(recipe.getName())+", ");
+           data.append("How to Make: "+recipe.getRecipeText()+", ");
+           data.append("Kcal: "+recipe.getFatten()+", ");
+           data.append(" Ingredients: { ");
+           for(RecipeIngredient ingredients : recipe.getIngredients()){
+               data.append(ingredients.getIngredient().getName()+", ");
+               data.append(ingredients.getAmount()+", ");
+           }
+           data.append("}, ");
+       }
+       try{
+           FileOutputStream out = openFileOutput( "data.csv", Context.MODE_PRIVATE);
+           out.write((data.toString().getBytes()));
+
+           Context context = getApplicationContext();
+           File filelocation = new File(getFilesDir(),"data.csv");
+           Uri path = FileProvider.getUriForFile(context,"com.example.exportcsv.fileprovider",filelocation);
+           Intent fileIntent = new Intent(Intent.ACTION_SEND);
+           fileIntent.setType("text/csv");
+           fileIntent.putExtra(Intent.EXTRA_SUBJECT,"Data");
+           fileIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+           fileIntent.putExtra(Intent.EXTRA_STREAM,path);
+           startActivity(Intent.createChooser(fileIntent,"Send"));
+
+       }
+       catch(Exception e){
+           e.printStackTrace();
+       }
+    }
+
+
+    public void createCsv(View view) {
+        createCsv();
     }
 }

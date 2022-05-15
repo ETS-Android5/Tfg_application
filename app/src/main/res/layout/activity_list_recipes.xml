@@ -5,7 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ListRecipes">
-
+    <Button
+        android:id="@+id/exportButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/teal_700"
+        android:hint="Export"
+        android:onClick="createCsv"
+        android:textColorHint="@color/white"
+        />
     <ListView
         android:id="@+id/listRecipe"
         android:layout_width="match_parent"
