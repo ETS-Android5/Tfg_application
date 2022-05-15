@@ -145,6 +145,7 @@ public class ListRecipes extends AppCompatActivity {
            data.append("How to Make: "+recipe.getRecipeText()+", ");
            data.append("Kcal: "+recipe.getFatten()+", ");
            data.append(" Ingredients: { ");
+           recipe = cDB.getRecipe(recipe.getId());
            for(RecipeIngredient ingredients : recipe.getIngredients()){
                data.append(ingredients.getIngredient().getName()+", ");
                data.append(ingredients.getAmount()+", ");
