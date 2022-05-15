@@ -40,10 +40,11 @@ public class TestShowRecipe extends AppCompatActivity {
         recipe = (Recipe) getIntent().getSerializableExtra("recipe");
         int id = this.getIntent().getExtras().getInt("idRecipe");
 
-        Recipe recipe = controllerDB.getRecipe(id);
+        recipe = controllerDB.getRecipe(id);
         String txt = "";
         for (RecipeIngredient ri : recipe.getIngredients()) {
             txt += ri.getAmount()+" -- "+ri.getIngredient().getName()+"\n";
+            //Toast.makeText(this,"Ingredients--> "+ri.getIngredient().getName()+"--"+ri.getAmount(),Toast.LENGTH_SHORT).show();
             textView.setText(txt);
         }
 

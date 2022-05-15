@@ -27,7 +27,7 @@ import java.util.List;
 public class ControllerDB extends SQLiteOpenHelper {
 
     public ControllerDB(Context context) {
-        super(context, "com.damedix.Tfg_application", null, 13);
+        super(context, "com.damedix.Tfg_application", null, 14);
 
     }
 
@@ -56,16 +56,11 @@ public class ControllerDB extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-        db.execSQL("DROP TABLE IF EXISTS RECIPES");
-        db.execSQL("CREATE TABLE RECIPES (" +
-                "ID INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "userId INT NOT NULL," +
-                "NAME_RECIPE TEXT NOT NULL," +
-                "RECIPE_TEXT TEXT NOT NULL ," +
-                "FATTEN TEXT ," +
-                "TYPEOFFOOD TEXT," +
-                "IMAGE BLOB," +
-                "FOREIGN KEY (userId) REFERENCES USERS(ID));");
+        db.execSQL("INSERT INTO INGREDIENTS(INGREDIENT) VALUES ('Lechuga')");
+        db.execSQL("INSERT INTO INGREDIENTS(INGREDIENT) VALUES ('Pollo')");
+        db.execSQL("INSERT INTO INGREDIENTS(INGREDIENT) VALUES ('Zanahoria')");
+        db.execSQL("INSERT INTO INGREDIENTS(INGREDIENT) VALUES ('Rucula')");
+        db.execSQL("INSERT INTO INGREDIENTS(INGREDIENT) VALUES ('Escarola')");
     }
 
     public int checkIfUserExists(User user) {
