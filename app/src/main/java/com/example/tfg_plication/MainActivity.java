@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intentBreakfast = new Intent (MainActivity.this, ShowRecipe.class);
+                intentBreakfast.putExtra("bf","Desayuno");
                 startActivity(intentBreakfast);
             }
         });
@@ -69,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intentMainCourse = new Intent (MainActivity.this, ShowRecipe.class);
+                intentMainCourse.putExtra("eat","Comida");
                 startActivity(intentMainCourse);
             }
         });
@@ -76,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intentDessert = new Intent (MainActivity.this, ShowRecipe.class);
+                intentDessert.putExtra("din","Cena");
                 startActivity(intentDessert);
             }
         });

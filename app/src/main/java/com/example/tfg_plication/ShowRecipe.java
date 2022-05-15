@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +18,7 @@ import com.example.tfg_plication.db.ControllerDB;
 import com.example.tfg_plication.db.ControllerFB;
 import com.example.tfg_plication.entity.Recipe;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -24,8 +26,9 @@ public class ShowRecipe extends AppCompatActivity {
     private ImageView imgRecipe;
     RatingBar ratingBar;
     Button button;
-    private TextView nameRecipe, typeFood, calories,infoRecipe;
+    private TextView nameRecipe, typeFood, calories, infoRecipe;
     private ControllerDB controllerDB;
+    private int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,23 +36,42 @@ public class ShowRecipe extends AppCompatActivity {
         setContentView(R.layout.activity_show_recipe);
         initValues();
         controllerDB = new ControllerDB(this);
-        Recipe recipe = controllerDB.getRecipe();
+
+        if (this.getIntent().getExtras().getString("bf") != null) {
+            String val = this.getIntent().getExtras().getString("bf");
+            generateRandomRecipe(val);
+
+        } else if (this.getIntent().getExtras().getString("eat") != null) {
+            String val = this.getIntent().getExtras().getString("eat");
+            generateRandomRecipe(val);
+        } else {
+            String val = this.getIntent().getExtras().getString("din");
+            generateRandomRecipe(val);
+        }
+
+        Recipe recipe = controllerDB.getRecipe(id);
         Drawable d = new BitmapDrawable(getResources(), recipe.getImg());
         imgRecipe.setImageDrawable(d);
         nameRecipe.setText(recipe.getName());
         infoRecipe.setText(recipe.getRecipeText());
         typeFood.setText(recipe.getTypeofFood());
         calories.setText(recipe.getFatten());
-        ratingBar = (RatingBar) findViewById(R.id.ratingBar);
-        ratingBar.setRating(recipe.getRating());
-        button = (Button) findViewById(R.id.buttonRating);
+
+
+
+
+        /*Recipe recipe = controllerDB.getRecipe();
+         */
+        //ratingBar = (RatingBar) findViewById(R.id.ratingBar);
+        //ratingBar.setRating(recipe.getRating());
+        /*button = (Button) findViewById(R.id.buttonRating);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 float aux = (ratingBar.getRating()+recipe.getRating())/2;
                 ratingBar.setRating(aux);
             }
-        });
+        });*/
 
 
         /*controllerFB.getRecipe(1, new ControllerFB.RecipeDataStatus() {
@@ -89,6 +111,15 @@ public class ShowRecipe extends AppCompatActivity {
 
     }
 
+    private void generateRandomRecipe(String val) {
+        ArrayList<Integer> ids = controllerDB.getIdsRecipes(val);
+        Log.v("ShowRecipe", "list size--> " + ids.size());
+        int amountIds = controllerDB.amountIds(val);
+        Log.v("ShowRecipe", "fields--> " + ids.size());
+        int rand = (int) (Math.random() * amountIds);
+        id = ids.get(rand);
+    }
+
     private void initValues() {
         imgRecipe = findViewById(R.id.img);
         nameRecipe = findViewById(R.id.getNameRecipe);
@@ -98,21 +129,21 @@ public class ShowRecipe extends AppCompatActivity {
     }
 
 
-        /**
-         *
-         /**********                     **********/
-        /**********  AVISO INFORMATIVO  **********/
-        /**********                     **********
-         *
-         * Para recuperar la imagen de la BD simplemente este formato
-         ImageView image = findViewById(R.id.imageView);
-         *       Drawable d = new BitmapDrawable(getResources(), recipe.getImg());
-         *       image.setImageDrawable(d);
-         *
-         * @author Adrian Fernandez
-         * @version 1.0
-         *
-         */
+    /**
+     *
+     /**********                     **********/
+    /**********  AVISO INFORMATIVO  **********/
+    /**********                     **********
+     *
+     * Para recuperar la imagen de la BD simplemente este formato
+     ImageView image = findViewById(R.id.imageView);
+     *       Drawable d = new BitmapDrawable(getResources(), recipe.getImg());
+     *       image.setImageDrawable(d);
+     *
+     * @author Adrian Fernandez
+     * @version 1.0
+     *
+     */
 
 
-    }
+}
