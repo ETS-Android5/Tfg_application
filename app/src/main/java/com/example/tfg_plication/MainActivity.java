@@ -61,7 +61,13 @@ public class MainActivity extends AppCompatActivity {
         buttonBreakfast.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                int ID_USER  = getIntent().getExtras().getInt("idUser");
                 Intent intentBreakfast = new Intent (MainActivity.this, ShowRecipe.class);
+                if (ID_USER == 0){
+                    ID_USER = getIntent().getExtras().getInt("returnIdToMain");
+                }
+                intentBreakfast.putExtra("idUser", ID_USER);
                 intentBreakfast.putExtra("bf","Desayuno");
                 startActivity(intentBreakfast);
             }
@@ -69,17 +75,27 @@ public class MainActivity extends AppCompatActivity {
         buttonMainCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentMainCourse = new Intent (MainActivity.this, ShowRecipe.class);
-                intentMainCourse.putExtra("eat","Comida");
-                startActivity(intentMainCourse);
+                int ID_USER  = getIntent().getExtras().getInt("idUser");
+                Intent intentBreakfast = new Intent (MainActivity.this, ShowRecipe.class);
+                if (ID_USER == 0){
+                    ID_USER = getIntent().getExtras().getInt("returnIdToMain");
+                }
+                intentBreakfast.putExtra("idUser", ID_USER);
+                intentBreakfast.putExtra("eat","Comida");
+                startActivity(intentBreakfast);
             }
         });
         buttonDessert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentDessert = new Intent (MainActivity.this, ShowRecipe.class);
-                intentDessert.putExtra("din","Cena");
-                startActivity(intentDessert);
+                int ID_USER  = getIntent().getExtras().getInt("idUser");
+                Intent dinner = new Intent (MainActivity.this, ShowRecipe.class);
+                if (ID_USER == 0){
+                    ID_USER = getIntent().getExtras().getInt("returnIdToMain");
+                }
+                dinner.putExtra("idUser", ID_USER);
+                dinner.putExtra("din","Cena");
+                startActivity(dinner);
             }
         });
 

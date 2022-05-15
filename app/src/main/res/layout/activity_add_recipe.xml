@@ -148,8 +148,7 @@
                 android:paddingRight="10dp"
                 android:text="Add "
                 android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:onClick="addIngredient"/>
+                android:textColor="@color/white"/>
 
         </LinearLayout>
 

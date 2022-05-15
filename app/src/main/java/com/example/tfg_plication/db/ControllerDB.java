@@ -461,4 +461,10 @@ public class ControllerDB extends SQLiteOpenHelper {
         return  c2.getCount();
         }
 
+    public int returnIdUser(User user) {
+        SQLiteDatabase ref_db = this.getReadableDatabase();
+        Cursor c1 = ref_db.rawQuery("SELECT ID FROM USERS WHERE USER=? AND PASS=?", new String[]{user.getName(), user.getPass()});
+        c1.moveToFirst();
+        return c1.getInt(0);
+    }
 }

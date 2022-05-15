@@ -11,20 +11,30 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <Button
+            android:id="@+id/goBack"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/teal_700"
+            android:text="back" />
         <TextView
+
             android:id="@+id/getNameRecipe"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center|top"
             android:layout_marginTop="6dp"
+            android:layout_toEndOf="@+id/goBack"
+
+            android:text="Hello"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="32sp" />
 
         <ImageView
             android:id="@+id/img"
-            android:layout_width="wrap_content"
-            android:layout_height="320dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/getNameRecipe" />
 
         <RatingBar

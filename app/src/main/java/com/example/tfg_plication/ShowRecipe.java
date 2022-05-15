@@ -3,6 +3,7 @@ package com.example.tfg_plication;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ public class ShowRecipe extends AppCompatActivity {
     Button button;
     private TextView nameRecipe, typeFood, calories, infoRecipe;
     private ControllerDB controllerDB;
+    private Button backToMain;
     private int id;
 
     @Override
@@ -36,16 +38,16 @@ public class ShowRecipe extends AppCompatActivity {
         setContentView(R.layout.activity_show_recipe);
         initValues();
         controllerDB = new ControllerDB(this);
-
+        String val = null;
         if (this.getIntent().getExtras().getString("bf") != null) {
-            String val = this.getIntent().getExtras().getString("bf");
+            val = this.getIntent().getExtras().getString("bf");
             generateRandomRecipe(val);
 
         } else if (this.getIntent().getExtras().getString("eat") != null) {
-            String val = this.getIntent().getExtras().getString("eat");
+            val = this.getIntent().getExtras().getString("eat");
             generateRandomRecipe(val);
         } else {
-            String val = this.getIntent().getExtras().getString("din");
+            val = this.getIntent().getExtras().getString("din");
             generateRandomRecipe(val);
         }
 
@@ -57,6 +59,16 @@ public class ShowRecipe extends AppCompatActivity {
         typeFood.setText(recipe.getTypeofFood());
         calories.setText(recipe.getFatten());
 
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int id = getIntent().getExtras().getInt("idUser");
+                Intent intent = new Intent(ShowRecipe.this,MainActivity.class);
+                intent.putExtra("returnIdToMain", id);
+                startActivity(intent);
+            }
+        });
 
 
 
@@ -126,6 +138,7 @@ public class ShowRecipe extends AppCompatActivity {
         infoRecipe = findViewById(R.id.getInfoFromRecipe);
         typeFood = findViewById(R.id.getTypeFood);
         calories = findViewById(R.id.getNumCal);
+        button = findViewById(R.id.goBack);
     }
 
 
