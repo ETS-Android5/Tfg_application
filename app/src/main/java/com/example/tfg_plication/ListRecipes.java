@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -38,8 +39,7 @@ public class ListRecipes extends AppCompatActivity {
     private ControllerDB cDB;
     ListView lv;
     private ArrayAdapter<Recipe> miAdapter;
-
-
+    private Button button;
 
 
     @Override
@@ -48,6 +48,7 @@ public class ListRecipes extends AppCompatActivity {
         setContentView(R.layout.activity_list_recipes);
         lv = findViewById(R.id.listRecipe);
         cDB = new ControllerDB(this);
+        button = findViewById(R.id.extended_fab);
         ArrayList<Recipe> arrayOfUsers = new ArrayList<Recipe>();
         for (Recipe recipe : cDB.getAllRecipes()) {
             Recipe reAux = new Recipe();
@@ -55,13 +56,14 @@ public class ListRecipes extends AppCompatActivity {
             reAux.setName(recipe.getName());
             reAux.setRecipeText(recipe.getRecipeText());
             reAux.setImg(recipe.getImg());
-            reAux.setFatten(recipe.getFatten()+" kcal.");
+            reAux.setFatten(recipe.getFatten() + " kcal.");
             reAux.setTypeofFood(recipe.getTypeofFood());
             arrayOfUsers.add(reAux);
         }
 
         RecipeAdapter adapter = new RecipeAdapter(this, arrayOfUsers);
         lv.setAdapter(adapter);
+
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -72,7 +74,19 @@ public class ListRecipes extends AppCompatActivity {
                 //Toast.makeText(ListRecipes.this,"Id -->"+arrayOfUsers.get(i).getId(),Toast.LENGTH_SHORT).show();
             }
         });
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int id = getIntent().getExtras().getInt("idUser");
+                Intent intent = new Intent(ListRecipes.this, MainActivity.class);
+                if (id == 0){
+                    id = getIntent().getExtras().getInt("returnIdToListRecipe");
+                }
+                intent.putExtra("idUser", id);
+                startActivity(intent);
 
+            }
+        });
 
 
         /*controllerFB.getRecipe(1, new ControllerFB.RecipeDataStatus() {
@@ -120,6 +134,7 @@ public class ListRecipes extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_list_recipes, menu);
         return super.onCreateOptionsMenu(menu);
     }
+
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         AlertDialog alert = new AlertDialog.Builder(this)
@@ -139,38 +154,37 @@ public class ListRecipes extends AppCompatActivity {
     }
 
     //SEND CSV COMPLETE TO SOCIAL NETWORK
-    public void createCsv(){
-       StringBuilder data = new StringBuilder();
-       for(Recipe recipe : cDB.getAllRecipes()){
-           data.append("\n Name:"+(recipe.getName())+", ");
-           data.append("How to Make: "+recipe.getRecipeText()+", ");
-           data.append("Kcal: "+recipe.getFatten()+", ");
-           data.append(" Ingredients: { ");
-           recipe = cDB.getRecipe(recipe.getId());
-           for(RecipeIngredient ingredients : recipe.getIngredients()){
-               data.append(ingredients.getIngredient().getName()+", ");
-               data.append(ingredients.getAmount()+", ");
-           }
-           data.append("}, ");
-       }
-       try{
-           FileOutputStream out = openFileOutput( "data.csv", Context.MODE_PRIVATE);
-           out.write((data.toString().getBytes()));
+    public void createCsv() {
+        StringBuilder data = new StringBuilder();
+        for (Recipe recipe : cDB.getAllRecipes()) {
+            data.append("\n Name:" + (recipe.getName()) + ", ");
+            data.append("How to Make: " + recipe.getRecipeText() + ", ");
+            data.append("Kcal: " + recipe.getFatten() + ", ");
+            data.append(" Ingredients: { ");
+            recipe = cDB.getRecipe(recipe.getId());
+            for (RecipeIngredient ingredients : recipe.getIngredients()) {
+                data.append(ingredients.getIngredient().getName() + ", ");
+                data.append(ingredients.getAmount() + ", ");
+            }
+            data.append("}, ");
+        }
+        try {
+            FileOutputStream out = openFileOutput("data.csv", Context.MODE_PRIVATE);
+            out.write((data.toString().getBytes()));
 
-           Context context = getApplicationContext();
-           File filelocation = new File(getFilesDir(),"data.csv");
-           Uri path = FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID+".provider", filelocation);
-           Intent fileIntent = new Intent(Intent.ACTION_SEND);
-           fileIntent.setType("text/csv");
-           fileIntent.putExtra(Intent.EXTRA_SUBJECT,"Data");
-           fileIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-           fileIntent.putExtra(Intent.EXTRA_STREAM,path);
-           startActivity(Intent.createChooser(fileIntent,"Send"));
+            Context context = getApplicationContext();
+            File filelocation = new File(getFilesDir(), "data.csv");
+            Uri path = FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".provider", filelocation);
+            Intent fileIntent = new Intent(Intent.ACTION_SEND);
+            fileIntent.setType("text/csv");
+            fileIntent.putExtra(Intent.EXTRA_SUBJECT, "Data");
+            fileIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            fileIntent.putExtra(Intent.EXTRA_STREAM, path);
+            startActivity(Intent.createChooser(fileIntent, "Send"));
 
-       }
-       catch(Exception e){
-           e.printStackTrace();
-       }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

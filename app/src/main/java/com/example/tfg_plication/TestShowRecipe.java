@@ -40,7 +40,7 @@ public class TestShowRecipe extends AppCompatActivity {
         recipe = (Recipe) getIntent().getSerializableExtra("recipe");
         int id = this.getIntent().getExtras().getInt("idRecipe");
 
-        recipe = controllerDB.getRecipe(id);
+        recipe = controllerDB.getRecipeIntoTsR(id);
         String txt = "";
         for (RecipeIngredient ri : recipe.getIngredients()) {
             txt += ri.getAmount()+" -- "+ri.getIngredient().getName()+"\n";
@@ -55,10 +55,18 @@ public class TestShowRecipe extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int id = getIntent().getExtras().getInt("idUser");
                 Intent changeSign = new Intent(TestShowRecipe.this, ListRecipes.class);
+                changeSign.putExtra("returnIdToListRecipe", id);
                 startActivity(changeSign);
             }
         });
-
+        /*
+        *       int id = getIntent().getExtras().getInt("idUser");
+                Intent intent = new Intent(ListRecipes.this, MainActivity.class);
+                intent.putExtra("returnIdToMain", id);
+                startActivity(intent);
+        *
+        * */
     }
 }

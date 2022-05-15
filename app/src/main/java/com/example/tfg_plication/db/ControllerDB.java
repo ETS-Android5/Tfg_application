@@ -410,8 +410,30 @@ public class ControllerDB extends SQLiteOpenHelper {
             recipe.setFatten(c1.getString(4));
             recipe.setTypeofFood(c1.getString(5));
             recipe.setImg(blobToBitmap(c1.getBlob(6)));
+            ref_db.close();
+            return recipe;
+        }
 
-            /*Cursor c2 = ref_db.rawQuery("SELECT * FROM RECIPES_INGREDIENTS WHERE ID_RECIPE = ? ", new String[]{String.valueOf(id)});
+    }
+
+    public Recipe getRecipeIntoTsR(int id) {
+        SQLiteDatabase ref_db = this.getReadableDatabase();
+        ArrayList<RecipeIngredient> listIngredients = new ArrayList<>();
+        Cursor c1 = ref_db.rawQuery("SELECT * FROM RECIPES WHERE id = ?", new String[]{String.valueOf(id)});
+        int cant_reg = c1.getCount();
+        if (cant_reg == 0) {
+            ref_db.close();
+            return null;
+        } else {
+            c1.moveToFirst();
+            Recipe recipe = new Recipe();
+            recipe.setName(c1.getString(2));
+            recipe.setRecipeText(c1.getString(3));
+            recipe.setFatten(c1.getString(4));
+            recipe.setTypeofFood(c1.getString(5));
+            recipe.setImg(blobToBitmap(c1.getBlob(6)));
+
+            Cursor c2 = ref_db.rawQuery("SELECT * FROM RECIPES_INGREDIENTS WHERE ID_RECIPE = ? ", new String[]{String.valueOf(id)});
             c2.moveToFirst();
             ArrayList<RecipeIngredient> recipeIngredients = new ArrayList<>();
             int amount = c2.getCount();
@@ -419,20 +441,19 @@ public class ControllerDB extends SQLiteOpenHelper {
             for (int i = 0; i < amount; i++) {
                 RecipeIngredient recipeIngredient = new RecipeIngredient();
                 Ingredient ig = getIngredient(ref_db, c2.getInt(1));
-                Log.v("ControllerDB","Name-->"+ig.getName());
+                Log.v("ControllerDB", "Name-->" + ig.getName());
 
                 recipeIngredient.setIngredient(ig);
                 recipeIngredient.setAmount(c2.getInt(2));
-                Log.v("ControllerDB","Amount-->"+c2.getInt(2));
+                Log.v("ControllerDB", "Amount-->" + c2.getInt(2));
 
                 recipeIngredients.add(recipeIngredient);
                 c2.moveToNext();
             }
-            recipe.addListIngredient(recipeIngredients);*/
+            recipe.addListIngredient(recipeIngredients);
             ref_db.close();
             return recipe;
         }
-
     }
 
     public ArrayList<Integer> getIdsRecipes(String breakFast) {

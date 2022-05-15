@@ -44,7 +44,12 @@ public class MainActivity extends AppCompatActivity {
         buttonRecipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentListRecipes = new Intent (MainActivity.this,ListRecipes.class);
+                int ID_USER  = getIntent().getExtras().getInt("idUser");
+                Intent intentListRecipes = new Intent(MainActivity.this, ListRecipes.class);
+                if (ID_USER == 0){
+                    ID_USER = getIntent().getExtras().getInt("returnIdToMain");
+                }
+                intentListRecipes.putExtra("idUser", ID_USER);
                 startActivity(intentListRecipes);
             }
         });
@@ -61,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
         buttonBreakfast.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 int ID_USER  = getIntent().getExtras().getInt("idUser");
                 Intent intentBreakfast = new Intent (MainActivity.this, ShowRecipe.class);
                 if (ID_USER == 0){
