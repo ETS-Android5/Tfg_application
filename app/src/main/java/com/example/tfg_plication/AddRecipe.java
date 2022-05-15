@@ -12,6 +12,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.Image;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.hardware.Camera;
 
@@ -71,6 +72,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
     private EditText et;
 
     private static final int PERMISO_CAMARA = 0;
+    private static final int REQUEST_CODE_ASK_PERMISSIONS = 123;
     private RecipeManager recipeManager;
     private ControllerDB cDB;
 
@@ -88,12 +90,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         getSupportActionBar().hide();
         initValues();
         dynamicSpinners();
-        /*this.plusIngredient.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-            }
-        });*/
 
 
         this.galleryActivityResultLauncher = registerForActivityResult(
@@ -105,10 +102,15 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
                         if (result.getResultCode() == Activity.RESULT_OK) {
                             //image picked
                             //get uri of image
-                            Intent data = result.getData();
-                            Uri imageUri = data.getData();
 
-                            imgRecipe.setImageURI(imageUri);
+                            Intent data = result.getData();
+                            Bitmap photo = (Bitmap)data.getExtras().get("data");
+
+                            // Set the image in imageview for display
+                            imgRecipe.setImageBitmap(photo);
+                            //Uri imageUri = data.getData();
+
+                            //imgRecipe.setImageURI(imageUri);
                         } else {
                             //cancelled
                             Toast.makeText(AddRecipe.this, "Cancelled...", Toast.LENGTH_SHORT).show();
@@ -185,9 +187,11 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
                 if (options[item].equals("Take Photo")) {
 
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    File f = new File(android.os.Environment.getExternalStorageDirectory(), "temp.jpg");
-                    intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
+                    startActivity(intent);
+                    //File f = new File(android.os.Environment.getExternalStorageDirectory(), "temp.jpg");
+                    //intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
                     galleryActivityResultLauncher.launch(intent);
+
 
                 } else if (options[item].equals("Choose from Gallery")) {
                     Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -198,12 +202,27 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
                 }
             }
         });
+
         builder.show();
 
     }
 
 
-    public void saveInfo(View view) {
+
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            Bitmap photo = (Bitmap)data.getExtras().get("data");
+
+            // Set the image in imageview for display
+            imgRecipe.setImageBitmap(photo);
+        }
+    }
+
+
+
+            public void saveInfo(View view) {
         String name = name_recipe.getText().toString();
         String description = info_recipe.getText().toString();
         String calories = num_kl.getText().toString();
@@ -241,84 +260,52 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
     }
 
     public void chooseImage(View view) {
-        //ComprobarPermisos();
-        SelectImage();
+        ComprobarPermisos();
+        //SelectImage();
     }
 
     private void ComprobarPermisos() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
-                == PackageManager.PERMISSION_GRANTED) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
 
-            // Ya se ha obtenido el permiso previamente Iniciamos Cámara
-
-            SelectImage();
-        } else {
-            // No se tiene el permiso, es necesario pedirlo al usuario
-            PedirPermisoCamara();
-        }
-    }
-
-
-    private void PedirPermisoCamara() {
-        //Comprobación 'Racional'
-        if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                Manifest.permission.CAMERA)) {
-
-            //Mostramos un AlertDialog al usuario explicándole la necesidad del permiso
-            AlertDialog AD;
-            AlertDialog.Builder ADBuilder = new AlertDialog.Builder(AddRecipe.this);
-            ADBuilder.setMessage("\n" +
-                    "\n" +
-                    "To scan a product you need to use your device's camera. Allow 'app name' to access the camera.\n" +
-                    "\n");
-            ADBuilder.setPositiveButton("continue", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-
-                    //Cuando el usuario pulse sobre el botón del AlertDialog se procede a solicitar el permiso con el siguiente código
-
-                    ActivityCompat.requestPermissions(
-                            AddRecipe.this,
-                            new String[]{Manifest.permission.CAMERA},
-                            PERMISO_CAMARA);
-                }
-            });
-
-            //Mostramos el AlertDialog
-            AD = ADBuilder.create();
-            AD.show();
-
+            Toast.makeText(this, "This version is not Android 6 or later " + Build.VERSION.SDK_INT, Toast.LENGTH_LONG).show();
 
         } else {
-            //Si no hay necesidad de una explicación racional, pasamos a solicitar el permiso directamente
 
-            ActivityCompat.requestPermissions(
-                    AddRecipe.this,
-                    new String[]{Manifest.permission.CAMERA},
-                    PERMISO_CAMARA);
-        }
+            int hasWriteContactsPermission = checkSelfPermission(Manifest.permission.CAMERA);
 
+            if (hasWriteContactsPermission != PackageManager.PERMISSION_GRANTED) {
 
-    }
+                requestPermissions(new String[] {Manifest.permission.CAMERA},
+                        REQUEST_CODE_ASK_PERMISSIONS);
 
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
+                Toast.makeText(this, "Requesting permissions", Toast.LENGTH_LONG).show();
 
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == PERMISO_CAMARA) {
-            //Resultado de la solicitud para permiso de cámara Si la solicitud es cancelada por el usuario, el método .lenght sobre el array
-            //             'grantResults' devolverá null.
+            }else if (hasWriteContactsPermission == PackageManager.PERMISSION_GRANTED){
 
-
-            if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                // Permiso concedido, podemos iniciar camara
-
+                Toast.makeText(this, "The permissions are already granted ", Toast.LENGTH_LONG).show();
                 SelectImage();
 
-            } else {
-                ///Permiso no concedido Aquí habría que explicar al usuario el por qué de este permiso y volver a solicitarlo .
             }
+
+        }
+
+        return;
+    }
+
+
+
+
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if(REQUEST_CODE_ASK_PERMISSIONS == requestCode) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "OK Permissions granted ! " + Build.VERSION.SDK_INT, Toast.LENGTH_LONG).show();
+                SelectImage();
+            } else {
+                Toast.makeText(this, "Permissions are not granted ! " + Build.VERSION.SDK_INT, Toast.LENGTH_LONG).show();
+            }
+        }else{
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
+
 }
