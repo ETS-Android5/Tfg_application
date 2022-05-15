@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -82,7 +83,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
     private Spinner type_food, ingredients;
     private User user;
     private ActivityResultLauncher<Intent> galleryActivityResultLauncher;
-
+    private ActivityResultLauncher<Intent> galleryAtcitivtyResultfile;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,7 +91,20 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         getSupportActionBar().hide();
         initValues();
         dynamicSpinners();
+        this.galleryAtcitivtyResultfile = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>(){
 
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        if (result.getResultCode() == Activity.RESULT_OK) {
+                            Intent data = result.getData();
+
+                            Uri selectedImage = data.getData();
+                            imgRecipe.setImageURI(selectedImage);
+
+                        }
+                        }
+                    });
 
 
         this.galleryActivityResultLauncher = registerForActivityResult(
@@ -100,17 +114,13 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
                     public void onActivityResult(ActivityResult result) {
                         //here we will handle the result of our intent
                         if (result.getResultCode() == Activity.RESULT_OK) {
-                            //image picked
-                            //get uri of image
 
                             Intent data = result.getData();
                             Bitmap photo = (Bitmap)data.getExtras().get("data");
 
-                            // Set the image in imageview for display
-                            imgRecipe.setImageBitmap(photo);
-                            //Uri imageUri = data.getData();
 
-                            //imgRecipe.setImageURI(imageUri);
+                            imgRecipe.setImageBitmap(photo);
+
                         } else {
                             //cancelled
                             Toast.makeText(AddRecipe.this, "Cancelled...", Toast.LENGTH_SHORT).show();
@@ -188,6 +198,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
 
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     startActivity(intent);
+
                     //File f = new File(android.os.Environment.getExternalStorageDirectory(), "temp.jpg");
                     //intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
                     galleryActivityResultLauncher.launch(intent);
@@ -195,7 +206,9 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
 
                 } else if (options[item].equals("Choose from Gallery")) {
                     Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    galleryActivityResultLauncher.launch(intent);
+                    startActivity(intent);
+
+                    galleryAtcitivtyResultfile.launch(intent);
 
                 } else if (options[item].equals("Cancel")) {
                     dialog.dismiss();
@@ -210,15 +223,6 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
 
 
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            Bitmap photo = (Bitmap)data.getExtras().get("data");
-
-            // Set the image in imageview for display
-            imgRecipe.setImageBitmap(photo);
-        }
-    }
 
 
 
