@@ -76,7 +76,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
     private static final int REQUEST_CODE_ASK_PERMISSIONS = 123;
     private RecipeManager recipeManager;
     private ControllerDB cDB;
-    private Button button;
+    private Button button,insertIngredient;
     //private List<Ingredient> ingredients;
     private EditText name_recipe, info_recipe, num_kl;
     private ImageButton imgRecipe;
@@ -98,6 +98,25 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
                 Intent intent = new Intent(AddRecipe.this, MainActivity.class);
                 intent.putExtra("returnIdToMain", id);
                 startActivity(intent);
+            }
+        });
+        /*Alert Dialog*/
+        insertIngredient.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog alert = new AlertDialog.Builder(AddRecipe.this)
+                        .setTitle("Ingredient Dialog")
+                        .setMessage("Add The ingredients You Wish to Use")
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    }
+                                }
+                        )
+                        .setNegativeButton("Cancel", null)
+                        .create();
+                alert.show();
             }
         });
 
@@ -156,6 +175,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
 
 
     private void initValues() {
+        insertIngredient = findViewById(R.id.insertIngredient);
         ly = findViewById(R.id.ly);
         button = findViewById(R.id.btn_return);
         plusIngredient = findViewById(R.id.plus_ingredient);
@@ -170,6 +190,9 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         user = new User();
 
     }
+
+
+
 
    @Override
     public void onClick(View view) {
