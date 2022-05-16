@@ -76,14 +76,16 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
     private static final int REQUEST_CODE_ASK_PERMISSIONS = 123;
     private RecipeManager recipeManager;
     private ControllerDB cDB;
-    private Button button,insertIngredient;
+    private Button button, insertIngredient;
     //private List<Ingredient> ingredients;
     private EditText name_recipe, info_recipe, num_kl;
     private ImageButton imgRecipe;
     private Spinner type_food, ingredients;
+    private int cant;
     private User user;
     private ActivityResultLauncher<Intent> galleryActivityResultLauncher;
     private ActivityResultLauncher<Intent> galleryAtcitivtyResultfile;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,29 +108,28 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder alert = new AlertDialog.Builder(AddRecipe.this);
-                        alert.setTitle("NEW INGREDIENT");
-                        alert.setMessage("Add The ingredients You Wish to Use");
-                        EditText input = new EditText(AddRecipe.this);
-                        alert.setView(input);
-                        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        String srt = input.getEditableText().toString();
-                                        Ingredient ingredient = new Ingredient();
-                                        ingredient.setName(srt);
-                                        cDB.addIngredient(ingredient);
-
-                                    }
-                                }
-                        );
-                        alert.setNegativeButton("Cancel", null);
-                        alert.create();
+                alert.setTitle("NEW INGREDIENT");
+                alert.setMessage("Add The ingredients You Wish to Use");
+                EditText input = new EditText(AddRecipe.this);
+                alert.setView(input);
+                alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                String srt = input.getEditableText().toString();
+                                Ingredient ingredient = new Ingredient();
+                                ingredient.setName(srt);
+                                cDB.addIngredient(ingredient);
+                            }
+                        }
+                );
+                alert.setNegativeButton("Cancel", null);
+                alert.create();
                 alert.show();
             }
         });
 
         this.galleryAtcitivtyResultfile = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-                new ActivityResultCallback<ActivityResult>(){
+                new ActivityResultCallback<ActivityResult>() {
 
                     @Override
                     public void onActivityResult(ActivityResult result) {
@@ -139,8 +140,8 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
                             imgRecipe.setImageURI(selectedImage);
 
                         }
-                        }
-                    });
+                    }
+                });
 
 
         this.galleryActivityResultLauncher = registerForActivityResult(
@@ -152,7 +153,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
                         if (result.getResultCode() == Activity.RESULT_OK) {
 
                             Intent data = result.getData();
-                            Bitmap photo = (Bitmap)data.getExtras().get("data");
+                            Bitmap photo = (Bitmap) data.getExtras().get("data");
 
 
                             imgRecipe.setImageBitmap(photo);
@@ -199,9 +200,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
     }
 
 
-
-
-   @Override
+    @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.plus_ingredient:
@@ -215,8 +214,8 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         view_name = getLayoutInflater().inflate(R.layout.ingredient_format, null, false);
         ingredients = view_name.findViewById(R.id.ingredients);
         ArrayList<String> test = new ArrayList<>();
-        for (int i = 0; i < recipeManager.getIngredients(this).size(); i++) {
-            test.add(recipeManager.getIngredients(this).get(i).getName());
+        for (int i = 0; i < cDB.getAllIngredient().size(); i++) {
+            test.add(cDB.getAllIngredient().get(i).getName());
             ArrayAdapter arrayAdapter = new ArrayAdapter(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, test);
             ingredients.setAdapter(arrayAdapter);
         }
@@ -263,12 +262,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
     }
 
 
-
-
-
-
-
-            public void saveInfo(View view) {
+    public void saveInfo(View view) {
         String name = name_recipe.getText().toString();
         String description = info_recipe.getText().toString();
         String calories = num_kl.getText().toString();
@@ -292,7 +286,9 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
             et = (EditText) cricketView.findViewById(R.id.amount);
             Spinner spinner = (Spinner) cricketView.findViewById(R.id.ingredients);
             if (view_name != null && et != null && spinner != null) {
-                ingredient = new Ingredient(i + 1, spinner.getSelectedItem().toString());
+                ingredient = new Ingredient();
+                ingredient.setId(spinner.getSelectedItemPosition()+1);
+                ingredient.setName(spinner.getSelectedItem().toString());
                 listIngredients.add(new RecipeIngredient(ingredient, Integer.parseInt(et.getText().toString())));
             }
         }
@@ -321,12 +317,12 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
 
             if (hasWriteContactsPermission != PackageManager.PERMISSION_GRANTED) {
 
-                requestPermissions(new String[] {Manifest.permission.CAMERA},
+                requestPermissions(new String[]{Manifest.permission.CAMERA},
                         REQUEST_CODE_ASK_PERMISSIONS);
 
                 Toast.makeText(this, "Requesting permissions", Toast.LENGTH_LONG).show();
 
-            }else if (hasWriteContactsPermission == PackageManager.PERMISSION_GRANTED){
+            } else if (hasWriteContactsPermission == PackageManager.PERMISSION_GRANTED) {
 
                 Toast.makeText(this, "The permissions are already granted ", Toast.LENGTH_LONG).show();
                 SelectImage();
@@ -339,17 +335,15 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
     }
 
 
-
-
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        if(REQUEST_CODE_ASK_PERMISSIONS == requestCode) {
+        if (REQUEST_CODE_ASK_PERMISSIONS == requestCode) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "OK Permissions granted ! " + Build.VERSION.SDK_INT, Toast.LENGTH_LONG).show();
                 SelectImage();
             } else {
                 Toast.makeText(this, "Permissions are not granted ! " + Build.VERSION.SDK_INT, Toast.LENGTH_LONG).show();
             }
-        }else{
+        } else {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }

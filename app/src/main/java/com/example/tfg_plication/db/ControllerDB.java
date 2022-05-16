@@ -134,6 +134,29 @@ public class ControllerDB extends SQLiteOpenHelper {
             return ingredients;
         }
     }
+    public void testAllIds() {
+        List<Ingredient> ingredients = new ArrayList<Ingredient>();
+        SQLiteDatabase ref_db = this.getReadableDatabase();
+        Cursor c2 = ref_db.rawQuery("SELECT * FROM INGREDIENTS", null);
+        int cant_reg = c2.getCount();
+        if (cant_reg == 0) {
+            ref_db.close();
+            //return null;
+        } else {
+            c2.moveToFirst();
+            for (int i = 0; i < cant_reg; i++) {
+                Ingredient ingredient = new Ingredient();
+                ingredient.setId(c2.getInt(0));
+                Log.v("ControllerDB","All ids -->"+c2.getInt(0));
+                ingredient.setName(c2.getString(1));
+                ingredients.add(ingredient);
+                c2.moveToNext();
+            }
+            ref_db.close();
+            //return ingredients;
+        }
+
+    }
 
     public void addRecipe(Recipe recipe) {
         SQLiteDatabase ref_db = this.getWritableDatabase();
