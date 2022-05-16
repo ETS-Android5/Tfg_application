@@ -76,7 +76,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
     private static final int REQUEST_CODE_ASK_PERMISSIONS = 123;
     private RecipeManager recipeManager;
     private ControllerDB cDB;
-
+    private Button button;
     //private List<Ingredient> ingredients;
     private EditText name_recipe, info_recipe, num_kl;
     private ImageButton imgRecipe;
@@ -91,6 +91,16 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         getSupportActionBar().hide();
         initValues();
         dynamicSpinners();
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int id = getIntent().getExtras().getInt("idUser");
+                Intent intent = new Intent(AddRecipe.this, MainActivity.class);
+                intent.putExtra("returnIdToMain", id);
+                startActivity(intent);
+            }
+        });
+
         this.galleryAtcitivtyResultfile = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
                 new ActivityResultCallback<ActivityResult>(){
 
@@ -144,8 +154,10 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
 
     }
 
+
     private void initValues() {
         ly = findViewById(R.id.ly);
+        button = findViewById(R.id.btn_return);
         plusIngredient = findViewById(R.id.plus_ingredient);
         plusIngredient.setOnClickListener(this);
         recipeManager = new RecipeManager();

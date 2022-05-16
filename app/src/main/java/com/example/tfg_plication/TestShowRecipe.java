@@ -44,7 +44,6 @@ public class TestShowRecipe extends AppCompatActivity {
         String txt = "";
         for (RecipeIngredient ri : recipe.getIngredients()) {
             txt += ri.getAmount()+" -- "+ri.getIngredient().getName()+"\n";
-            //Toast.makeText(this,"Ingredients--> "+ri.getIngredient().getName()+"--"+ri.getAmount(),Toast.LENGTH_SHORT).show();
             textView.setText(txt);
         }
 
@@ -61,12 +60,5 @@ public class TestShowRecipe extends AppCompatActivity {
                 startActivity(changeSign);
             }
         });
-        /*
-        *       int id = getIntent().getExtras().getInt("idUser");
-                Intent intent = new Intent(ListRecipes.this, MainActivity.class);
-                intent.putExtra("returnIdToMain", id);
-                startActivity(intent);
-        *
-        * */
     }
 }

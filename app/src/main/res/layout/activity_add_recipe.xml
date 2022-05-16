@@ -1,28 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
     android:background="@drawable/gradient"
+    android:fillViewport="true"
     tools:context=".AddRecipe">
 
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_margin="20dp"
         android:background="@color/white"
         android:orientation="vertical"
         android:padding="6dp">
 
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Form Recipe"
-            android:textAlignment="center"
-            android:textSize="32sp"
-            android:textStyle="bold" />
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_return"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/teal_700"
+                android:drawableStart="@drawable/left_arrow" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:text="Form Recipe"
+                android:textAlignment="center"
+                android:textSize="32sp"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"
@@ -74,7 +91,6 @@
                 android:layout_height="120dp"
                 android:onClick="chooseImage"
                 android:scaleType="fitXY"
-                android:src="@drawable/ic_restaurant"
                  />
 
             <EditText
@@ -125,7 +141,7 @@
             android:textStyle="bold" />
 
         <LinearLayout
-            android:layout_width="400dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
