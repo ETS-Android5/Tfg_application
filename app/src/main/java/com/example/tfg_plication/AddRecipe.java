@@ -91,6 +91,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         getSupportActionBar().hide();
         initValues();
         dynamicSpinners();
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -104,18 +105,24 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         insertIngredient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog alert = new AlertDialog.Builder(AddRecipe.this)
-                        .setTitle("Ingredient Dialog")
-                        .setMessage("Add The ingredients You Wish to Use")
-                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                AlertDialog.Builder alert = new AlertDialog.Builder(AddRecipe.this);
+                        alert.setTitle("NEW INGREDIENT");
+                        alert.setMessage("Add The ingredients You Wish to Use");
+                        EditText input = new EditText(AddRecipe.this);
+                        alert.setView(input);
+                        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
+                                        String srt = input.getEditableText().toString();
+                                        Ingredient ingredient = new Ingredient();
+                                        ingredient.setName(srt);
+                                        cDB.addIngredient(ingredient);
 
                                     }
                                 }
-                        )
-                        .setNegativeButton("Cancel", null)
-                        .create();
+                        );
+                        alert.setNegativeButton("Cancel", null);
+                        alert.create();
                 alert.show();
             }
         });
