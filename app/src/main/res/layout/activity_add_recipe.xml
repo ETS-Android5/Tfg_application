@@ -242,9 +242,23 @@
                     android:layout_height="wrap_content"
                     android:spinnerMode="dialog" />
             </LinearLayout>
-
         </LinearLayout>
-
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Rating"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            />
+        <RatingBar
+            android:id="@+id/score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            tools:ignore="SpeakableTextPresentCheck" />
         <Button
             android:id="@+id/send"
             android:layout_width="match_parent"

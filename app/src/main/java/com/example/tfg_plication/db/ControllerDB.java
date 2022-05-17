@@ -27,7 +27,7 @@ import java.util.List;
 public class ControllerDB extends SQLiteOpenHelper {
 
     public ControllerDB(Context context) {
-        super(context, "com.damedix.Tfg_application", null, 14);
+        super(context, "com.damedix.Tfg_application", null, 15);
 
     }
 
@@ -44,7 +44,6 @@ public class ControllerDB extends SQLiteOpenHelper {
                 "FATTEN TEXT ," +
                 "TYPEOFFOOD TEXT," +
                 "IMAGE BLOB," +
-                "RATING FLOAT," +
                 "FOREIGN KEY (userId) REFERENCES USERS(ID));");
         db.execSQL("CREATE TABLE RECIPES_INGREDIENTS (ID_RECIPE INTEGER NOT NULL," +
                 "ID_INGREDIENT INTEGER NOT NULL," +
@@ -56,11 +55,7 @@ public class ControllerDB extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-        db.execSQL("INSERT INTO INGREDIENTS(INGREDIENT) VALUES ('Lechuga')");
-        db.execSQL("INSERT INTO INGREDIENTS(INGREDIENT) VALUES ('Pollo')");
-        db.execSQL("INSERT INTO INGREDIENTS(INGREDIENT) VALUES ('Zanahoria')");
-        db.execSQL("INSERT INTO INGREDIENTS(INGREDIENT) VALUES ('Rucula')");
-        db.execSQL("INSERT INTO INGREDIENTS(INGREDIENT) VALUES ('Escarola')");
+        db.execSQL("ALTER TABLE RECIPES ADD COLUMN  RATING FLOAT");
     }
 
     public int checkIfUserExists(User user) {
@@ -167,7 +162,7 @@ public class ControllerDB extends SQLiteOpenHelper {
         cv.put("FATTEN", String.valueOf(recipe.getFatten()));
         cv.put("TYPEOFFOOD", String.valueOf(recipe.getTypeofFood()));
         cv.put("IMAGE", getBitmapAsByteArray(recipe.getImg()));
-        //cv.put("RATING", recipe.getRating());
+        cv.put("RATING", recipe.getRating());
         ref_db.insert("RECIPES", null, cv);
         Cursor c2 = ref_db.rawQuery("SELECT ID FROM RECIPES WHERE NAME_RECIPE=?", new String[]{recipe.getName()});
         c2.moveToFirst();
@@ -428,11 +423,13 @@ public class ControllerDB extends SQLiteOpenHelper {
         } else {
             c1.moveToFirst();
             Recipe recipe = new Recipe();
+            recipe.setId(c1.getInt(0));
             recipe.setName(c1.getString(2));
             recipe.setRecipeText(c1.getString(3));
             recipe.setFatten(c1.getString(4));
             recipe.setTypeofFood(c1.getString(5));
             recipe.setImg(blobToBitmap(c1.getBlob(6)));
+            recipe.setRating(c1.getFloat(7));
             ref_db.close();
             return recipe;
         }
@@ -511,4 +508,11 @@ public class ControllerDB extends SQLiteOpenHelper {
         c1.moveToFirst();
         return c1.getInt(0);
     }
+    public void updateRating(float actRating, float newRating, int idRecipe){
+            ContentValues cv = new ContentValues();
+            cv.put("RATING", newRating);
+            SQLiteDatabase db = this.getWritableDatabase();
+            db.update("RECIPES", cv, "RATING=? and ID=?", new String[]{String.valueOf(actRating), String.valueOf(idRecipe)});
+        }
 }
+

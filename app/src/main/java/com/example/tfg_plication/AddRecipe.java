@@ -36,6 +36,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -79,6 +80,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
     private Button button, insertIngredient;
     //private List<Ingredient> ingredients;
     private EditText name_recipe, info_recipe, num_kl;
+    private RatingBar ratingBar;
     private ImageButton imgRecipe;
     private Spinner type_food, ingredients;
     private int cant;
@@ -194,6 +196,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         name_recipe = (EditText) findViewById(R.id.name_recipe);
         info_recipe = (EditText) findViewById(R.id.info_about);
         num_kl = (EditText) findViewById(R.id.num_kal);
+        ratingBar = (RatingBar) findViewById(R.id.score);
         type_food = (Spinner) findViewById(R.id.type_of_food);
         user = new User();
 
@@ -268,6 +271,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         String calories = num_kl.getText().toString();
         String typeFood = type_food.getSelectedItem().toString();
         long idUser = this.getIntent().getExtras().getLong("idUser");
+        float rating = ratingBar.getRating();
         user.setId(idUser);
         Bitmap bmImg = ((BitmapDrawable) imgRecipe.getDrawable()).getBitmap();
         Recipe recipe = new Recipe();
@@ -276,7 +280,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         recipe.setFatten(calories);
         recipe.setUser(user);
         recipe.setImg(bmImg);
-        //recipe.setRating(Float.intBitsToFloat(0));
+        recipe.setRating(rating);
         recipe.setTypeofFood(typeFood);
 
         ArrayList<RecipeIngredient> listIngredients = new ArrayList<>();
@@ -297,6 +301,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
             test.add(new RecipeIngredient(new Ingredient(listIngredients.get(i).getIngredient().getId(), listIngredients.get(i).getIngredient().getName()), listIngredients.get(i).getAmount()));
         }
         recipe.addListIngredient(test);
+        //Toast.makeText(this, "Score: "+recipe.getRating(), Toast.LENGTH_SHORT).show();
         cDB.addRecipe(recipe);
         Toast.makeText(this, "ShowRecipe Added!!!", Toast.LENGTH_SHORT).show();
     }
