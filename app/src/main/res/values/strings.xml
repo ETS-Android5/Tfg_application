@@ -30,5 +30,6 @@
     <string name="lunch">Lunch</string>
     <string name="desserts">Desserts</string>
     <string name="sign_in">SIGN_IN</string>
+    <string name="recipe_lunch">Recipe Lunch</string>
 
 </resources>
