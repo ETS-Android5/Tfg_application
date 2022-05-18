@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.transition.AutoTransition;
 import android.transition.TransitionManager;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,7 +32,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class ShowRecipe extends AppCompatActivity {
     private ImageView imgRecipe;
     //RatingBar ratingBar;
-    Button button,upRating;
+    Button button,upRating,delRecipe;
     private LinearLayout lyExpandable;
     private CardView cw;
     private TextView stringDescription;
@@ -60,13 +61,22 @@ public class ShowRecipe extends AppCompatActivity {
         }
 
         Recipe recipe = controllerDB.getRecipe(id);
-        Drawable d = new BitmapDrawable(getResources(), recipe.getImg());
-        imgRecipe.setImageDrawable(d);
-        nameRecipe.setText(recipe.getName());
-        infoRecipe.setText(recipe.getRecipeText());
-        typeFood.setText(recipe.getTypeofFood());
-        calories.setText(recipe.getFatten()+" Kcal.");
-        ratingBar.setRating(recipe.getRating());
+
+        if (recipe == null){
+            Toast toast = Toast.makeText(ShowRecipe.this, "Please add a recipe first", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+        }else{
+            Drawable d = new BitmapDrawable(getResources(), recipe.getImg());
+            imgRecipe.setImageDrawable(d);
+            nameRecipe.setText(recipe.getName());
+            infoRecipe.setText(recipe.getRecipeText());
+            typeFood.setText(recipe.getTypeofFood());
+            calories.setText(recipe.getFatten()+" Kcal.");
+            ratingBar.setRating(recipe.getRating());
+        }
+
+
 
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -98,56 +108,12 @@ public class ShowRecipe extends AppCompatActivity {
             }
         });
 
-
-
-
-        /*Recipe recipe = controllerDB.getRecipe();
-         */
-        //ratingBar = (RatingBar) findViewById(R.id.ratingBar);
-        //ratingBar.setRating(recipe.getRating());
-        /*button = (Button) findViewById(R.id.buttonRating);
-        button.setOnClickListener(new View.OnClickListener() {
+        delRecipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                float aux = (ratingBar.getRating()+recipe.getRating())/2;
-                ratingBar.setRating(aux);
+                //controllerDB.deleteRecipe(recipe.getId());
             }
-        });*/
-
-
-        /*controllerFB.getRecipe(1, new ControllerFB.RecipeDataStatus() {
-            @Override
-            public void OnRecipeGetId(Long idRecipe) {
-
-            }
-
-            @Override
-            public void getUserRecipe(List<Recipe> userRecipes) {
-
-            }
-
-            @Override
-            public void getRecipeIngredients(Recipe recipe) {
-
-            }
-
-            @Override
-            public void getAllRecipe(List<Recipe> allRecipe) {
-
-            }
-
-            @Override
-            public void getRecipe(Recipe recipe) {
-
-                Drawable d = new BitmapDrawable(getResources(), recipe.getImg());
-                imgRecipe.setImageDrawable(d);
-                nameRecipe.setText(recipe.getName());
-                infoRecipe.setText(recipe.getRecipeText());
-                typeFood.setText(recipe.getTypeofFood());
-                calories.setText(recipe.getFatten());
-
-            }
-        });*/
+        });
 
 
     }

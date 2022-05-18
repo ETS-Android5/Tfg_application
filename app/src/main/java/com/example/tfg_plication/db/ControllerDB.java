@@ -182,7 +182,7 @@ public class ControllerDB extends SQLiteOpenHelper {
     public void deleteRecipe(Recipe recipe) {
         SQLiteDatabase ref_db = this.getWritableDatabase();
 
-        ref_db.delete("RECIPES", "RECIPE=? AND userID=?", new String[]{recipe.getName(), String.valueOf(recipe.getId())});
+        ref_db.delete("RECIPES", "RECIPE=? AND userID=?", new String[]{recipe.getName()});
         ref_db.close();
     }
 

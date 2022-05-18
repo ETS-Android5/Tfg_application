@@ -12,6 +12,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -50,19 +51,29 @@ public class ListRecipes extends AppCompatActivity {
         cDB = new ControllerDB(this);
         button = findViewById(R.id.extended_fab);
         ArrayList<Recipe> arrayOfUsers = new ArrayList<Recipe>();
-        for (Recipe recipe : cDB.getAllRecipes()) {
-            Recipe reAux = new Recipe();
-            reAux.setId(recipe.getId());
-            reAux.setName(recipe.getName());
-            reAux.setRecipeText(recipe.getRecipeText());
-            reAux.setImg(recipe.getImg());
-            reAux.setFatten(recipe.getFatten() + " kcal.");
-            reAux.setTypeofFood(recipe.getTypeofFood());
-            arrayOfUsers.add(reAux);
+
+        if (cDB.getAllRecipes() == null){
+            lv.setAdapter(null);
+            Toast toast = Toast.makeText(ListRecipes.this, "Please add a recipe first", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+        }else{
+            for (Recipe recipe : cDB.getAllRecipes()) {
+                Recipe reAux = new Recipe();
+                reAux.setId(recipe.getId());
+                reAux.setName(recipe.getName());
+                reAux.setRecipeText(recipe.getRecipeText());
+                reAux.setImg(recipe.getImg());
+                reAux.setFatten(recipe.getFatten() + " kcal.");
+                reAux.setTypeofFood(recipe.getTypeofFood());
+                arrayOfUsers.add(reAux);
+            }
+            RecipeAdapter adapter = new RecipeAdapter(this, arrayOfUsers);
+            lv.setAdapter(adapter);
         }
 
-        RecipeAdapter adapter = new RecipeAdapter(this, arrayOfUsers);
-        lv.setAdapter(adapter);
+
+
 
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {

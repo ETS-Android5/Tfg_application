@@ -72,7 +72,7 @@ public class Sign_in extends AppCompatActivity {
                                          defIngredients.add("Queso");
                                          defIngredients.add("Aceite de Oliva");
                                       Intent intent = new Intent(Sign_in.this, MainActivity.class);
-                                      intent.putExtra("idUser", user.getId());
+                                      //intent.putExtra("idUser", user.getId());
                                       intent.putExtra("defaultIngredients",defIngredients);
                                       startActivity(intent);
                                   }

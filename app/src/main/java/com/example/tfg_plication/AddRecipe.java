@@ -282,36 +282,53 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         float rating = ratingBar.getRating();
         user.setId(idUser);
         Bitmap bmImg = ((BitmapDrawable) imgRecipe.getDrawable()).getBitmap();
-        Recipe recipe = new Recipe();
-        recipe.setName(name);
-        recipe.setRecipeText(description);
-        recipe.setFatten(calories);
-        recipe.setUser(user);
-        recipe.setImg(bmImg);
-        recipe.setRating(rating);
-        recipe.setTypeofFood(typeFood);
+        if (name.isEmpty()) {
+            name_recipe.setError("Please don't let the name empty");
+        } else if (description.isEmpty()) {
+            info_recipe.setError("Please don't let the description empty");
+        } else if (calories.isEmpty()) {
+            num_kl.setError("Please don't let the calories empty");
+        } else {
+            Recipe recipe = new Recipe();
+            recipe.setName(name);
+            recipe.setRecipeText(description);
+            recipe.setFatten(calories);
+            recipe.setUser(user);
+            recipe.setImg(bmImg);
+            recipe.setRating(rating);
+            recipe.setTypeofFood(typeFood);
 
-        ArrayList<RecipeIngredient> listIngredients = new ArrayList<>();
-        Ingredient ingredient = null;
-        for (int i = 0; i < ly.getChildCount(); i++) {
-            View cricketView = ly.getChildAt(i);
-            et = (EditText) cricketView.findViewById(R.id.amount);
-            Spinner spinner = (Spinner) cricketView.findViewById(R.id.ingredients);
-            if (view_name != null && et != null && spinner != null) {
-                ingredient = new Ingredient();
-                ingredient.setId(spinner.getSelectedItemPosition()+1);
-                ingredient.setName(spinner.getSelectedItem().toString());
-                listIngredients.add(new RecipeIngredient(ingredient, Integer.parseInt(et.getText().toString())));
+            ArrayList<RecipeIngredient> listIngredients = new ArrayList<>();
+            Ingredient ingredient = null;
+            for (int i = 0; i < ly.getChildCount(); i++) {
+                View cricketView = ly.getChildAt(i);
+                et = (EditText) cricketView.findViewById(R.id.amount);
+                Spinner spinner = (Spinner) cricketView.findViewById(R.id.ingredients);
+                if (view_name != null && et != null && spinner != null) {
+                    ingredient = new Ingredient();
+                    ingredient.setId(spinner.getSelectedItemPosition() + 1);
+                    ingredient.setName(spinner.getSelectedItem().toString());
+                    if (et.getText().toString().equalsIgnoreCase("")) {
+                        et.requestFocus();
+                        et.setError("Please add a number");
+                    } else {
+                        listIngredients.add(new RecipeIngredient(ingredient, Integer.parseInt(et.getText().toString())));
+                    }
+                }
+            }
+            if (listIngredients.size() <= 1) {
+                Toast.makeText(AddRecipe.this, "Add at least two ingredients", Toast.LENGTH_SHORT).show();
+            } else {
+                ArrayList<RecipeIngredient> test = new ArrayList<>();
+                for (int i = 0; i < listIngredients.size(); i++) {
+                    test.add(new RecipeIngredient(new Ingredient(listIngredients.get(i).getIngredient().getId(), listIngredients.get(i).getIngredient().getName()), listIngredients.get(i).getAmount()));
+                }
+                recipe.addListIngredient(test);
+                //Toast.makeText(this, "Score: "+recipe.getRating(), Toast.LENGTH_SHORT).show();
+                cDB.addRecipe(recipe);
+                Toast.makeText(this, "ShowRecipe Added!!!", Toast.LENGTH_SHORT).show();
             }
         }
-        ArrayList<RecipeIngredient> test = new ArrayList<>();
-        for (int i = 0; i < listIngredients.size(); i++) {
-            test.add(new RecipeIngredient(new Ingredient(listIngredients.get(i).getIngredient().getId(), listIngredients.get(i).getIngredient().getName()), listIngredients.get(i).getAmount()));
-        }
-        recipe.addListIngredient(test);
-        //Toast.makeText(this, "Score: "+recipe.getRating(), Toast.LENGTH_SHORT).show();
-        cDB.addRecipe(recipe);
-        Toast.makeText(this, "ShowRecipe Added!!!", Toast.LENGTH_SHORT).show();
     }
 
     public void chooseImage(View view) {
