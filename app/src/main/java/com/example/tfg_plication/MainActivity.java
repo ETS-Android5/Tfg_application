@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -59,16 +60,20 @@ public class MainActivity extends AppCompatActivity {
         buttonAddRecipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int ID_USER  = getIntent().getExtras().getInt("idUser");
                 ArrayList<String> listIng = (ArrayList<String>) getIntent().getStringArrayListExtra("defaultIngredients");
                 Intent intentListRecipes = new Intent(MainActivity.this, AddRecipe.class);
                 if (listIng != null) {
                     intentListRecipes.putExtra("defaultIngredients", listIng);
                 }
-                if (ID_USER == 0){
-                    ID_USER = getIntent().getExtras().getInt("returnIdToMain");
+                int ID_USER = getIntent().getExtras().getInt("idUser");
+                if (ID_USER != 0) {
+                    intentListRecipes.putExtra("idUser", ID_USER);
+                    Toast.makeText(MainActivity.this, "Main Activity-->" + ID_USER, Toast.LENGTH_SHORT).show();
+                } else {
+                    int id = getIntent().getExtras().getInt("returnIdToMain");
+                    intentListRecipes.putExtra("idUser", id);
+                    Toast.makeText(MainActivity.this, "Main Activity-->" + id, Toast.LENGTH_SHORT).show();
                 }
-                intentListRecipes.putExtra("idUser", ID_USER);
                 startActivity(intentListRecipes);
             }
         });
