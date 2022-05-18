@@ -35,6 +35,7 @@ public class ShowRecipe extends AppCompatActivity {
     Button button,upRating,delRecipe;
     private LinearLayout lyExpandable;
     private CardView cw;
+    Recipe recipe;
     private TextView stringDescription;
     private TextView nameRecipe, typeFood, calories, infoRecipe;
     private ControllerDB controllerDB;
@@ -47,7 +48,7 @@ public class ShowRecipe extends AppCompatActivity {
         setContentView(R.layout.activity_show_recipe);
         initValues();
         controllerDB = new ControllerDB(this);
-        String val = null;
+        String val;
         if (this.getIntent().getExtras().getString("bf") != null) {
             val = this.getIntent().getExtras().getString("bf");
             generateRandomRecipe(val);
@@ -60,7 +61,7 @@ public class ShowRecipe extends AppCompatActivity {
             generateRandomRecipe(val);
         }
 
-        Recipe recipe = controllerDB.getRecipe(id);
+        recipe = controllerDB.getRecipe(id);
 
         if (recipe == null){
             Toast toast = Toast.makeText(ShowRecipe.this, "Please add a recipe first", Toast.LENGTH_LONG);
@@ -95,6 +96,7 @@ public class ShowRecipe extends AppCompatActivity {
                 Toast.makeText(ShowRecipe.this,"Score Updated!!",Toast.LENGTH_SHORT).show();
             }
         });
+
         stringDescription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -108,12 +110,12 @@ public class ShowRecipe extends AppCompatActivity {
             }
         });
 
-        delRecipe.setOnClickListener(new View.OnClickListener() {
+        /*delRecipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //controllerDB.deleteRecipe(recipe.getId());
             }
-        });
+        });*/
 
 
     }

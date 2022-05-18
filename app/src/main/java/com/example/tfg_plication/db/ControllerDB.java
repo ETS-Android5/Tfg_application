@@ -415,7 +415,7 @@ public class ControllerDB extends SQLiteOpenHelper {
     public Recipe getRecipe(int id) {
         SQLiteDatabase ref_db = this.getReadableDatabase();
         ArrayList<RecipeIngredient> listIngredients = new ArrayList<>();
-        Cursor c1 = ref_db.rawQuery("SELECT * FROM RECIPES WHERE id = ?", new String[]{String.valueOf(id)});
+        Cursor c1 = ref_db.rawQuery("SELECT * FROM RECIPES WHERE ID = ?", new String[]{String.valueOf(id)});
         int cant_reg = c1.getCount();
         if (cant_reg == 0) {
             ref_db.close();
