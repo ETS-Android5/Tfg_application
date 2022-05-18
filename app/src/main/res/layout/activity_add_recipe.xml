@@ -91,6 +91,7 @@
                 android:layout_height="120dp"
                 android:onClick="chooseImage"
                 android:src="@drawable/ic_restaurant"
+                android:background="@drawable/ic_restaurant"
                 android:scaleType="fitXY"
                  />
 

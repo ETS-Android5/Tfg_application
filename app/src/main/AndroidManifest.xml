@@ -14,11 +14,12 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@mipmap/logo"
+        android:label="DeliciousApp"
+        android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Tfg_Plication" >
+        android:theme="@style/Theme.Tfg_Plication"
+        >
         <activity
             android:name=".Lead"
             android:exported="false" />

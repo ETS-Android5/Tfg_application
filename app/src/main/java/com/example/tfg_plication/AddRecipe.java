@@ -11,6 +11,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
@@ -94,6 +95,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         setContentView(R.layout.activity_add_recipe);
         getSupportActionBar().hide();
         initValues();
+
         ArrayList<String> listIng = (ArrayList<String>) getIntent().getStringArrayListExtra("defaultIngredients");
         if (listIng != null) {
             for (String ingredients : listIng) {
@@ -119,7 +121,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
             public void onClick(View view) {
                 AlertDialog.Builder alert = new AlertDialog.Builder(AddRecipe.this);
                 alert.setTitle("NEW INGREDIENT");
-                alert.setMessage("Add The ingredients You Wish to Use");
+                alert.setMessage("Add the ingredient you wish to use");
                 EditText input = new EditText(AddRecipe.this);
                 alert.setView(input);
                 alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -201,6 +203,8 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         recipeManager = new RecipeManager();
         cDB = new ControllerDB(this);
         imgRecipe = findViewById(R.id.imgRecipe);
+        Bitmap icon = BitmapFactory.decodeResource(this.getResources(),R.drawable.ic_restaurant);
+        imgRecipe.setImageBitmap(icon);
         name_recipe = (EditText) findViewById(R.id.name_recipe);
         info_recipe = (EditText) findViewById(R.id.info_about);
         num_kl = (EditText) findViewById(R.id.num_kal);
@@ -281,18 +285,20 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         long idUser = this.getIntent().getExtras().getLong("idUser");
         float rating = ratingBar.getRating();
         user.setId(idUser);
-        Bitmap bmImg = ((BitmapDrawable) imgRecipe.getDrawable()).getBitmap();
-        if (name.isEmpty()) {
+        if(name.isEmpty()) {
             name_recipe.setError("Please don't let the name empty");
         } else if (description.isEmpty()) {
             info_recipe.setError("Please don't let the description empty");
         } else if (calories.isEmpty()) {
             num_kl.setError("Please don't let the calories empty");
         } else {
+            Drawable img = imgRecipe.getDrawable();
+            Bitmap bmImg = ((BitmapDrawable) imgRecipe.getDrawable()).getBitmap();
             Recipe recipe = new Recipe();
             recipe.setName(name);
             recipe.setRecipeText(description);
             recipe.setFatten(calories);
+
             recipe.setUser(user);
             recipe.setImg(bmImg);
             recipe.setRating(rating);
