@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.tfg_plication.db.ControllerDB;
 import com.example.tfg_plication.db.ControllerFB;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     private Button buttonRecipe;
@@ -58,7 +60,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 int ID_USER  = getIntent().getExtras().getInt("idUser");
+                ArrayList<String> listIng = (ArrayList<String>) getIntent().getStringArrayListExtra("defaultIngredients");
                 Intent intentListRecipes = new Intent(MainActivity.this, AddRecipe.class);
+                if (listIng != null) {
+                    intentListRecipes.putExtra("defaultIngredients", listIng);
+                }
                 if (ID_USER == 0){
                     ID_USER = getIntent().getExtras().getInt("returnIdToMain");
                 }

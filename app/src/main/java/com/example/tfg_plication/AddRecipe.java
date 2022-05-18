@@ -94,6 +94,14 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         setContentView(R.layout.activity_add_recipe);
         getSupportActionBar().hide();
         initValues();
+        ArrayList<String> listIng = (ArrayList<String>) getIntent().getStringArrayListExtra("defaultIngredients");
+        if (listIng != null) {
+            for (String ingredients : listIng) {
+                Ingredient ingredient = new Ingredient();
+                ingredient.setName(ingredients);
+                cDB.addIngredient(ingredient);
+            }
+        }
         dynamicSpinners();
 
         button.setOnClickListener(new View.OnClickListener() {

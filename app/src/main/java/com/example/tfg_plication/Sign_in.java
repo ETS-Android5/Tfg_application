@@ -60,8 +60,20 @@ public class Sign_in extends AppCompatActivity {
                                       Toast userCreate = Toast.makeText(Sign_in.this, "User Create", Toast.LENGTH_LONG);
                                       userCreate.show();
                                       controllerDB.insertNewUser(user);
+                                         ArrayList<String> defIngredients = new ArrayList<>();
+                                         defIngredients.add("Lechuga");
+                                         defIngredients.add("Tomate");
+                                         defIngredients.add("Aceite");
+                                         defIngredients.add("Boquerones");
+                                         defIngredients.add("Trucha");
+                                         defIngredients.add("Lubina");
+                                         defIngredients.add("Carne");
+                                         defIngredients.add("Calamares");
+                                         defIngredients.add("Queso");
+                                         defIngredients.add("Aceite de Oliva");
                                       Intent intent = new Intent(Sign_in.this, MainActivity.class);
                                       intent.putExtra("idUser", user.getId());
+                                      intent.putExtra("defaultIngredients",defIngredients);
                                       startActivity(intent);
                                   }
                               }else{
