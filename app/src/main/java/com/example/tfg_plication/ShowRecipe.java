@@ -61,13 +61,12 @@ public class ShowRecipe extends AppCompatActivity {
             generateRandomRecipe(val);
         }
 
-        recipe = controllerDB.getRecipe(id);
-
-        if (recipe == null){
+        if (controllerDB.getRecipe(id) == null){
             Toast toast = Toast.makeText(ShowRecipe.this, "Please add a recipe first", Toast.LENGTH_LONG);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
         }else{
+            recipe = new Recipe();
             Drawable d = new BitmapDrawable(getResources(), recipe.getImg());
             imgRecipe.setImageDrawable(d);
             nameRecipe.setText(recipe.getName());

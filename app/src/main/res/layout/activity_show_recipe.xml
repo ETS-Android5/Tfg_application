@@ -153,15 +153,6 @@
             android:background="@drawable/bordertext2"
             android:padding="10dp"
             android:textColor="@color/white" />
-
-        <Button
-            android:id="@+id/delRecipe"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center|bottom"
-            android:backgroundTint="@color/red"
-            android:text="Del RECIPE"
-            android:textColor="@color/white"
-            android:visibility="visible" />
+        
     </FrameLayout>
 </ScrollView>
