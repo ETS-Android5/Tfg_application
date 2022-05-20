@@ -1,3 +1,30 @@
+<div id="top"></div>
+
+
+<br />
+<div align="center">
+  <img src="img/logo.png" alt="Logo" width="80" height="80"></img>
+  <h3 align="center">DeliciousApp</h3>
+  <p align="center">
+    Promotional landing page to promote DeliciousApp Android application
+    <br />
+    <a href="https://github.com/GonzaloFer83/deliciousapp_landing.git/issues">Report Bug</a>
+  </p>
+</div>
+
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#Uso-de-la-aplicación">Uso de la aplicación</a>
+    </li>
+    <li>
+      <a href="#Como-esta-creada-la-aplicación">Como esta creada la aplicación</a>
+    </li>
+    <li><a href="#Como-usar-la-aplicación">Como usar la aplicación</a></li>
+    <li><a href="#Autores">Autores</a></li>
+  </ol>
+</details>
 # DeliciousApp
 Esta aplicación permite que en cualquier lugar puedas consultar o apuntar una receta.
 
