@@ -32,7 +32,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class ShowRecipe extends AppCompatActivity {
     private ImageView imgRecipe;
     //RatingBar ratingBar;
-    Button button,upRating,delRecipe;
+    Button button, upRating, delRecipe;
     private LinearLayout lyExpandable;
     private CardView cw;
     Recipe recipe;
@@ -61,29 +61,33 @@ public class ShowRecipe extends AppCompatActivity {
             generateRandomRecipe(val);
         }
 
-        if (controllerDB.getRecipe(id) == null){
-            Toast toast = Toast.makeText(ShowRecipe.this, "Please add a recipe first", Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.CENTER, 0, 0);
-            toast.show();
-        }else{
-            recipe = new Recipe();
+        recipe = new Recipe();
+        recipe = controllerDB.getRecipe(id);
+
+        if (recipe == null) {
+            Toast.makeText(ShowRecipe.this,"Please Add a recipe of this type first",Toast.LENGTH_SHORT).show();
+            imgRecipe.setVisibility(View.GONE);
+            nameRecipe.setVisibility(View.GONE);
+            infoRecipe.setVisibility(View.GONE);
+            cw.setVisibility(View.GONE);
+            typeFood.setVisibility(View.GONE);
+            ratingBar.setVisibility(View.GONE);
+            calories.setVisibility(View.GONE);
+            upRating.setVisibility(View.GONE);
+        } else {
             Drawable d = new BitmapDrawable(getResources(), recipe.getImg());
             imgRecipe.setImageDrawable(d);
             nameRecipe.setText(recipe.getName());
             infoRecipe.setText(recipe.getRecipeText());
             typeFood.setText(recipe.getTypeofFood());
-            calories.setText(recipe.getFatten()+" Kcal.");
             ratingBar.setRating(recipe.getRating());
+            calories.setText(recipe.getFatten() + " Kcal.");
         }
-
-
-
-
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int id = getIntent().getExtras().getInt("idUser");
-                Intent intent = new Intent(ShowRecipe.this,MainActivity.class);
+                Intent intent = new Intent(ShowRecipe.this, MainActivity.class);
                 intent.putExtra("returnIdToMain", id);
                 startActivity(intent);
             }
@@ -91,41 +95,36 @@ public class ShowRecipe extends AppCompatActivity {
         upRating.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                controllerDB.updateRating(recipe.getRating(),ratingBar.getRating(),recipe.getId());
-                Toast.makeText(ShowRecipe.this,"Score Updated!!",Toast.LENGTH_SHORT).show();
+                controllerDB.updateRating(recipe.getRating(), ratingBar.getRating(), recipe.getId());
+                Toast.makeText(ShowRecipe.this, "Score Updated!!", Toast.LENGTH_SHORT).show();
             }
         });
 
         stringDescription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (lyExpandable.getVisibility() == View.GONE){
-                    TransitionManager.beginDelayedTransition(cw,new AutoTransition());
+                if (lyExpandable.getVisibility() == View.GONE) {
+                    TransitionManager.beginDelayedTransition(cw, new AutoTransition());
                     lyExpandable.setVisibility(View.VISIBLE);
-                }else{
-                    TransitionManager.beginDelayedTransition(cw,new AutoTransition());
+                } else {
+                    TransitionManager.beginDelayedTransition(cw, new AutoTransition());
                     lyExpandable.setVisibility(View.GONE);
                 }
             }
         });
-
-        /*delRecipe.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //controllerDB.deleteRecipe(recipe.getId());
-            }
-        });*/
 
 
     }
 
     private void generateRandomRecipe(String val) {
         ArrayList<Integer> ids = controllerDB.getIdsRecipes(val);
-        Log.v("ShowRecipe", "list size--> " + ids.size());
-        int amountIds = controllerDB.amountIds(val);
-        Log.v("ShowRecipe", "fields--> " + ids.size());
-        int rand = (int) (Math.random() * amountIds);
-        id = ids.get(rand);
+        if (ids != null){
+            Log.v("ShowRecipe", "list size--> " + ids.size());
+            int amountIds = controllerDB.amountIds(val);
+            int rand = (int) (Math.random() * amountIds);
+            id = ids.get(rand);
+            Log.v("ShowRecipe", "Id Generated--> " + rand);
+        }
     }
 
     private void initValues() {

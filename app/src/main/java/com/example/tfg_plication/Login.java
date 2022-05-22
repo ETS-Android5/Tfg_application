@@ -32,6 +32,7 @@ public class Login extends AppCompatActivity {
         //controllerDB.getTestRecipe();
         //controllerFB.getMoreInfo();
         controllerDB.testAllIds();
+        controllerDB.getIdRecipes();
 
         getSupportActionBar().hide();
         buttonSign = (Button) findViewById(R.id.button_sign);

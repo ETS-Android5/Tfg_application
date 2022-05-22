@@ -27,7 +27,7 @@ import java.util.List;
 public class ControllerDB extends SQLiteOpenHelper {
 
     public ControllerDB(Context context) {
-        super(context, "com.damedix.Tfg_application", null, 15);
+        super(context, "com.damedix.Tfg_application", null, 16);
 
     }
 
@@ -44,6 +44,7 @@ public class ControllerDB extends SQLiteOpenHelper {
                 "FATTEN TEXT ," +
                 "TYPEOFFOOD TEXT," +
                 "IMAGE BLOB," +
+                "RATING FLOAT,"+
                 "FOREIGN KEY (userId) REFERENCES USERS(ID));");
         db.execSQL("CREATE TABLE RECIPES_INGREDIENTS (ID_RECIPE INTEGER NOT NULL," +
                 "ID_INGREDIENT INTEGER NOT NULL," +
@@ -55,7 +56,7 @@ public class ControllerDB extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-        db.execSQL("ALTER TABLE RECIPES ADD COLUMN  RATING FLOAT");
+        //db.execSQL("ALTER TABLE RECIPES ADD COLUMN  RATING FLOAT");
     }
 
     public int checkIfUserExists(User user) {
@@ -129,6 +130,7 @@ public class ControllerDB extends SQLiteOpenHelper {
             return ingredients;
         }
     }
+
     public void testAllIds() {
         List<Ingredient> ingredients = new ArrayList<Ingredient>();
         SQLiteDatabase ref_db = this.getReadableDatabase();
@@ -142,7 +144,7 @@ public class ControllerDB extends SQLiteOpenHelper {
             for (int i = 0; i < cant_reg; i++) {
                 Ingredient ingredient = new Ingredient();
                 ingredient.setId(c2.getInt(0));
-                Log.v("ControllerDB","All ids -->"+c2.getInt(0));
+                Log.v("ControllerDB", "All ids -->" + c2.getInt(0));
                 ingredient.setName(c2.getString(1));
                 ingredients.add(ingredient);
                 c2.moveToNext();
@@ -476,6 +478,7 @@ public class ControllerDB extends SQLiteOpenHelper {
         }
     }
 
+
     public ArrayList<Integer> getIdsRecipes(String breakFast) {
         ArrayList<Integer> ids = new ArrayList<Integer>();
         SQLiteDatabase ref_db = this.getReadableDatabase();
@@ -495,12 +498,13 @@ public class ControllerDB extends SQLiteOpenHelper {
             return ids;
         }
     }
+
     public int amountIds(String breakFast) {
         ArrayList<Integer> ids = new ArrayList<Integer>();
         SQLiteDatabase ref_db = this.getReadableDatabase();
         Cursor c2 = ref_db.rawQuery("SELECT ID FROM RECIPES WHERE TYPEOFFOOD = ? ", new String[]{breakFast});
-        return  c2.getCount();
-        }
+        return c2.getCount();
+    }
 
     public int returnIdUser(User user) {
         SQLiteDatabase ref_db = this.getReadableDatabase();
@@ -508,11 +512,31 @@ public class ControllerDB extends SQLiteOpenHelper {
         c1.moveToFirst();
         return c1.getInt(0);
     }
-    public void updateRating(float actRating, float newRating, int idRecipe){
-            ContentValues cv = new ContentValues();
-            cv.put("RATING", newRating);
-            SQLiteDatabase db = this.getWritableDatabase();
-            db.update("RECIPES", cv, "RATING=? and ID=?", new String[]{String.valueOf(actRating), String.valueOf(idRecipe)});
+
+    public void updateRating(float actRating, float newRating, int idRecipe) {
+        ContentValues cv = new ContentValues();
+        cv.put("RATING", newRating);
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.update("RECIPES", cv, "RATING=? and ID=?", new String[]{String.valueOf(actRating), String.valueOf(idRecipe)});
+    }
+
+    public void getIdRecipes() {
+        SQLiteDatabase ref_db = this.getReadableDatabase();
+        Cursor c2 = ref_db.rawQuery("SELECT ID FROM RECIPES WHERE TYPEOFFOOD='Desayuno'", null);
+        int cant_reg = c2.getCount();
+        if (cant_reg == 0) {
+            ref_db.close();
+            Log.v("ControllerDB", "Something Wrong ");
+        } else {
+            c2.moveToFirst();
+            for (int i = 0; i < cant_reg; i++) {
+                Log.v("ControllerDB", "Recipe id --> " + c2.getInt(0));
+                c2.moveToNext();
+            }
+            c2.close();
+            ref_db.close();
         }
+    }
+
 }
 
